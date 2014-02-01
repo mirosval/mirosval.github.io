@@ -1,0 +1,11 @@
+{% include header.html %}
+    <section class="content">
+        <h2>{{ page.title }}</h2>
+        <span class="published">Published {{ page.date | date: "%-d %B %Y" }}</span>
+        {{ content }}
+        {% for tag in page.tags %}
+            {{ tag | first | slugize }}
+        {% endfor %}
+        {% include disqus.html %}
+    </section>
+{% include footer.html %}

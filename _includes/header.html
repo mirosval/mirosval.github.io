@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Mirosval</title>
+
+    <link rel="stylesheet" href="{{ site.url }}/stylesheets/styles.css">
+    <link rel="stylesheet" href="{{ site.url }}/stylesheets/pygment_trac.css">
+    <link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ site.url }}/feed.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        
+        <a href="{{ site.url }}/" class="profile-picture-link">
+          <img src="{{ site.url }}/images/cuba.jpg" alt="Profile Picture Mirosval" class="profile-picture">
+        </a>
+
+        <p></p>
+        <h1>Mirosval</h1>
+
+        <p class="view">
+          <a href="https://github.com/mirosval">My GitHub</a>
+          <a href="https://twitter.com/mirosva1">My Twitter</a>
+        </p>
+
+        <div class="categories">
+          <h3>Categories</h3>
+          <ul class="categories">
+            {% for category in site.categories %}
+              <li>
+                <a href="{{ site.url }}/categories/{{ category | first | slugize }}">
+                  {{ category | first | replace: "-", " " | capitalize }} ({{ category | last | size }})
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="tags">
+          <h3>Tags</h3>
+          <ul class="tags">
+            {% for tag in site.tags %}
+              <li style="font-size: {{ tag | last | size | times: 100 | divided_by: site.tags.size | plus: 60 }}%">
+                <a href="{{ site.url }}/tags/{{ tag | first | slugize }}">
+                  {{ tag | first | replace: "-", " " | capitalize }} ({{ tag | last | size }})
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </header>
