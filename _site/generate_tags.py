@@ -31,15 +31,15 @@ for f in os.listdir('tags'):
 # create tag pages
 for tag in tags:
     if not os.path.exists(os.path.join('tags', tag)):
-        os.makedirs(os.path.join('tags', tag))
-    with open(os.path.join('tags', tag, 'index.html'), 'w') as f:
+        os.makedirs(os.path.join('tags', tag.lower()))
+    with open(os.path.join('tags', tag.lower(), 'index.html'), 'w') as f:
         f.write("""---
 layout: default
 title: """ + tag.replace('-', ' ').capitalize() + """ Tag
 ---
 <h2>{{ page.title }}</h2>
 
-{% for post in site.tags.""" + tag + """ %}
+{% for post in site.tags.""" + tag.lower() + """ %}
     <article>
         <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
         <span class="published">Published {{ post.date | date: "%-d %B %Y" }}</span>
@@ -58,15 +58,15 @@ for f in os.listdir('categories'):
 # create category pages
 for category in categories:
     if not os.path.exists(os.path.join('categories', category)):
-        os.makedirs(os.path.join('categories', category))
-    with open(os.path.join('categories', category, 'index.html'), 'w') as f:
+        os.makedirs(os.path.join('categories', category.lower()))
+    with open(os.path.join('categories', category.lower(), 'index.html'), 'w') as f:
         f.write("""---
 layout: default
 title: """ + category.replace('-', ' ').capitalize() + """ Category
 ---
 <h2>{{ page.title }}</h2>
 
-{% for post in site.categories.""" + category + """ %}
+{% for post in site.categories.""" + category.lower() + """ %}
     <article>
         <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
         <span class="published">Published {{ post.date | date: "%-d %B %Y" }}</span>

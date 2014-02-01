@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Mirosval</title>
 
-    <link rel="stylesheet" href="/stylesheets/styles.css">
-    <link rel="stylesheet" href="/stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="http://mirosval.github.io/stylesheets/styles.css">
+    <link rel="stylesheet" href="http://mirosval.github.io/stylesheets/pygment_trac.css">
+    <link rel="alternate" type="application/rss+xml" title="Mirosval" href="http://mirosval.github.io/feed.xml">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -16,8 +17,8 @@
     <div class="wrapper">
       <header>
         
-        <a href="/" class="profile-picture-link">
-          <img src="/images/cuba.jpg" alt="Profile Picture Mirosval" class="profile-picture">
+        <a href="http://mirosval.github.io/" class="profile-picture-link">
+          <img src="http://mirosval.github.io/images/cuba.jpg" alt="Profile Picture Mirosval" class="profile-picture">
         </a>
 
         <p></p>
@@ -33,13 +34,13 @@
           <ul class="categories">
             
               <li>
-                <a href="/categories/master-thesis">
+                <a href="http://mirosval.github.io/categories/master-thesis">
                   Master thesis (3)
                 </a>
               </li>
             
               <li>
-                <a href="/categories/other">
+                <a href="http://mirosval.github.io/categories/other">
                   Other (1)
                 </a>
               </li>
@@ -52,37 +53,37 @@
           <ul class="tags">
             
               <li style="font-size: 110%">
-                <a href="/tags/master-thesis">
+                <a href="http://mirosval.github.io/tags/master-thesis">
                   Master thesis (3)
                 </a>
               </li>
             
               <li style="font-size: 110%">
-                <a href="/tags/opencv">
+                <a href="http://mirosval.github.io/tags/opencv">
                   Opencv (3)
                 </a>
               </li>
             
               <li style="font-size: 110%">
-                <a href="/tags/python">
+                <a href="http://mirosval.github.io/tags/python">
                   Python (3)
                 </a>
               </li>
             
               <li style="font-size: 76%">
-                <a href="/tags/pupil">
+                <a href="http://mirosval.github.io/tags/pupil">
                   Pupil (1)
                 </a>
               </li>
             
               <li style="font-size: 93%">
-                <a href="/tags/iris">
+                <a href="http://mirosval.github.io/tags/iris">
                   Iris (2)
                 </a>
               </li>
             
               <li style="font-size: 76%">
-                <a href="/tags/safari-extension">
+                <a href="http://mirosval.github.io/tags/safari-extension">
                   Safari extension (1)
                 </a>
               </li>
@@ -114,7 +115,7 @@
 
 <p>We begin with the location of the pupil as determined by the <a href='/master-thesis/2014/01/29/pupil-detection.html'>Pupil Detection</a>. The iris detection technique presented here is relying on the corectness of the pupil detection. It therefore very important for the pupil detection to be correct.</p>
 
-<p><img alt='Pupil detection' src='/images/002-iris/001.png' /></p>
+<p><img alt='Pupil detection' src='http://mirosval.github.io/images/002-iris/001.png' /></p>
 <div class='highlight'><pre><code class='python'><span class='lineno'> 1</span> <span class='k'>def</span> <span class='nf'>getOrientationAndMagnitude</span><span class='p'>(</span><span class='n'>image</span><span class='p'>,</span> <span class='n'>show</span><span class='o'>=</span><span class='bp'>False</span><span class='p'>):</span>
 <span class='lineno'> 2</span>     <span class='n'>sobelHorizontal</span> <span class='o'>=</span> <span class='n'>cv2</span><span class='o'>.</span><span class='n'>Sobel</span><span class='p'>(</span><span class='n'>image</span><span class='p'>,</span> <span class='n'>cv2</span><span class='o'>.</span><span class='n'>CV_32F</span><span class='p'>,</span> <span class='mi'>1</span><span class='p'>,</span> <span class='mi'>0</span><span class='p'>)</span>
 <span class='lineno'> 3</span>     <span class='n'>sobelVertical</span> <span class='o'>=</span> <span class='n'>cv2</span><span class='o'>.</span><span class='n'>Sobel</span><span class='p'>(</span><span class='n'>image</span><span class='p'>,</span> <span class='n'>cv2</span><span class='o'>.</span><span class='n'>CV_32F</span><span class='p'>,</span> <span class='mi'>0</span><span class='p'>,</span> <span class='mi'>1</span><span class='p'>)</span>
@@ -134,7 +135,7 @@
 <span class='lineno'>17</span> 
 <span class='lineno'>18</span>     <span class='k'>return</span> <span class='n'>orientation</span><span class='p'>,</span> <span class='n'>magnitude</span>
 </code></pre></div>
-<p><img alt='Orientation' src='/images/002-iris/003-orientation.png' /> <img alt='Magnitude' src='/images/002-iris/002-magnitude.png' /></p>
+<p><img alt='Orientation' src='http://mirosval.github.io/images/002-iris/003-orientation.png' /> <img alt='Magnitude' src='http://mirosval.github.io/images/002-iris/002-magnitude.png' /></p>
 
 <p>We know that the iris is going to be somewhere aroudn the pupil, so to get its radius, we are going to first get a couple of samples (lines that go from the center of the pupil) and then we are going to find the place where the change in intensity is the right orientation and magnitude. To be able to do that, we first need to calculate the orientation and magnitude fields of the image. That is what you can see above.</p>
 <div class='highlight'><pre><code class='python'><span class='lineno'> 1</span> <span class='k'>def</span> <span class='nf'>getCircleSamples</span><span class='p'>(</span><span class='n'>center</span><span class='o'>=</span><span class='p'>(</span><span class='mi'>0</span><span class='p'>,</span> <span class='mi'>0</span><span class='p'>),</span> <span class='n'>radius</span><span class='o'>=</span><span class='mi'>1</span><span class='p'>,</span> <span class='n'>nPoints</span><span class='o'>=</span><span class='mi'>30</span><span class='p'>):</span>
@@ -284,7 +285,7 @@
 </code></pre></div>
 <p>Now to put it all together, we start with orientation and magnitude maps. Then sample the original image to get lines from the pupil out. We loop through these samples and find places where the gradient magnitude and orientation is just right and then add a vote for the radius at that location. In the end we just grab the radius with the most votes and draw an ellipse around it. In the image below, the purple circle is the estimated iris radius, the aqua circles are votes and the green lines are samples. You can see that the lines don&#8217;t cover the whole circle. That is because it is probable that eyelids will cover top and bottom portion of the iris and therefore interfere with the algorithm, so we only consider the horizontal samples, as defined by <code>sin(x) &lt; 0.7</code>.</p>
 
-<p><img alt='Final image iris radius estimation' src='/images/002-iris/004-final.png' /></p>
+<p><img alt='Final image iris radius estimation' src='http://mirosval.github.io/images/002-iris/004-final.png' /></p>
 
 <p>This is it for the iris detection, next time we&#8217;ll look at unwrapping the iris to form a rectangular image.</p>
 
@@ -319,7 +320,7 @@
         
       </footer>
     </div>
-    <script src="/javascripts/scale.fix.js"></script>
+    <script src="http://mirosval.github.io/javascripts/scale.fix.js"></script>
     <script type="text/javascript">
   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
