@@ -109,9 +109,53 @@
       </header>
 
     <section class="content">
-        <h2>Intro</h2>
-        <span class="published">Published 28 January 2014</span>
-        <p>Hi everyone, I intend to use this blog thing to write about the progress of my Master Thesis. I&#8217;ll be talking about implementing various computer vision algorithms together to form an eye-tracker. In between I&#8217;ll talk about other things if something interesting comes up.</p>
+        <h2>Macbook Pro SSD Upgrade</h2>
+        <span class="published">Published 20 February 2014</span>
+        <p>I have a Macbook Pro from mid 2010. Its coming up on 4 years, so some would say that it&#8217;s quite old, but I&#8217;ve upgraded its RAM to 8GB and it has been working for me quite nicely until recently when I felt that it&#8217;s starting to get slow.</p>
+
+<h3 id='dust_cleaning'>Dust cleaning</h3>
+
+<p>The first problem appeared in the summer, when I&#8217;ve installed Mavericks. At the time I&#8217;ve been using Google Chrome as my primary web browser and it has become unbearable. The machine would run hot and with fans at full speed with a lot of noise. So at the time I switched back to Safari which helped tremendously, but Safari has many other shortcomings (Horrible PDF support, Reddit&#8217;s RES didn&#8217;t work, etc.) so I wanted to switch back to Chrome, and now after Christmas they seem to have released a new version (I&#8217;m using the Beta channel, so now it&#8217;s 33) which does not suffer from the performance issues of the old one, so I switched back and everything seemed fine, with just occasional fan rampage.</p>
+
+<p>But it still bothered me, it seemed that the fans would go crazy for no reason (low CPU and energy use, and still, fans were running at 6000rpm). So I&#8217;ve removed the back cover and cleaned all the dust from the fans, that has helped incredibly, now it runs much cooler (up to 10&#176;C cooler) and much more quiet (most of the time just 2000rpm).</p>
+
+<h3 id='new_ssd'>New SSD</h3>
+
+<p>I still wanted to improve the performance, and the SSD looked like a good option. After looking it up briefly I decided on Samsung 840 EVO 250GB SSD, it was faster than what my Macbook could handle (SATA III vs SATA II on my Macbook Pro), but not much more expensive than the lower options. At about 150&#8364; it wasn&#8217;t too expensive either. I got the Laptop Upgrade kit.</p>
+
+<p>The kit comes with just a SATA to USB connector and some useless CD with software. It does not have any screw drivers, but I had that covered. You only need a Phillips screwdriver luckily.</p>
+
+<p>The annoying part was that my HD was 500GB and I needed to reduce that to about 200GB if I wanted to fit into the SSD comfortably. I&#8217;ve moved all my photos to an external HDD, that took some good 3-4 hours.</p>
+
+<p>I first formatted the SSD to <code>Mac OS Extended Journaled</code> and to move the filesystem to the SSD I&#8217;ve used the <a href='http://www.bombich.com/'>Carbon Copy Cloner</a>. It allows you to create the Mavericks recovery partition on the drive as well, so you could just use that to make a clean install. But I&#8217;ve copied my whole system over using the CCC, about 200GB took around 4 hours to complete.</p>
+
+<p>I&#8217;ve encountered an issue with Time Machine local backups, they will use up the empty space on the drive, so I&#8217;ve deleted almost 300GB of data and only had 70GB free on a 500GB drive. But it was sufficient to just run the Time Machine and it would remove these local backups during the Preparing Backup phase.</p>
+
+<p>The actual HW swap went well, the SSD is much lighter and a bit smaller than the original HDD. I&#8217;ve used the <a href='http://www.ifixit.com/Guide/MacBook+Pro+15-Inch+Unibody+Mid+2010+Hard+Drive+Replacement/3030'>iFixit guide</a>, but I haven&#8217;t removed the battery and to unscrew the HDD screws on the side I&#8217;ve just used pliers to unscrew them carefully and then screw them back on the SSD. This is necessary to hold it in place, since it is slightly smaller than the original.</p>
+
+<p>After the replacement I&#8217;ve used <a href='http://www.cindori.org/software/trimenabler/'>Trim Enabler</a> to enable TRIM support, because apparently Apple only enables TRIM on their own SSDs by default.</p>
+
+<h3 id='performance'>Performance</h3>
+
+<p>I have measured my disk performance before and after the upgrade using <a href='https://itunes.apple.com/us/app/blackmagic-disk-speed-test/id425264550?mt=12'>Blackmagic Disk Speed Test</a> and this is what I got:</p>
+<div class='highlight'><pre><code class='text'>Before:
+    Write:  42.5 MB/s   Read:   39.9 MB/s
+After:
+    Write: 202.0 MB/s   Read:  256.5 MB/s
+</code></pre></div>
+<p>Subjectively it feels a lot faster, especially opening apps is almost instantaneous. The main bottleneck now is probably the 3Gb/s SATA II interface, because the SSD should give around 500MB/s on SATA III. Over all I think this was a good investment and a relatively painless upgrade (apart from all the slow copying, ugh).</p>
+
+<p>Here are the Speed Test Screen Shots:</p>
+
+<h4 id='before_upgrade'>Before upgrade</h4>
+
+<p><img alt='Before SSD Upgrade' src='http://mirosval.github.io/images/ssd/old.png' /></p>
+
+<h4 id='after_upgrade'>After upgrade</h4>
+
+<p><img alt='After SSD Upgrade' src='http://mirosval.github.io/images/ssd/new.png' /></p>
+        
+            
         
         <div id="disqus_thread"></div>
 <script type="text/javascript">

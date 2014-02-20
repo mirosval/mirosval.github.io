@@ -7,6 +7,56 @@
         <atom:link href="http://mirosval.github.io/feed.xml" rel="self" type="application/rss+xml" />
         
             <item>
+                <title>Macbook Pro SSD Upgrade</title>
+                <description>&lt;p&gt;I have a Macbook Pro from mid 2010. Its coming up on 4 years, so some would say that it&amp;#8217;s quite old, but I&amp;#8217;ve upgraded its RAM to 8GB and it has been working for me quite nicely until recently when I felt that it&amp;#8217;s starting to get slow.&lt;/p&gt;
+
+&lt;h3 id=&#39;dust_cleaning&#39;&gt;Dust cleaning&lt;/h3&gt;
+
+&lt;p&gt;The first problem appeared in the summer, when I&amp;#8217;ve installed Mavericks. At the time I&amp;#8217;ve been using Google Chrome as my primary web browser and it has become unbearable. The machine would run hot and with fans at full speed with a lot of noise. So at the time I switched back to Safari which helped tremendously, but Safari has many other shortcomings (Horrible PDF support, Reddit&amp;#8217;s RES didn&amp;#8217;t work, etc.) so I wanted to switch back to Chrome, and now after Christmas they seem to have released a new version (I&amp;#8217;m using the Beta channel, so now it&amp;#8217;s 33) which does not suffer from the performance issues of the old one, so I switched back and everything seemed fine, with just occasional fan rampage.&lt;/p&gt;
+
+&lt;p&gt;But it still bothered me, it seemed that the fans would go crazy for no reason (low CPU and energy use, and still, fans were running at 6000rpm). So I&amp;#8217;ve removed the back cover and cleaned all the dust from the fans, that has helped incredibly, now it runs much cooler (up to 10&amp;#176;C cooler) and much more quiet (most of the time just 2000rpm).&lt;/p&gt;
+
+&lt;h3 id=&#39;new_ssd&#39;&gt;New SSD&lt;/h3&gt;
+
+&lt;p&gt;I still wanted to improve the performance, and the SSD looked like a good option. After looking it up briefly I decided on Samsung 840 EVO 250GB SSD, it was faster than what my Macbook could handle (SATA III vs SATA II on my Macbook Pro), but not much more expensive than the lower options. At about 150&amp;#8364; it wasn&amp;#8217;t too expensive either. I got the Laptop Upgrade kit.&lt;/p&gt;
+
+&lt;p&gt;The kit comes with just a SATA to USB connector and some useless CD with software. It does not have any screw drivers, but I had that covered. You only need a Phillips screwdriver luckily.&lt;/p&gt;
+
+&lt;p&gt;The annoying part was that my HD was 500GB and I needed to reduce that to about 200GB if I wanted to fit into the SSD comfortably. I&amp;#8217;ve moved all my photos to an external HDD, that took some good 3-4 hours.&lt;/p&gt;
+
+&lt;p&gt;I first formatted the SSD to &lt;code&gt;Mac OS Extended Journaled&lt;/code&gt; and to move the filesystem to the SSD I&amp;#8217;ve used the &lt;a href=&#39;http://www.bombich.com/&#39;&gt;Carbon Copy Cloner&lt;/a&gt;. It allows you to create the Mavericks recovery partition on the drive as well, so you could just use that to make a clean install. But I&amp;#8217;ve copied my whole system over using the CCC, about 200GB took around 4 hours to complete.&lt;/p&gt;
+
+&lt;p&gt;I&amp;#8217;ve encountered an issue with Time Machine local backups, they will use up the empty space on the drive, so I&amp;#8217;ve deleted almost 300GB of data and only had 70GB free on a 500GB drive. But it was sufficient to just run the Time Machine and it would remove these local backups during the Preparing Backup phase.&lt;/p&gt;
+
+&lt;p&gt;The actual HW swap went well, the SSD is much lighter and a bit smaller than the original HDD. I&amp;#8217;ve used the &lt;a href=&#39;http://www.ifixit.com/Guide/MacBook+Pro+15-Inch+Unibody+Mid+2010+Hard+Drive+Replacement/3030&#39;&gt;iFixit guide&lt;/a&gt;, but I haven&amp;#8217;t removed the battery and to unscrew the HDD screws on the side I&amp;#8217;ve just used pliers to unscrew them carefully and then screw them back on the SSD. This is necessary to hold it in place, since it is slightly smaller than the original.&lt;/p&gt;
+
+&lt;p&gt;After the replacement I&amp;#8217;ve used &lt;a href=&#39;http://www.cindori.org/software/trimenabler/&#39;&gt;Trim Enabler&lt;/a&gt; to enable TRIM support, because apparently Apple only enables TRIM on their own SSDs by default.&lt;/p&gt;
+
+&lt;h3 id=&#39;performance&#39;&gt;Performance&lt;/h3&gt;
+
+&lt;p&gt;I have measured my disk performance before and after the upgrade using &lt;a href=&#39;https://itunes.apple.com/us/app/blackmagic-disk-speed-test/id425264550?mt=12&#39;&gt;Blackmagic Disk Speed Test&lt;/a&gt; and this is what I got:&lt;/p&gt;
+&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;text&#39;&gt;Before:
+    Write:  42.5 MB/s   Read:   39.9 MB/s
+After:
+    Write: 202.0 MB/s   Read:  256.5 MB/s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Subjectively it feels a lot faster, especially opening apps is almost instantaneous. The main bottleneck now is probably the 3Gb/s SATA II interface, because the SSD should give around 500MB/s on SATA III. Over all I think this was a good investment and a relatively painless upgrade (apart from all the slow copying, ugh).&lt;/p&gt;
+
+&lt;p&gt;Here are the Speed Test Screen Shots:&lt;/p&gt;
+
+&lt;h4 id=&#39;before_upgrade&#39;&gt;Before upgrade&lt;/h4&gt;
+
+&lt;p&gt;&lt;img alt=&#39;Before SSD Upgrade&#39; src=&#39;http://mirosval.github.io/images/ssd/old.png&#39; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&#39;after_upgrade&#39;&gt;After upgrade&lt;/h4&gt;
+
+&lt;p&gt;&lt;img alt=&#39;After SSD Upgrade&#39; src=&#39;http://mirosval.github.io/images/ssd/new.png&#39; /&gt;&lt;/p&gt;</description>
+                <pubDate>Thu, 20 Feb 2014 00:00:00 +0100</pubDate>
+                <link>http://mirosval.github.io/other/2014/02/20/ssd-upgrade.html</link>
+                <guid isPermaLink="true">http://mirosval.github.io/other/2014/02/20/ssd-upgrade.html</guid>
+            </item>
+        
+            <item>
                 <title>Performance of the unwrapIris()</title>
                 <description>&lt;p&gt;After the performance improvement from yesterday, I wanted to try some more things, because the speed of this was still not satisfactory (I spent an hour processing 2000 images).&lt;/p&gt;
 
