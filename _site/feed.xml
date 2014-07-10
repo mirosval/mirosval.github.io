@@ -15,7 +15,7 @@
 &lt;p&gt;Tento článok pozostáva z 3 častí:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;/python/other/slovak/2014/07/10/roulette.html&quot;&gt;Analýza pôvodného článku a metódy&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/python/other/slovak/2014/07/10/roulette-I.html&quot;&gt;Analýza pôvodného článku a metódy&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;/python/other/slovak/2014/07/10/roulette-II.html&quot;&gt;Štatistická simulácia metódy a jej vyhodnotenie&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;/python/other/slovak/2014/07/10/roulette-III.html&quot;&gt;O čo vlastne ide a závery&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
@@ -52,7 +52,7 @@
 &lt;p&gt;Tento článok pozostáva z 3 častí:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;/python/other/slovak/2014/07/10/roulette.html&quot;&gt;Analýza pôvodného článku a metódy&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/python/other/slovak/2014/07/10/roulette-I.html&quot;&gt;Analýza pôvodného článku a metódy&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;/python/other/slovak/2014/07/10/roulette-II.html&quot;&gt;Štatistická simulácia metódy a jej vyhodnotenie&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;/python/other/slovak/2014/07/10/roulette-III.html&quot;&gt;O čo vlastne ide a závery&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
@@ -182,7 +182,7 @@
 
 &lt;p&gt;Aby sme videli ako sa to prejaví v simulácii, pozrime sa na nasledujúci graf&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://mirosval.github.io/images/roulette/cumulative.jpg&quot; alt=&quot;Cumulative&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://mirosval.github.io/images/roulette/cumulative.png&quot; alt=&quot;Cumulative&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Tento graf ukazuje ako skončilo 1 000 hier, to sú cca 3 roky, 3 hodiny denne. Zelené krížiky sú hry ktoré skončili v pluse, červené, ktoré skončili v mínuse alebo na nule. Nula v tomto prípade znamená, že sme skončili s 200 eurami a za tie 3 hodiny sme nič nezarobili. Čiže oproti minimálnej mzde ste asi 9 eur v mínuse.&lt;/p&gt;
 
@@ -204,7 +204,7 @@
 &lt;p&gt;Tento článok pozostáva z 3 častí:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;/python/other/slovak/2014/07/10/roulette.html&quot;&gt;Analýza pôvodného článku a metódy&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/python/other/slovak/2014/07/10/roulette-I.html&quot;&gt;Analýza pôvodného článku a metódy&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;/python/other/slovak/2014/07/10/roulette-II.html&quot;&gt;Štatistická simulácia metódy a jej vyhodnotenie&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;/python/other/slovak/2014/07/10/roulette-III.html&quot;&gt;O čo vlastne ide a závery&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
@@ -279,8 +279,8 @@
 &lt;p&gt;Na konci článku ešte nasleduje link na to spomínané on-line kasíno, kde sa dá takto skvele zarobiť a kopec komentárov od “úspešných” hráčov, ktorí takto zarobili už veľa peňazí™.&lt;/p&gt;
 </description>
                 <pubDate>Thu, 10 Jul 2014 00:00:00 +0200</pubDate>
-                <link>http://mirosval.github.io/python/other/slovak/2014/07/10/roulette.html</link>
-                <guid isPermaLink="true">http://mirosval.github.io/python/other/slovak/2014/07/10/roulette.html</guid>
+                <link>http://mirosval.github.io/python/other/slovak/2014/07/10/roulette-I.html</link>
+                <guid isPermaLink="true">http://mirosval.github.io/python/other/slovak/2014/07/10/roulette-I.html</guid>
             </item>
         
             <item>

@@ -11,7 +11,7 @@ Pred časom sa mi dostal do ruky link na [zaujímavý článok o rulete](http://
 
 Tento článok pozostáva z 3 častí:
 
-1. [Analýza pôvodného článku a metódy]({% post_url 2014-07-10-roulette %})
+1. [Analýza pôvodného článku a metódy]({% post_url 2014-07-10-roulette-I %})
 2. [Štatistická simulácia metódy a jej vyhodnotenie]({% post_url 2014-07-10-roulette-II %})
 3. [O čo vlastne ide a závery]({% post_url 2014-07-10-roulette-III %})
 
