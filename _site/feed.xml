@@ -189,6 +189,8 @@
 &lt;p&gt;Ten istý program som pustil aj 10 000 krát, aby som získal presnejšie výsledky. Graf tu neukazujem, lebo je to len chaotickejšia verzia toho, ktorý tu už je. Zaujímavé sú však čísla. Minimálna výhra mi vyšla -455€, maximálna 111€ a pravdepodobnosť, že o všetko prídete cca na úrovni 34%. To znamená, že jedna tretina hier končí prinajlepšom na nule. Ale podstatný detail je, že nevyhráte 180€, ale len okolo 100€. Spolu to teda znamená, že v jednej tretine hier prerobíte 200€ a v dvoch tretinách zarobíte 100€, čo je dokopy cca 0€ keď sa to zráta a podčiarkne. To zhruba sedí s tým čo sa píše na &lt;a href=&quot;http://en.wikipedia.org/wiki/Roulette&quot;&gt;Wikipedii&lt;/a&gt; v kolónke Expected value (on a $1 bet) (French), a síce, že očakávaná vyhra pri opakovanej stávke na jednu farbu je matematicky -$0.027.&lt;/p&gt;
 
 &lt;p&gt;V skratke, vyhráva kasíno. Ako vždy.&lt;/p&gt;
+
+&lt;p&gt;Pokračujte &lt;a href=&quot;/python/other/slovak/2014/07/10/roulette-III.html&quot;&gt;O čo vlastne ide a závery&lt;/a&gt;&lt;/p&gt;
 </description>
                 <pubDate>Thu, 10 Jul 2014 00:00:00 +0200</pubDate>
                 <link>http://mirosval.github.io/python/other/slovak/2014/07/10/roulette-II.html</link>
@@ -277,6 +279,8 @@
 &lt;p&gt;Graf, ktorý tam k tomu je je síce pekný, ale je to totálny nezmysel.&lt;/p&gt;
 
 &lt;p&gt;Na konci článku ešte nasleduje link na to spomínané on-line kasíno, kde sa dá takto skvele zarobiť a kopec komentárov od “úspešných” hráčov, ktorí takto zarobili už veľa peňazí™.&lt;/p&gt;
+
+&lt;p&gt;Pokračujte &lt;a href=&quot;/python/other/slovak/2014/07/10/roulette-II.html&quot;&gt;Štatistická simulácia metódy a jej vyhodnotenie&lt;/a&gt;&lt;/p&gt;
 </description>
                 <pubDate>Thu, 10 Jul 2014 00:00:00 +0200</pubDate>
                 <link>http://mirosval.github.io/python/other/slovak/2014/07/10/roulette-I.html</link>

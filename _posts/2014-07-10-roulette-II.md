@@ -98,3 +98,5 @@ Tento graf ukazuje ako skončilo 1 000 hier, to sú cca 3 roky, 3 hodiny denne. 
 Ten istý program som pustil aj 10 000 krát, aby som získal presnejšie výsledky. Graf tu neukazujem, lebo je to len chaotickejšia verzia toho, ktorý tu už je. Zaujímavé sú však čísla. Minimálna výhra mi vyšla -455&euro;, maximálna 111&euro; a pravdepodobnosť, že o všetko prídete cca na úrovni 34%. To znamená, že jedna tretina hier končí prinajlepšom na nule. Ale podstatný detail je, že nevyhráte 180&euro;, ale len okolo 100&euro;. Spolu to teda znamená, že v jednej tretine hier prerobíte 200&euro; a v dvoch tretinách zarobíte 100&euro;, čo je dokopy cca 0&euro; keď sa to zráta a podčiarkne. To zhruba sedí s tým čo sa píše na [Wikipedii](http://en.wikipedia.org/wiki/Roulette) v kolónke Expected value (on a $1 bet) (French), a síce, že očakávaná vyhra pri opakovanej stávke na jednu farbu je matematicky -$0.027.
 
 V skratke, vyhráva kasíno. Ako vždy.
+
+Pokračujte [O čo vlastne ide a závery]({% post_url 2014-07-10-roulette-III %})

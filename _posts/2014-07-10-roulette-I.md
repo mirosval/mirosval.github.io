@@ -63,3 +63,5 @@ Tu sú hneď 2 závažné chyby:
 Graf, ktorý tam k tomu je je síce pekný, ale je to totálny nezmysel.
 
 Na konci článku ešte nasleduje link na to spomínané on-line kasíno, kde sa dá takto skvele zarobiť a kopec komentárov od "úspešných" hráčov, ktorí takto zarobili už veľa peňazí&#0153;.
+
+Pokračujte [Štatistická simulácia metódy a jej vyhodnotenie]({% post_url 2014-07-10-roulette-II %})
