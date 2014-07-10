@@ -1,7 +1,7 @@
 ---
 layout: single
 title: Units Safari Extension
-categories: [Other]
+categories: [Other,english]
 tags: [safari-extension]
 ---
 

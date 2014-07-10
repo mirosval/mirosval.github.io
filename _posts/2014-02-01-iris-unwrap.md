@@ -1,7 +1,7 @@
 ---
 layout: single
 title: Unwrapping the iris
-categories: [master-thesis]
+categories: [master-thesis,english]
 tags: [master-thesis,opencv,python,iris]
 ---
 

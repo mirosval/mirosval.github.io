@@ -1,0 +1,273 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Mirosval</title>
+
+    <link rel="stylesheet" href="http://mirosval.github.io/stylesheets/styles.css">
+    <link rel="stylesheet" href="http://mirosval.github.io/stylesheets/pygment_trac.css">
+
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    
+    <link rel="alternate" type="application/rss+xml" title="Mirosval" href="http://mirosval.github.io/feed.xml">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        
+        <a href="http://mirosval.github.io/" class="profile-picture-link">
+          <img src="http://mirosval.github.io/images/cuba.jpg" alt="Profile Picture Mirosval" class="profile-picture">
+        </a>
+
+        <p></p>
+        <h1>Mirosval</h1>
+
+        <p class="view">
+          <a href="https://github.com/mirosval">My GitHub</a>
+          <a href="https://twitter.com/mirosva1">My Twitter</a>
+        </p>
+
+        <div class="categories">
+          <h3>Categories</h3>
+          <ul class="categories">
+            
+              <li>
+                <a href="http://mirosval.github.io/categories/english">
+                  English (9)
+                </a>
+              </li>
+            
+              <li>
+                <a href="http://mirosval.github.io/categories/master-thesis">
+                  Master thesis (5)
+                </a>
+              </li>
+            
+              <li>
+                <a href="http://mirosval.github.io/categories/other">
+                  Other (5)
+                </a>
+              </li>
+            
+              <li>
+                <a href="http://mirosval.github.io/categories/python">
+                  Python (4)
+                </a>
+              </li>
+            
+              <li>
+                <a href="http://mirosval.github.io/categories/slovak">
+                  Slovak (3)
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+
+        <div class="tags">
+          <h3>Tags</h3>
+          <ul class="tags">
+            
+              <li style="font-size: 122%">
+                <a href="http://mirosval.github.io/tags/master-thesis">
+                  Master thesis (5)
+                </a>
+              </li>
+            
+              <li style="font-size: 122%">
+                <a href="http://mirosval.github.io/tags/opencv">
+                  Opencv (5)
+                </a>
+              </li>
+            
+              <li style="font-size: 172%">
+                <a href="http://mirosval.github.io/tags/python">
+                  Python (9)
+                </a>
+              </li>
+            
+              <li style="font-size: 72%">
+                <a href="http://mirosval.github.io/tags/pupil">
+                  Pupil (1)
+                </a>
+              </li>
+            
+              <li style="font-size: 85%">
+                <a href="http://mirosval.github.io/tags/iris">
+                  Iris (2)
+                </a>
+              </li>
+            
+              <li style="font-size: 72%">
+                <a href="http://mirosval.github.io/tags/safari-extension">
+                  Safari extension (1)
+                </a>
+              </li>
+            
+              <li style="font-size: 85%">
+                <a href="http://mirosval.github.io/tags/performance">
+                  Performance (2)
+                </a>
+              </li>
+            
+              <li style="font-size: 72%">
+                <a href="http://mirosval.github.io/tags/hardware">
+                  Hardware (1)
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </header>
+
+    <section class="content">
+        <h2>Basic Pupil Detection</h2>
+        <span class="published">Published 29 January 2014</span>
+        <p>Pupil Detection will be the basis of my eye tracker. In the end it will rely on accurate and robust
+pupil detection, but for now a simple detector will do. Later I will revisit the detection when the
+basics of the other components are done.</p>
+
+<p>The idea presented here is a simple one. If we look at the image, the pupil is just a black circle.
+Now this might not always be true, as in the circle does not always have to be completely black (in
+case we have some glints) and might not be a circle (if we’re looking at the pupil under an angle).
+We will deal with these potential issues later, for now we’ll just stick to the basics.</p>
+
+<p>I will be using <a href="http://opencv.org/">OpenCV 2</a> and <a href="http://www.python.org/">Python 2.7.5</a> on OSX.</p>
+
+<p>So on a high level, the process is the following:
+* Load the image and convert it to grayscale
+* Threshold the image
+* Cleanup using closing
+* Find the most circular contour
+* Draw it into the original image</p>
+
+<p>So here I just load the original image.</p>
+
+<div class="highlight"><pre><code class="python"><span class="lineno">1</span> <span class="kn">import</span> <span class="nn">cv2</span>
+<span class="lineno">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="lineno">3</span> 
+<span class="lineno">4</span> <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">&#39;eye.png&#39;</span><span class="p">)</span>
+<span class="lineno">5</span> <span class="n">gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">CV_BGR2GRAY</span><span class="p">)</span>
+</code></pre></div>
+
+<p><img src="http://mirosval.github.io/images/001-pupil/001.png" alt="Eye image" /></p>
+
+<p>Now that that’s out of the way, I’ll threshold it. This will make a binary image out of a grayscale
+one. So everything darker than 30 goes to black, and everything else goes to white. And this is what
+I get.</p>
+
+<div class="highlight"><pre><code class="python"><span class="lineno">1</span> <span class="n">retval</span><span class="p">,</span> <span class="n">thresholded</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">CV_THRESH_BINARY</span><span class="p">)</span>
+</code></pre></div>
+
+<p><img src="http://mirosval.github.io/images/001-pupil/002.png" alt="Threshold image" /></p>
+
+<p>Now this next part (Line 1 and 2) does not have to be here for this particular image, but in general
+it should be there, becuase you want to get rid of small holes that might occur in the pupil from glints,
+but since there are none in this image, it is of no concern.</p>
+
+<p>Now the binary image is fed into the 
+<a href="http://docs.opencv.org/modules/imgproc/doc/structural_analysis_and_shape_descriptors.html?#findcontours">findContours</a> 
+function, which will identify individual “objects”
+in the image. In this case we get two, one is for the pupil and one is for the whole image. So how to
+distinguish between the two? I used the <code>extend</code> parameter which puts in relation the area of a shape
+to the area of its bounding box. This will be close to 1 for the whole image, because it is rectangular,
+but lower for the pupil, since it is more circular. Something like 
+<a href="http://docs.opencv.org/modules/imgproc/doc/structural_analysis_and_shape_descriptors.html?#convexhull">Convex Hull</a> and 
+<a href="http://docs.opencv.org/modules/imgproc/doc/structural_analysis_and_shape_descriptors.html?#arclength">Arc Length</a>
+could be used to make this more robust. For example use the ratio of the radius to area. I will
+revisit this topic in the future.</p>
+
+<p>At last we compute the center of the detected area and fit an ellipse around it, so that we can
+draw the results into the last image.</p>
+
+<div class="highlight"><pre><code class="python"><span class="lineno"> 1</span> <span class="n">kernel</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">getStructuringElement</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">MORPH_RECT</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="lineno"> 2</span> <span class="n">closed</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">erode</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">dilate</span><span class="p">(</span><span class="n">thresholded</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="n">contours</span><span class="p">,</span> <span class="n">hierarchy</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">findContours</span><span class="p">(</span><span class="n">closed</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">CV_RETR_LIST</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">CV_CHAIN_APPROX_NONE</span><span class="p">)</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> <span class="n">drawing</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span> <span class="k">for</span> <span class="n">contour</span> <span class="ow">in</span> <span class="n">contours</span><span class="p">:</span>
+<span class="lineno"> 9</span>     <span class="n">area</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">contourArea</span><span class="p">(</span><span class="n">contour</span><span class="p">)</span>
+<span class="lineno">10</span>     <span class="n">bounding_box</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">boundingRect</span><span class="p">(</span><span class="n">contour</span><span class="p">)</span>
+<span class="lineno">11</span>     
+<span class="lineno">12</span>     <span class="n">extend</span> <span class="o">=</span> <span class="n">area</span> <span class="o">/</span> <span class="p">(</span><span class="n">bounding_box</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">bounding_box</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="lineno">13</span>     
+<span class="lineno">14</span>     <span class="c"># reject the contours with big extend</span>
+<span class="lineno">15</span>     <span class="k">if</span> <span class="n">extend</span> <span class="o">&gt;</span> <span class="mf">0.8</span><span class="p">:</span>
+<span class="lineno">16</span>         <span class="k">continue</span>
+<span class="lineno">17</span>     
+<span class="lineno">18</span>     <span class="c"># calculate countour center and draw a dot there</span>
+<span class="lineno">19</span>     <span class="n">m</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">moments</span><span class="p">(</span><span class="n">contour</span><span class="p">)</span>
+<span class="lineno">20</span>     <span class="k">if</span> <span class="n">m</span><span class="p">[</span><span class="s">&#39;m00&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="lineno">21</span>         <span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="s">&#39;m10&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">m</span><span class="p">[</span><span class="s">&#39;m00&#39;</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="s">&#39;m01&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">m</span><span class="p">[</span><span class="s">&#39;m00&#39;</span><span class="p">]))</span>
+<span class="lineno">22</span>         <span class="n">cv2</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">drawing</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="lineno">23</span>     
+<span class="lineno">24</span>     <span class="c"># fit an ellipse around the contour and draw it into the image</span>
+<span class="lineno">25</span>     <span class="n">ellipse</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">fitEllipse</span><span class="p">(</span><span class="n">contour</span><span class="p">)</span>
+<span class="lineno">26</span>     <span class="n">cv2</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">drawing</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="n">ellipse</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="lineno">27</span> 
+<span class="lineno">28</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="lineno">29</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">drawing</span><span class="p">)</span>
+</code></pre></div>
+
+<p><img src="http://mirosval.github.io/images/001-pupil/003.png" alt="Final image" /></p>
+
+<p>So that is how we quickly detect the position of a pupil in an image. In the next installments
+we will look at how to detect the iris, which is a bit more complicated. We will also flatten 
+the iris out and then we will look at processing video.</p>
+
+<p>This post is also available as a <a href="http://nbviewer.ipython.org/gist/mirosval/8752402">iPython Notebook</a></p>
+
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'mirosval'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+
+    </section>
+      <footer>
+        
+      </footer>
+    </div>
+    <script src="http://mirosval.github.io/javascripts/scale.fix.js"></script>
+    <script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+  try {
+    var pageTracker = _gat._getTracker("UA-44114682-1");
+  pageTracker._trackPageview();
+  } catch(err) {}
+</script>
+
+    <div class="clear"></div>
+  </body>
+</html>
+

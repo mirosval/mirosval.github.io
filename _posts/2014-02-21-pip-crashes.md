@@ -1,7 +1,7 @@
 ---
 layout: single
 title: Python Pip Crashes
-categories: [python]
+categories: [python,english]
 tags: [python]
 ---
 

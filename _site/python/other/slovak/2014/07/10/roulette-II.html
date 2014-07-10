@@ -1,0 +1,316 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Mirosval</title>
+
+    <link rel="stylesheet" href="http://mirosval.github.io/stylesheets/styles.css">
+    <link rel="stylesheet" href="http://mirosval.github.io/stylesheets/pygment_trac.css">
+
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    
+    <link rel="alternate" type="application/rss+xml" title="Mirosval" href="http://mirosval.github.io/feed.xml">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        
+        <a href="http://mirosval.github.io/" class="profile-picture-link">
+          <img src="http://mirosval.github.io/images/cuba.jpg" alt="Profile Picture Mirosval" class="profile-picture">
+        </a>
+
+        <p></p>
+        <h1>Mirosval</h1>
+
+        <p class="view">
+          <a href="https://github.com/mirosval">My GitHub</a>
+          <a href="https://twitter.com/mirosva1">My Twitter</a>
+        </p>
+
+        <div class="categories">
+          <h3>Categories</h3>
+          <ul class="categories">
+            
+              <li>
+                <a href="http://mirosval.github.io/categories/english">
+                  English (9)
+                </a>
+              </li>
+            
+              <li>
+                <a href="http://mirosval.github.io/categories/master-thesis">
+                  Master thesis (5)
+                </a>
+              </li>
+            
+              <li>
+                <a href="http://mirosval.github.io/categories/other">
+                  Other (5)
+                </a>
+              </li>
+            
+              <li>
+                <a href="http://mirosval.github.io/categories/python">
+                  Python (4)
+                </a>
+              </li>
+            
+              <li>
+                <a href="http://mirosval.github.io/categories/slovak">
+                  Slovak (3)
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+
+        <div class="tags">
+          <h3>Tags</h3>
+          <ul class="tags">
+            
+              <li style="font-size: 122%">
+                <a href="http://mirosval.github.io/tags/master-thesis">
+                  Master thesis (5)
+                </a>
+              </li>
+            
+              <li style="font-size: 122%">
+                <a href="http://mirosval.github.io/tags/opencv">
+                  Opencv (5)
+                </a>
+              </li>
+            
+              <li style="font-size: 172%">
+                <a href="http://mirosval.github.io/tags/python">
+                  Python (9)
+                </a>
+              </li>
+            
+              <li style="font-size: 72%">
+                <a href="http://mirosval.github.io/tags/pupil">
+                  Pupil (1)
+                </a>
+              </li>
+            
+              <li style="font-size: 85%">
+                <a href="http://mirosval.github.io/tags/iris">
+                  Iris (2)
+                </a>
+              </li>
+            
+              <li style="font-size: 72%">
+                <a href="http://mirosval.github.io/tags/safari-extension">
+                  Safari extension (1)
+                </a>
+              </li>
+            
+              <li style="font-size: 85%">
+                <a href="http://mirosval.github.io/tags/performance">
+                  Performance (2)
+                </a>
+              </li>
+            
+              <li style="font-size: 72%">
+                <a href="http://mirosval.github.io/tags/hardware">
+                  Hardware (1)
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </header>
+
+    <section class="content">
+        <h2>Roulette II</h2>
+        <span class="published">Published 10 July 2014</span>
+        <p>Pred časom sa mi dostal do ruky link na <a href="http://braniblog.info/2/?fb_action_ids=10204512621958174&amp;fb_action_types=og.likes">zaujímavý článok o rulete</a>, nazvaný “Ako som zarobil peniaze a kúpil si Lexus SC430-2003”. Veľmi som tomu neveril, ale snažím sa mať hlavu otvorenú, tak som si to aspoň prečítal. V tomto poste by som teda chcel zhrnúť svoje postrehy.</p>
+
+<hr />
+
+<p>Tento článok pozostáva z 3 častí:</p>
+
+<ol>
+  <li><a href="/python/other/slovak/2014/07/10/roulette.html">Analýza pôvodného článku a metódy</a></li>
+  <li><a href="/python/other/slovak/2014/07/10/roulette-II.html">Štatistická simulácia metódy a jej vyhodnotenie</a></li>
+  <li><a href="/python/other/slovak/2014/07/10/roulette-III.html">O čo vlastne ide a závery</a></li>
+</ol>
+
+<hr />
+
+<p>Teraz sa pozrieme na simuláciu tejto metódy. Kompletný zdrojový kód nájdete ako <a href="http://nbviewer.ipython.org/gist/mirosval/dda218a0ae7cb1ab9449">IPython Notebook</a>.</p>
+
+<p>Nasledujúca časť je však to podstatné. Implementácia logiky uvedenj metódy.</p>
+
+<div class="highlight"><pre><code class="python"><span class="lineno"> 1</span> <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="n">tosses</span><span class="p">,</span> <span class="n">account_balance</span><span class="p">):</span>
+<span class="lineno"> 2</span>     <span class="c"># account_history podrzi vsetky hodnoty uctu pocas celej hry</span>
+<span class="lineno"> 3</span>     <span class="n">account_history</span> <span class="o">=</span> <span class="p">[</span><span class="n">account_balance</span><span class="p">]</span>
+<span class="lineno"> 4</span>     <span class="c"># pociatocna uroven stavky je 1 euro</span>
+<span class="lineno"> 5</span>     <span class="n">bet</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="lineno"> 6</span>     <span class="c"># stavkujeme na cervenu alebo na ciernu, zaciname na ciernej</span>
+<span class="lineno"> 7</span>     <span class="n">betting_on_red</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="lineno"> 8</span>     <span class="c"># vyhrali sme toto kolo?</span>
+<span class="lineno"> 9</span>     <span class="n">won</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="lineno">10</span>     
+<span class="lineno">11</span>     <span class="c"># iterujeme cez vsetky nahodne hody</span>
+<span class="lineno">12</span>     <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">tosses</span><span class="p">:</span>    
+<span class="lineno">13</span>         <span class="c"># ak prave stavkujeme na cervenu a padla cervena, vyhravame</span>
+<span class="lineno">14</span>         <span class="k">if</span> <span class="n">betting_on_red</span> <span class="ow">and</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">red</span><span class="p">:</span>
+<span class="lineno">15</span>             <span class="n">won</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="lineno">16</span>         <span class="c"># ak stavkujeme na ciernu a padla cierna, tiez vyhravame</span>
+<span class="lineno">17</span>         <span class="k">elif</span> <span class="ow">not</span> <span class="n">betting_on_red</span> <span class="ow">and</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">black</span><span class="p">:</span>
+<span class="lineno">18</span>             <span class="n">won</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="lineno">19</span>         <span class="c"># inak sme prehrali</span>
+<span class="lineno">20</span>         <span class="k">else</span><span class="p">:</span>
+<span class="lineno">21</span>             <span class="n">won</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="lineno">22</span>         
+<span class="lineno">23</span>         <span class="c"># ak sme toto kolo vyhrali</span>
+<span class="lineno">24</span>         <span class="k">if</span> <span class="n">won</span><span class="p">:</span>
+<span class="lineno">25</span>             <span class="c"># pripiseme si vyhru</span>
+<span class="lineno">26</span>             <span class="n">account_balance</span> <span class="o">+=</span> <span class="n">bet</span>
+<span class="lineno">27</span>             <span class="c"># zmenime farbu</span>
+<span class="lineno">28</span>             <span class="n">betting_on_red</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">betting_on_red</span>
+<span class="lineno">29</span>             <span class="c"># resetujeme stavku na 1 euro</span>
+<span class="lineno">30</span>             <span class="n">bet</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="lineno">31</span>         <span class="c"># ak sme prehrali</span>
+<span class="lineno">32</span>         <span class="k">else</span><span class="p">:</span>
+<span class="lineno">33</span>             <span class="c"># odpocitame si prehru</span>
+<span class="lineno">34</span>             <span class="n">account_balance</span> <span class="o">-=</span> <span class="n">bet</span>
+<span class="lineno">35</span>             <span class="c"># zvysime stavku na dvojnasobok</span>
+<span class="lineno">36</span>             <span class="n">bet</span> <span class="o">*=</span> <span class="mi">2</span>
+<span class="lineno">37</span>         
+<span class="lineno">38</span>         <span class="c"># zapiseme si vysledok do historie</span>
+<span class="lineno">39</span>         <span class="n">account_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">account_balance</span><span class="p">)</span>
+<span class="lineno">40</span>         
+<span class="lineno">41</span>         <span class="c"># ak sme klesli s uctom na alebo pod nulu, koncime</span>
+<span class="lineno">42</span>         <span class="k">if</span> <span class="n">account_balance</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="lineno">43</span>             <span class="k">return</span> <span class="n">account_balance</span><span class="p">,</span> <span class="n">account_history</span>
+<span class="lineno">44</span> 
+<span class="lineno">45</span>     <span class="c"># vratime vysledky</span>
+<span class="lineno">46</span>     <span class="k">return</span> <span class="n">account_balance</span><span class="p">,</span> <span class="n">account_history</span>
+</code></pre></div>
+
+<p>Ak z tohoto kódu vynecháme riadky 56 a 57, môžeme dostať nasledujúci graf</p>
+
+<p><img src="http://mirosval.github.io/images/roulette/crash-arrow.jpg" alt="Crash" /></p>
+
+<p>Tento graf ilustruje prečo je táto metóda problematická. Nestáva sa to vždy, ale občas sa stane, že nasleduje rovnaká farba veľa ťahov po sebe. V závislosti od počiatočného rozpočtu vždy existuje počet opakovaní ktorý je už likvidačný. Na úrovni 200€ je likvidačná 8x rovnaká farba zasebou.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ťah</th>
+      <th style="text-align: right">Stávka</th>
+      <th style="text-align: right">Kumulatívna strata</th>
+      <th style="text-align: right">Stav účtu</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">199</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td style="text-align: right">2</td>
+      <td style="text-align: right">3</td>
+      <td style="text-align: right">197</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td style="text-align: right">4</td>
+      <td style="text-align: right">7</td>
+      <td style="text-align: right">193</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td style="text-align: right">8</td>
+      <td style="text-align: right">15</td>
+      <td style="text-align: right">185</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td style="text-align: right">16</td>
+      <td style="text-align: right">31</td>
+      <td style="text-align: right">169</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td style="text-align: right">32</td>
+      <td style="text-align: right">63</td>
+      <td style="text-align: right">137</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td style="text-align: right">64</td>
+      <td style="text-align: right">127</td>
+      <td style="text-align: right">73</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td style="text-align: right">128</td>
+      <td style="text-align: right">255</td>
+      <td style="text-align: right">-55</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Pravdepodobnosť, že sa to stane je (19/37)^8 = 0,004835206373, čiže asi pol percenta. To môže vyzerať ako málo, ale treba si uvedomiť, že každý deň, podľa autora, hráme cca 180 hier!</p>
+
+<p>Aby sme videli ako sa to prejaví v simulácii, pozrime sa na nasledujúci graf</p>
+
+<p><img src="http://mirosval.github.io/images/roulette/cumulative.jpg" alt="Cumulative" /></p>
+
+<p>Tento graf ukazuje ako skončilo 1 000 hier, to sú cca 3 roky, 3 hodiny denne. Zelené krížiky sú hry ktoré skončili v pluse, červené, ktoré skončili v mínuse alebo na nule. Nula v tomto prípade znamená, že sme skončili s 200 eurami a za tie 3 hodiny sme nič nezarobili. Čiže oproti minimálnej mzde ste asi 9 eur v mínuse.</p>
+
+<p>Ten istý program som pustil aj 10 000 krát, aby som získal presnejšie výsledky. Graf tu neukazujem, lebo je to len chaotickejšia verzia toho, ktorý tu už je. Zaujímavé sú však čísla. Minimálna výhra mi vyšla -455€, maximálna 111€ a pravdepodobnosť, že o všetko prídete cca na úrovni 34%. To znamená, že jedna tretina hier končí prinajlepšom na nule. Ale podstatný detail je, že nevyhráte 180€, ale len okolo 100€. Spolu to teda znamená, že v jednej tretine hier prerobíte 200€ a v dvoch tretinách zarobíte 100€, čo je dokopy cca 0€ keď sa to zráta a podčiarkne. To zhruba sedí s tým čo sa píše na <a href="http://en.wikipedia.org/wiki/Roulette">Wikipedii</a> v kolónke Expected value (on a $1 bet) (French), a síce, že očakávaná vyhra pri opakovanej stávke na jednu farbu je matematicky -$0.027.</p>
+
+<p>V skratke, vyhráva kasíno. Ako vždy.</p>
+
+        
+            
+        
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'mirosval'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+
+    </section>
+      <footer>
+        
+      </footer>
+    </div>
+    <script src="http://mirosval.github.io/javascripts/scale.fix.js"></script>
+    <script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+  try {
+    var pageTracker = _gat._getTracker("UA-44114682-1");
+  pageTracker._trackPageview();
+  } catch(err) {}
+</script>
+
+    <div class="clear"></div>
+  </body>
+</html>
+

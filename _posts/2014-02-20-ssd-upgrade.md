@@ -1,7 +1,7 @@
 ---
 layout: single
 title: Macbook Pro SSD Upgrade
-categories: [other]
+categories: [other,english]
 tags: [hardware]
 ---
 

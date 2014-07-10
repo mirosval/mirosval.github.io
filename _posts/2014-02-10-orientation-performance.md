@@ -1,7 +1,7 @@
 ---
 layout: single
 title: Performance of the getOrientationAndMagnitude()
-categories: [master-thesis]
+categories: [master-thesis,english]
 tags: [master-thesis,opencv,python,performance]
 ---
 
