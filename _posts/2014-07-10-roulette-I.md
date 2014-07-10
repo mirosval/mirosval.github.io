@@ -1,6 +1,6 @@
 ---
 layout: single
-title: Roulette
+title: Roulette I
 categories: [python,other,slovak]
 tags: [python]
 ---
