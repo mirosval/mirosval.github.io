@@ -39,7 +39,7 @@
             
               <li>
                 <a href="http://mirosval.github.io/categories/english">
-                  English (9)
+                  English (10)
                 </a>
               </li>
             
@@ -67,6 +67,12 @@
                 </a>
               </li>
             
+              <li>
+                <a href="http://mirosval.github.io/categories/lamp">
+                  Lamp (1)
+                </a>
+              </li>
+            
           </ul>
         </div>
 
@@ -74,51 +80,63 @@
           <h3>Tags</h3>
           <ul class="tags">
             
-              <li style="font-size: 122%">
+              <li style="font-size: 110%">
                 <a href="http://mirosval.github.io/tags/master-thesis">
                   Master thesis (5)
                 </a>
               </li>
             
-              <li style="font-size: 122%">
+              <li style="font-size: 110%">
                 <a href="http://mirosval.github.io/tags/opencv">
                   Opencv (5)
                 </a>
               </li>
             
-              <li style="font-size: 172%">
+              <li style="font-size: 150%">
                 <a href="http://mirosval.github.io/tags/python">
                   Python (9)
                 </a>
               </li>
             
-              <li style="font-size: 72%">
+              <li style="font-size: 70%">
                 <a href="http://mirosval.github.io/tags/pupil">
                   Pupil (1)
                 </a>
               </li>
             
-              <li style="font-size: 85%">
+              <li style="font-size: 80%">
                 <a href="http://mirosval.github.io/tags/iris">
                   Iris (2)
                 </a>
               </li>
             
-              <li style="font-size: 72%">
+              <li style="font-size: 70%">
                 <a href="http://mirosval.github.io/tags/safari-extension">
                   Safari extension (1)
                 </a>
               </li>
             
-              <li style="font-size: 85%">
+              <li style="font-size: 80%">
                 <a href="http://mirosval.github.io/tags/performance">
                   Performance (2)
                 </a>
               </li>
             
-              <li style="font-size: 72%">
+              <li style="font-size: 80%">
                 <a href="http://mirosval.github.io/tags/hardware">
-                  Hardware (1)
+                  Hardware (2)
+                </a>
+              </li>
+            
+              <li style="font-size: 70%">
+                <a href="http://mirosval.github.io/tags/arduino">
+                  Arduino (1)
+                </a>
+              </li>
+            
+              <li style="font-size: 70%">
+                <a href="http://mirosval.github.io/tags/ios">
+                  Ios (1)
                 </a>
               </li>
             
@@ -134,21 +152,19 @@ cleaning up, among others I’ve run <code>brew cleanup</code> which deletes old
 somewhere along the way that has broken my Python install. Trying to run Flask server would produce
 a cryptic error:</p>
 
-<div class="highlight"><pre><code class="text">ImportError: No module named itsdangerous
-</code></pre></div>
+<div class="highlight"><pre><code class="language-text" data-lang="text">ImportError: No module named itsdangerous</code></pre></div>
 
 <p>Hmm okay, lets try to install it:</p>
 
-<div class="highlight"><pre><code class="text"> % pip3 install itsdangerous
+<div class="highlight"><pre><code class="language-text" data-lang="text">% pip3 install itsdangerous
     Downloading/unpacking itsdangerous
     Downloading itsdangerous-0.23.tar.gz (46kB): 46kB downloaded
-    [1]    48739 segmentation fault  pip3 install itsdangerous
-</code></pre></div>
+    [1]    48739 segmentation fault  pip3 install itsdangerous</code></pre></div>
 
 <p>Mmmkaay, what? I’ve tried to reinstall python to no avail, the search did not show anything either…
 The segfault looked like this:</p>
 
-<div class="highlight"><pre><code class="text">Process:         Python [61249]
+<div class="highlight"><pre><code class="language-text" data-lang="text">Process:         Python [61249]
 Path:            /usr/local/Cellar/python3/3.3.4/Frameworks/Python.framework/Versions/3.3/Resources/Python.app/Contents/MacOS/Python
 Identifier:      Python
 Version:         3.3.4 (3.3.4)
@@ -242,14 +258,12 @@ Thread 0 crashed with X86 Thread State (64-bit):
   rdi: 0x00007fe6ca7bde20  rsi: 0x00007fe6ca60d490  rbp: 0x00007fff57726a90  rsp: 0x00007fff57726a70
    r8: 0x0000000000000006   r9: 0x00007fe6ca400000  r10: 0x0000000069793538  r11: 0xffffffffffe9b3a0
   r12: 0x00007fff7c009400  r13: 0x00000001092c0f38  r14: 0x00007fe6ca7bde20  r15: 0x0000000000000000
-  rip: 0x0000000108f6d1ac  rfl: 0x0000000000010202  cr2: 0x0000000000000011
- 
-</code></pre></div>
+  rip: 0x0000000108f6d1ac  rfl: 0x0000000000010202  cr2: 0x0000000000000011</code></pre></div>
 
 <p>So libcrypto.dylib is at fault here… Lets see, Homebrew has an option to use Python
 with brewed OpenSSL instead:</p>
 
-<div class="highlight"><pre><code class="text">  % brew info python3
+<div class="highlight"><pre><code class="language-text" data-lang="text">% brew info python3
 
 python3: stable 3.3.4, HEAD
 http://www.python.org/
@@ -288,14 +302,12 @@ You can install Python packages with
 They will install into the site-package directory
   /usr/local/lib/python3.3/site-packages
 
-See: https://github.com/Homebrew/homebrew/wiki/Homebrew-and-Python
-</code></pre></div>
+See: https://github.com/Homebrew/homebrew/wiki/Homebrew-and-Python</code></pre></div>
 
 <p>So I ran:</p>
 
-<div class="highlight"><pre><code class="text">  % brew uninstall python3
-  % brew install python3 --with-brewed-openssl
-</code></pre></div>
+<div class="highlight"><pre><code class="language-text" data-lang="text">% brew uninstall python3
+  % brew install python3 --with-brewed-openssl</code></pre></div>
 
 <p>And that seemed to do the trick for the pip segfaults, however it did not solve my original
 problem. To do that I’ve uninstalled all of the Flask and related packages using pip3 and then

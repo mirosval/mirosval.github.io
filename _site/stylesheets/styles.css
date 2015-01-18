@@ -49,6 +49,14 @@ a small {
   float: none;
 }
 
+.pull-left {
+  float: left;
+}
+
+.half {
+  width: 50%;
+}
+
 .wrapper {
   width:860px;
   margin:0 auto;

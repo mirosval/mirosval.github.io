@@ -39,7 +39,7 @@
             
               <li>
                 <a href="http://mirosval.github.io/categories/english">
-                  English (9)
+                  English (10)
                 </a>
               </li>
             
@@ -67,6 +67,12 @@
                 </a>
               </li>
             
+              <li>
+                <a href="http://mirosval.github.io/categories/lamp">
+                  Lamp (1)
+                </a>
+              </li>
+            
           </ul>
         </div>
 
@@ -74,51 +80,63 @@
           <h3>Tags</h3>
           <ul class="tags">
             
-              <li style="font-size: 122%">
+              <li style="font-size: 110%">
                 <a href="http://mirosval.github.io/tags/master-thesis">
                   Master thesis (5)
                 </a>
               </li>
             
-              <li style="font-size: 122%">
+              <li style="font-size: 110%">
                 <a href="http://mirosval.github.io/tags/opencv">
                   Opencv (5)
                 </a>
               </li>
             
-              <li style="font-size: 172%">
+              <li style="font-size: 150%">
                 <a href="http://mirosval.github.io/tags/python">
                   Python (9)
                 </a>
               </li>
             
-              <li style="font-size: 72%">
+              <li style="font-size: 70%">
                 <a href="http://mirosval.github.io/tags/pupil">
                   Pupil (1)
                 </a>
               </li>
             
-              <li style="font-size: 85%">
+              <li style="font-size: 80%">
                 <a href="http://mirosval.github.io/tags/iris">
                   Iris (2)
                 </a>
               </li>
             
-              <li style="font-size: 72%">
+              <li style="font-size: 70%">
                 <a href="http://mirosval.github.io/tags/safari-extension">
                   Safari extension (1)
                 </a>
               </li>
             
-              <li style="font-size: 85%">
+              <li style="font-size: 80%">
                 <a href="http://mirosval.github.io/tags/performance">
                   Performance (2)
                 </a>
               </li>
             
-              <li style="font-size: 72%">
+              <li style="font-size: 80%">
                 <a href="http://mirosval.github.io/tags/hardware">
-                  Hardware (1)
+                  Hardware (2)
+                </a>
+              </li>
+            
+              <li style="font-size: 70%">
+                <a href="http://mirosval.github.io/tags/arduino">
+                  Arduino (1)
+                </a>
+              </li>
+            
+              <li style="font-size: 70%">
+                <a href="http://mirosval.github.io/tags/ios">
+                  Ios (1)
                 </a>
               </li>
             
@@ -149,12 +167,11 @@ We will deal with these potential issues later, for now we’ll just stick to th
 
 <p>So here I just load the original image.</p>
 
-<div class="highlight"><pre><code class="python"><span class="lineno">1</span> <span class="kn">import</span> <span class="nn">cv2</span>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="lineno">1</span> <span class="kn">import</span> <span class="nn">cv2</span>
 <span class="lineno">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="lineno">3</span> 
 <span class="lineno">4</span> <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">&#39;eye.png&#39;</span><span class="p">)</span>
-<span class="lineno">5</span> <span class="n">gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">CV_BGR2GRAY</span><span class="p">)</span>
-</code></pre></div>
+<span class="lineno">5</span> <span class="n">gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">CV_BGR2GRAY</span><span class="p">)</span></code></pre></div>
 
 <p><img src="http://mirosval.github.io/images/001-pupil/001.png" alt="Eye image" /></p>
 
@@ -162,8 +179,7 @@ We will deal with these potential issues later, for now we’ll just stick to th
 one. So everything darker than 30 goes to black, and everything else goes to white. And this is what
 I get.</p>
 
-<div class="highlight"><pre><code class="python"><span class="lineno">1</span> <span class="n">retval</span><span class="p">,</span> <span class="n">thresholded</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">CV_THRESH_BINARY</span><span class="p">)</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="lineno">1</span> <span class="n">retval</span><span class="p">,</span> <span class="n">thresholded</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">CV_THRESH_BINARY</span><span class="p">)</span></code></pre></div>
 
 <p><img src="http://mirosval.github.io/images/001-pupil/002.png" alt="Threshold image" /></p>
 
@@ -186,7 +202,7 @@ revisit this topic in the future.</p>
 <p>At last we compute the center of the detected area and fit an ellipse around it, so that we can
 draw the results into the last image.</p>
 
-<div class="highlight"><pre><code class="python"><span class="lineno"> 1</span> <span class="n">kernel</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">getStructuringElement</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">MORPH_RECT</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="lineno"> 1</span> <span class="n">kernel</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">getStructuringElement</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">MORPH_RECT</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 <span class="lineno"> 2</span> <span class="n">closed</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">erode</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">dilate</span><span class="p">(</span><span class="n">thresholded</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="lineno"> 3</span> 
 <span class="lineno"> 4</span> <span class="n">contours</span><span class="p">,</span> <span class="n">hierarchy</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">findContours</span><span class="p">(</span><span class="n">closed</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">CV_RETR_LIST</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">CV_CHAIN_APPROX_NONE</span><span class="p">)</span>
@@ -214,8 +230,7 @@ draw the results into the last image.</p>
 <span class="lineno">26</span>     <span class="n">cv2</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">drawing</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="n">ellipse</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
 <span class="lineno">27</span> 
 <span class="lineno">28</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="lineno">29</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">drawing</span><span class="p">)</span>
-</code></pre></div>
+<span class="lineno">29</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">drawing</span><span class="p">)</span></code></pre></div>
 
 <p><img src="http://mirosval.github.io/images/001-pupil/003.png" alt="Final image" /></p>
 

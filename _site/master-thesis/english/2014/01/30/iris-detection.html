@@ -39,7 +39,7 @@
             
               <li>
                 <a href="http://mirosval.github.io/categories/english">
-                  English (9)
+                  English (10)
                 </a>
               </li>
             
@@ -67,6 +67,12 @@
                 </a>
               </li>
             
+              <li>
+                <a href="http://mirosval.github.io/categories/lamp">
+                  Lamp (1)
+                </a>
+              </li>
+            
           </ul>
         </div>
 
@@ -74,51 +80,63 @@
           <h3>Tags</h3>
           <ul class="tags">
             
-              <li style="font-size: 122%">
+              <li style="font-size: 110%">
                 <a href="http://mirosval.github.io/tags/master-thesis">
                   Master thesis (5)
                 </a>
               </li>
             
-              <li style="font-size: 122%">
+              <li style="font-size: 110%">
                 <a href="http://mirosval.github.io/tags/opencv">
                   Opencv (5)
                 </a>
               </li>
             
-              <li style="font-size: 172%">
+              <li style="font-size: 150%">
                 <a href="http://mirosval.github.io/tags/python">
                   Python (9)
                 </a>
               </li>
             
-              <li style="font-size: 72%">
+              <li style="font-size: 70%">
                 <a href="http://mirosval.github.io/tags/pupil">
                   Pupil (1)
                 </a>
               </li>
             
-              <li style="font-size: 85%">
+              <li style="font-size: 80%">
                 <a href="http://mirosval.github.io/tags/iris">
                   Iris (2)
                 </a>
               </li>
             
-              <li style="font-size: 72%">
+              <li style="font-size: 70%">
                 <a href="http://mirosval.github.io/tags/safari-extension">
                   Safari extension (1)
                 </a>
               </li>
             
-              <li style="font-size: 85%">
+              <li style="font-size: 80%">
                 <a href="http://mirosval.github.io/tags/performance">
                   Performance (2)
                 </a>
               </li>
             
-              <li style="font-size: 72%">
+              <li style="font-size: 80%">
                 <a href="http://mirosval.github.io/tags/hardware">
-                  Hardware (1)
+                  Hardware (2)
+                </a>
+              </li>
+            
+              <li style="font-size: 70%">
+                <a href="http://mirosval.github.io/tags/arduino">
+                  Arduino (1)
+                </a>
+              </li>
+            
+              <li style="font-size: 70%">
+                <a href="http://mirosval.github.io/tags/ios">
+                  Ios (1)
                 </a>
               </li>
             
@@ -156,7 +174,7 @@ pupil detection. It therefore very important for the pupil detection to be corre
 
 <p><img src="http://mirosval.github.io/images/002-iris/001.png" alt="Pupil detection" /></p>
 
-<div class="highlight"><pre><code class="python"><span class="lineno"> 1</span> <span class="k">def</span> <span class="nf">getOrientationAndMagnitude</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="lineno"> 1</span> <span class="k">def</span> <span class="nf">getOrientationAndMagnitude</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
 <span class="lineno"> 2</span>     <span class="n">sobelHorizontal</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Sobel</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CV_32F</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="lineno"> 3</span>     <span class="n">sobelVertical</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Sobel</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CV_32F</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="lineno"> 4</span> 
@@ -173,8 +191,7 @@ pupil detection. It therefore very important for the pupil detection to be corre
 <span class="lineno">15</span> 
 <span class="lineno">16</span>     <span class="n">magnitude</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">magnitude</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 <span class="lineno">17</span> 
-<span class="lineno">18</span>     <span class="k">return</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">magnitude</span>
-</code></pre></div>
+<span class="lineno">18</span>     <span class="k">return</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">magnitude</span></code></pre></div>
 
 <p><img src="http://mirosval.github.io/images/002-iris/003-orientation.png" alt="Orientation" />
 <img src="http://mirosval.github.io/images/002-iris/002-magnitude.png" alt="Magnitude" /></p>
@@ -185,7 +202,7 @@ and then we are going to find the place where the change in intensity is the rig
 orientation and magnitude. To be able to do that, we first need to calculate the
 orientation and magnitude fields of the image. That is what you can see above.</p>
 
-<div class="highlight"><pre><code class="python"><span class="lineno"> 1</span> <span class="k">def</span> <span class="nf">getCircleSamples</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nPoints</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="lineno"> 1</span> <span class="k">def</span> <span class="nf">getCircleSamples</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nPoints</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
 <span class="lineno"> 2</span>     <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">nPoints</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="lineno"> 3</span>     <span class="c"># print(np.sin(s))</span>
 <span class="lineno"> 4</span> 
@@ -196,13 +213,12 @@ orientation and magnitude fields of the image. That is what you can see above.</
 <span class="lineno"> 9</span>             <span class="n">radius</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">center</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> 
 <span class="lineno">10</span>             <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> 
 <span class="lineno">11</span>             <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">s</span> <span class="p">]</span>
-<span class="lineno">12</span>     <span class="k">return</span> <span class="n">P</span>
-</code></pre></div>
+<span class="lineno">12</span>     <span class="k">return</span> <span class="n">P</span></code></pre></div>
 
 <p>This function returns a list of tuples, each representing 2 points that delimit a line
 going from the center of the circle outwards in regular intervals.</p>
 
-<div class="highlight"><pre><code class="python"><span class="lineno"> 1</span> <span class="k">def</span> <span class="nf">getLineCoordinates</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="lineno"> 1</span> <span class="k">def</span> <span class="nf">getLineCoordinates</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
 <span class="lineno"> 2</span>     <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span> <span class="o">=</span> <span class="n">p1</span>
 <span class="lineno"> 3</span>     <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span> <span class="o">=</span> <span class="n">p2</span>
 <span class="lineno"> 4</span> 
@@ -240,14 +256,13 @@ going from the center of the circle outwards in regular intervals.</p>
 <span class="lineno">36</span> 
 <span class="lineno">37</span>     <span class="n">retPoints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
 <span class="lineno">38</span> 
-<span class="lineno">39</span>     <span class="k">return</span> <span class="n">retPoints</span>
-</code></pre></div>
+<span class="lineno">39</span>     <span class="k">return</span> <span class="n">retPoints</span></code></pre></div>
 
 <p>This function converts the coordinates of two points into a list of points that lay on the
 line between the two points. We will evaluate the gradient along this line, and for that we
 need a list of positions where to look.</p>
 
-<div class="highlight"><pre><code class="python"><span class="lineno"> 1</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">magnitude</span> <span class="o">=</span> <span class="n">getOrientationAndMagnitude</span><span class="p">(</span><span class="n">smooth</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="lineno"> 1</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">magnitude</span> <span class="o">=</span> <span class="n">getOrientationAndMagnitude</span><span class="p">(</span><span class="n">smooth</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="lineno"> 2</span> 
 <span class="lineno"> 3</span> <span class="c"># average radius for pupil (since it is an ellipse)</span>
 <span class="lineno"> 4</span> <span class="n">pupilRadius</span> <span class="o">=</span> <span class="n">pupil_width</span>
@@ -335,8 +350,7 @@ need a list of positions where to look.</p>
 <span class="lineno">86</span> 
 <span class="lineno">87</span> <span class="c"># draw the winning radius</span>
 <span class="lineno">88</span> <span class="n">cv2</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">finalIrisRadius</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
-<span class="lineno">89</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s">&quot;Test&quot;</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
-</code></pre></div>
+<span class="lineno">89</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s">&quot;Test&quot;</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span></code></pre></div>
 
 <p>Now to put it all together, we start with orientation and magnitude maps. Then sample the
 original image to get lines from the pupil out. We loop through these samples and find places

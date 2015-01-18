@@ -39,7 +39,7 @@
             
               <li>
                 <a href="http://mirosval.github.io/categories/english">
-                  English (9)
+                  English (10)
                 </a>
               </li>
             
@@ -67,6 +67,12 @@
                 </a>
               </li>
             
+              <li>
+                <a href="http://mirosval.github.io/categories/lamp">
+                  Lamp (1)
+                </a>
+              </li>
+            
           </ul>
         </div>
 
@@ -74,51 +80,63 @@
           <h3>Tags</h3>
           <ul class="tags">
             
-              <li style="font-size: 122%">
+              <li style="font-size: 110%">
                 <a href="http://mirosval.github.io/tags/master-thesis">
                   Master thesis (5)
                 </a>
               </li>
             
-              <li style="font-size: 122%">
+              <li style="font-size: 110%">
                 <a href="http://mirosval.github.io/tags/opencv">
                   Opencv (5)
                 </a>
               </li>
             
-              <li style="font-size: 172%">
+              <li style="font-size: 150%">
                 <a href="http://mirosval.github.io/tags/python">
                   Python (9)
                 </a>
               </li>
             
-              <li style="font-size: 72%">
+              <li style="font-size: 70%">
                 <a href="http://mirosval.github.io/tags/pupil">
                   Pupil (1)
                 </a>
               </li>
             
-              <li style="font-size: 85%">
+              <li style="font-size: 80%">
                 <a href="http://mirosval.github.io/tags/iris">
                   Iris (2)
                 </a>
               </li>
             
-              <li style="font-size: 72%">
+              <li style="font-size: 70%">
                 <a href="http://mirosval.github.io/tags/safari-extension">
                   Safari extension (1)
                 </a>
               </li>
             
-              <li style="font-size: 85%">
+              <li style="font-size: 80%">
                 <a href="http://mirosval.github.io/tags/performance">
                   Performance (2)
                 </a>
               </li>
             
-              <li style="font-size: 72%">
+              <li style="font-size: 80%">
                 <a href="http://mirosval.github.io/tags/hardware">
-                  Hardware (1)
+                  Hardware (2)
+                </a>
+              </li>
+            
+              <li style="font-size: 70%">
+                <a href="http://mirosval.github.io/tags/arduino">
+                  Arduino (1)
+                </a>
+              </li>
+            
+              <li style="font-size: 70%">
+                <a href="http://mirosval.github.io/tags/ios">
+                  Ios (1)
                 </a>
               </li>
             
@@ -134,13 +152,12 @@ later, when I felt I had all of the functionality I wanted, but from time to tim
 code, particularly when it’s suspiciously slow. So I did examine the code I had written so far using 
 <a href="http://packages.python.org/line_profiler/">line_profiler</a> (Abysmal documentation btw.) like so:</p>
 
-<div class="highlight"><pre><code class="bash">kernprof.py -l test.py <span class="o">&amp;&amp;</span> python -m line_profiler test.py.lprof
-</code></pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">kernprof.py -l test.py <span class="o">&amp;&amp;</span> python -m line_profiler test.py.lprof</code></pre></div>
 
 <p>I have found that the most time is being spent in one function, <code>getOrientationAndMagnitude</code>, you’ll recall it
 looked like this:</p>
 
-<div class="highlight"><pre><code class="python"><span class="lineno"> 1</span> <span class="k">def</span> <span class="nf">getOrientationAndMagnitude</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="lineno"> 1</span> <span class="k">def</span> <span class="nf">getOrientationAndMagnitude</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
 <span class="lineno"> 2</span>     <span class="n">sobelHorizontal</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Sobel</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CV_32F</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="lineno"> 3</span>     <span class="n">sobelVertical</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Sobel</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CV_32F</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="lineno"> 4</span> 
@@ -157,8 +174,7 @@ looked like this:</p>
 <span class="lineno">15</span> 
 <span class="lineno">16</span>     <span class="n">magnitude</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">magnitude</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 <span class="lineno">17</span> 
-<span class="lineno">18</span>     <span class="k">return</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">magnitude</span>
-</code></pre></div>
+<span class="lineno">18</span>     <span class="k">return</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">magnitude</span></code></pre></div>
 
 <p>I wrote this code some time ago, when I was less familiar with OpenCV than I am now, and you can quickly see
 the hotspot. Yes, the line <code>14</code>. I probably did it like this because I hadn’t noticed the 
@@ -168,32 +184,30 @@ the hotspot. Yes, the line <code>14</code>. I probably did it like this because 
 Armed with the <a href="http://docs.opencv.org/modules/core/doc/operations_on_arrays.html#phase"><code>phase()</code></a> function,
 we can do the following:</p>
 
-<div class="highlight"><pre><code class="python"><span class="lineno">1</span> <span class="k">def</span> <span class="nf">getOrientationAndMagnitude</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="lineno">1</span> <span class="k">def</span> <span class="nf">getOrientationAndMagnitude</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
 <span class="lineno">2</span>     <span class="n">h</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Sobel</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CV_32F</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="lineno">3</span>     <span class="n">v</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Sobel</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CV_32F</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="lineno">4</span> 
 <span class="lineno">5</span>     <span class="n">orientation</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">phase</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">angleInDegrees</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="lineno">6</span>     <span class="n">magnitude</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">magnitude</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 <span class="lineno">7</span> 
-<span class="lineno">8</span>     <span class="k">return</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">magnitude</span>
-</code></pre></div>
+<span class="lineno">8</span>     <span class="k">return</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">magnitude</span></code></pre></div>
 
 <p>Now this much shorter and simpler function will also run much faster, thanks to OpenCV. And here’s how I tested
 it:</p>
 
-<div class="highlight"><pre><code class="python"><span class="lineno">1</span> <span class="kn">import</span> <span class="nn">cProfile</span>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="lineno">1</span> <span class="kn">import</span> <span class="nn">cProfile</span>
 <span class="lineno">2</span> 
 <span class="lineno">3</span> <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">&#39;eye.png&#39;</span><span class="p">)</span>
 <span class="lineno">4</span> <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">CV_BGR2GRAY</span><span class="p">)</span>
 <span class="lineno">5</span> <span class="n">image2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
 <span class="lineno">6</span> 
 <span class="lineno">7</span> <span class="n">cProfile</span><span class="o">.</span><span class="n">runctx</span><span class="p">(</span><span class="s">&quot;refGetOrientationAndMagnitude(image)&quot;</span><span class="p">,</span> <span class="nb">globals</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span> <span class="nb">locals</span><span class="o">=</span><span class="nb">locals</span><span class="p">())</span>
-<span class="lineno">8</span> <span class="n">cProfile</span><span class="o">.</span><span class="n">runctx</span><span class="p">(</span><span class="s">&quot;newGetOrientationAndMagnitude(image)&quot;</span><span class="p">,</span> <span class="nb">globals</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span> <span class="nb">locals</span><span class="o">=</span><span class="nb">locals</span><span class="p">())</span>
-</code></pre></div>
+<span class="lineno">8</span> <span class="n">cProfile</span><span class="o">.</span><span class="n">runctx</span><span class="p">(</span><span class="s">&quot;newGetOrientationAndMagnitude(image)&quot;</span><span class="p">,</span> <span class="nb">globals</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span> <span class="nb">locals</span><span class="o">=</span><span class="nb">locals</span><span class="p">())</span></code></pre></div>
 
 <p>Which yielded the following results:</p>
 
-<div class="highlight"><pre><code class="text">201309 function calls in 1.022 seconds
+<div class="highlight"><pre><code class="language-text" data-lang="text">201309 function calls in 1.022 seconds
 
 Ordered by: standard name
 
@@ -218,8 +232,7 @@ ncalls  tottime  percall  cumtime  percall filename:lineno(function)
     2    0.002    0.001    0.002    0.001 {cv2.Sobel}
     1    0.000    0.000    0.000    0.000 {cv2.magnitude}
     1    0.001    0.001    0.001    0.001 {cv2.phase}
-    1    0.000    0.000    0.000    0.000 {method &#39;disable&#39; of &#39;_lsprof.Profiler&#39; objects}
-</code></pre></div>
+    1    0.000    0.000    0.000    0.000 {method &#39;disable&#39; of &#39;_lsprof.Profiler&#39; objects}</code></pre></div>
 
 <p>So 1.022s to 0.004, 255× faster with just replacing a double <code>for</code> loop with an OpenCV call.</p>
 

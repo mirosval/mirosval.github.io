@@ -145,38 +145,63 @@
       </header>
 
     <section class="content">
-        <h2>Roulette III</h2>
-        <span class="published">Published 10 July 2014</span>
-        <p>Pred časom sa mi dostal do ruky link na <a href="http://braniblog.info/2/?fb_action_ids=10204512621958174&amp;fb_action_types=og.likes">zaujímavý článok o rulete</a>, nazvaný “Ako som zarobil peniaze a kúpil si Lexus SC430-2003”. Veľmi som tomu neveril, ale snažím sa mať hlavu otvorenú, tak som si to aspoň prečítal. V tomto poste by som teda chcel zhrnúť svoje postrehy.</p>
+        <h2>Lamp Project</h2>
+        <span class="published">Published 18 January 2015</span>
+        <p>In this series I will share my experiences with building an Rfduino-based RGB LED lamp from start to finish, including iOS and other apps for remote control.</p>
 
 <hr />
 
-<p>Tento článok pozostáva z 3 častí:</p>
+<p>I’ve had this idea for a project for quite some time now, but now I’ve actually come around to some real progress. The project specificaton is simple: I wanted to build an RGB LED lamp that could be controlled wirelessly. That idea in and of itself is not particularly new or unprecedented, however when I was looking at ready-made solutions online, I couldn’t find anything that would work for me. I really just wanted something that could be programmed or controlled remotely. </p>
 
-<ol>
-  <li><a href="/python/other/slovak/2014/07/10/roulette-I.html">Analýza pôvodného článku a metódy</a></li>
-  <li><a href="/python/other/slovak/2014/07/10/roulette-II.html">Štatistická simulácia metódy a jej vyhodnotenie</a></li>
-  <li><a href="/python/other/slovak/2014/07/10/roulette-III.html">O čo vlastne ide a závery</a></li>
-</ol>
+<h2 id="the-vision">The Vision</h2>
 
-<hr />
-
-<p>Ako je teda možné, že tento chlapík zarobil “približne 6 tisíc mesačne”? Vysvetlení je niekoľko:</p>
+<p>I really just want a smart lamp, that would be able to do things like change color and intensity of light according to various outside stimuli, such as direct control via a mobile phone, automatic lighting up and dimming according to my sleep cycle, audio input, temperature and so on. I would like to be able to control multiple lamps from one place and optionally have “groups” of lamps that could be controlled separately. I could not find anything that would be both inexpensive and flexible enough for my programming needs (most of these cheap RGB LED strips come with an IR remote control, but that is a joke). I thought I could build something that would work for me from the following components:</p>
 
 <ul>
-  <li>Kasíno používa iný algoritmus na výpočet náhodných čísel. To je vysoko nepravdepodobné, pretože je to nelegálne. Náhodné čísla by mali byť uniformne rozložené.</li>
-  <li>Pán autor článku (neuviedol meno, tak neviem kto to je) je proste dieťa šťasteny a naozaj tie peniaze vyhral, ale nie preto, že jeho metóda je super, ale jednoducho mal šťastie</li>
-  <li>Pán autor nezarába na hraní v kasíne, ale na tom blogu. Ako? Referrals.</li>
+  <li>IKEA Lamp</li>
+  <li>Arduino</li>
+  <li>RGB LED Strip</li>
+  <li>Power supply</li>
+  <li>iOS Device</li>
+  <li>Raspberry PI</li>
 </ul>
 
-<p>Keď sa na ten blog bližšie pozrieme, vidíme, že je to vlastne len “blog” s <a href="http://braniblog.info/">1 stránkou</a> a doménu <a href="http://whois.domaintools.com/braniblog.info">vlastní niekto z Kyjeva</a>. </p>
+<h2 id="the-current-state-of-things">The current state of things</h2>
 
-<p>Všetky linky na stránke vedú na <a href="http://braniblog.info/2/eu.php">http://braniblog.info/2/eu.php</a>, ktorá nás presmeruje cez <a href="http://site.gotoeucasino.com/index.cgi?aname=mitkobombata1&amp;zone_id=brask2">http://site.gotoeucasino.com/index.cgi?aname=mitkobombata1&amp;zone_id=brask2</a> na <a href="http://slovakian.eucasino.com/">http://slovakian.eucasino.com/</a>, zaregistrované na Cypre, len tak mimochodom. Takže, keď sa cez tento link dostanete na kasíno, autor článku dostane nejaké percentá z vášho prvého vkladu, koľko presne to je alebo ako to funguje sa mi nepodarilo vypátrať.</p>
+<p><img src="http://mirosval.github.io/images/lamp/lamp-1.jpg" alt="Current state of the RGB LED Lamp" class="pull-left half" /></p>
 
-<p>Ešte pikoška na záver, spravil som si <a href="https://www.google.com/search?tbs=sbi:AMhZZivtxO7IivBaAiGAKuUK3NmymUxIq7xkPVqT2XM-AWfwAvNBSexSAO6JnaygNiXF6s47HtuX4LKqkC7DZtJGFUtED8WwlHRZ4TrcWU5AaG_1BOdPO9iCgXdhLvXIq-6KPjvMSHMkygzx7o8IfV3oY2W28SVHQm_1OZnsdwDLxDsN388rZpmq8_1Xy6HP0uPbrth_18MKWzD7XZHetHxvD26fUdrMRpKg6Y_1yJCDs5TT9CmByYPHtq_19Wd6zkAEeZiA6O6hKstt7foGhE-U5bpIPimLbYNA8OKUiUb3KDTt0vMIZMXTadEiAq_1hdqTSEfWP-N3iNYmLVwrz1vnJJn-Q1ArsCuWomb9-el0g-fBXr67z6J39h88tk1VZDBdzBgvVjzTiYe-R-HJBJlqrNXRJAJIeCwJDWp3dR3kqHkQG6kXk9Jt0FS0JOXMbyeIVfDu3TXRwQ3u9Hl35c5aa2FP8_1Nsha2fx0FoeAImWc5BKQgg-kDdgHR-Dyy9KLof66kFEJj253kU0Rx308o4F02u2kOEMFCXCx3NVhC0i3Eu7b0tnO0VQl56Kndao1uxQ6WdxliDiS3g9cFeGYcxuMoL1rHFmwdTS9F0GmSfrb6wh4NAUDSOjJuM_1V6VD6CaXKBn34a-BLCJaX3dNoUhAYYcWIr7GH_1lSKrxkUxJvfBJmBkCHyLbJVrMLz0bXMz4OyJjfBmYnlqDN3Fa7Yo2_1Romt81p7CSeR8VDObOVk_17EYsHIvk3mFFRfxgSDuJBFmMGYhrE6fuHPcCsJUDF15g0G3SmRRIIZkN9QS6JtN7NHnosAm_1LHk29ZG6m_1RiPqAhur1ggYq08ELh3Y_1WamMu2F-4emnu2kv1qSPxNvkqhuI28bri4zuF7xQFV2QuDXBUh1l_1KKP4gnf_1eHPyCRaZ1CCt3eBIAjzHRd44rbwJ8StAOwSfWVJ8cZn9Cv5BY2YvM-B0nWX_1h3EoWf0cOruX-ZTN-PnXRE5Dbfv8s88tjauwQNcPVnOwpDal56rdnqS4wkHm52FOrJYCg71pyhxhL_1pK5G2Q_1xmHP14jcqf0sqfHH-M9NPaC-ab1cMKAMVGWeWI5XI3zhWRZtGn1iX354oBmVMd2AKtgR4YrwSe2hVfB3opsut6oOMe5lgmL5HsSdzDp0bHOlKGdkhR-_1caWT3vN05ohcUF5ulolcyIjDJN6jPR-8qgHFMDNYrz2F3Xzz4xBmr8S3caTEik6EJxYysF37CvjLP0QjV3Oy9n6Wz3wfc1opQEXl0xUNwqCoOmADp29YNDGXUl34xIvnFcrn1LmaXH78tGSpFuqm_1k9WEB-4QNgKW1Xr_1rk-El6IN9FH7_1aZO1justpzsk2gf8s8wooFqFSPbbHLNDq0u99e2NEraHVyRv-c3nAcjwnu0L--1J9gIxpkZMHnNMWgCt3Z0q0FToYTQPGZLdSG8V_1Xhu_11GPVKyGd59uOG49f--ix0hWy2U_1NwCd3ITSj0r_19dtcJOaUcNrWKok21YuiS_1Uk_14wpSqxOaaXVS2qe2M_1B7LtSOxK-czdDyI0r-wHcmBMRyLjTPgexxNYg&amp;btnG=Search%20by%20image">Google Reverse Image Search</a> na ten obrázok, kde “autor” stojí pri svojom novom aute, pozrite si to sami :)</p>
+<p>I’ve built a lamp using an Arduino and a Bluetooth chip that could be controlled by Bluetooth 2.0 back in 2012. This was good, but not good enough. The RGB strip worked well, but Bluetooth connection was unreliable and prone to problems (unable to find the device, unable to connect, etc.)</p>
 
-<p>Aby som to teda zhrnul. Nemám nič proti kasínam, to je každého osobná vec ako míňa svoje peniaze. Dokonca nemám ani nič proti autorovi tohoto článku, aj keď zneužíva to, že niektorí ľudia sú rozumovo slabší a neuvedomia si, o čo ide. Túto sériu článkov beriem s nadhľadom a ako cvičenie v štatistike a Pythone. Preto ak niekto nájde niekde nejakú chybu alebo nezrovnalosť, dajte mi vedieť.</p>
+<p>In the summer of 2014 I have built another prototype based on the <a href="http://www.rfduino.com/">Rfduino</a>, the new hot platform that includes Arduino and Bluetooth 4.0 (or BLE) in one package. This prototype works flawlessly, the connection is stable and easily established, which is a huge plus.</p>
 
+<p>I currently have 1 Rfduino-based lamp with a 1m RGB LED strip attached to it. The LED strip I’m currently using is something like <a href="http://www.amazon.co.uk/Waterproof-300LEDs-Flexible-Lighting-Decoration/dp/B009ZOLW04/ref=sr_1_46?s=lighting&amp;ie=UTF8&amp;qid=1421617842&amp;sr=1-46&amp;keywords=5050+rgb+led+strip">this</a>. The key parameters are 12V, ~1A/m, 5050 LEDs 60 pieces per meter. The cool part is that the strip can be cut every 5cm (every 3 LEDs). So I have bought a 5m roll and I’m going to cut it into 5 1m long strips for use in 5 lamps.</p>
+
+<p>The 1m LED strip I have draws 1.2A at 12V, which means it has a wattage of 14.4W. This determines all of the other components that are needed. For power supply I have used something like <a href="http://uk.farnell.com/powerpax/sw3526/ac-dc-power-supply-12v-1-25a-euro/dp/1971795">this</a>. At 15W it supplies enough power for the LED strip,  Rfduino and the remaining circuitry. </p>
+
+<p>I have designed a simple protocol that is able to send the RGB color to the lamp and is able to address up to 255 lamps. iOS is limited to 10 simmultaneous BT connections, so 255 is more than could be realistically adressed anyways. </p>
+
+<p>And lastly I have built an iOS app that is able to set a solid color on a lamp, or alternatively can use the microphone to set the intensity of the light, while the user can pick the hue. I will discuss all these points in depth in future posts.</p>
+
+<h2 id="immediate-future-of-the-project">Immediate future of the project</h2>
+
+<p>Currently I have 1 lamp that works with the iOS app. I’ve recently received a shipment of 7 new Rfduinos and I’ve ordered more parts online which should arrive shortly. In the next weeks I’m going to build another prototype and test how the iOS app and the protocol cope with 2 or 3 lamps. I would also like to employ my Raspberry pi in the project, so that it could control the lamps without the need to use an iOS device. This would be perfect for things like morning alarm light, afternoon automatic lights and so on.</p>
+
+<p>Another little subproject I have researched and would like to do is having PCBs printed. I have started designing the board using <a href="http://www.cadsoftusa.com/">Eagle</a>, but I have to wait until I can finalize the component list. I found an interesting place that could print my PCBs, <a href="https://oshpark.com/">OSHPark</a> and I would like to see how it works.</p>
+
+<h2 id="long-term-ideas">Long term ideas</h2>
+
+<p>There are a couple of things that I can see as a long term / low priority goals for the project:</p>
+
+<ul>
+  <li>Have some sort of switch that would disentangle the lamp from the iOS controller</li>
+  <li>Have printed PCBs and a box with everything nicely contained inside</li>
+</ul>
+
+
+        
+            
+        
+            
         
             
         
