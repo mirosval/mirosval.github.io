@@ -53,6 +53,10 @@ a small {
   float: left;
 }
 
+img.pull-left {
+  margin: 0px 20px 20px 0px;
+}
+
 .half {
   width: 50%;
 }
