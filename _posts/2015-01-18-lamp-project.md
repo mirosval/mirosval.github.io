@@ -24,7 +24,7 @@ I really just want a smart lamp, that would be able to do things like change col
 
 ##The current state of things
 
-![Current state of the RGB LED Lamp]({{ site.url }}/images/lamp/lamp-1.jpg){: .pull-left .half}
+![Current state of the RGB LED Lamp]({{ site.baseurl }}/images/lamp/lamp-1.jpg){: .pull-left .half}
 
 I've built a lamp using an Arduino and a Bluetooth chip that could be controlled by Bluetooth 2.0 back in 2012. This was good, but not good enough. The RGB strip worked well, but Bluetooth connection was unreliable and prone to problems (unable to find the device, unable to connect, etc.)
 

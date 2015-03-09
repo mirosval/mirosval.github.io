@@ -75,6 +75,6 @@ painless upgrade (apart from all the slow copying, ugh).
 Here are the Speed Test Screen Shots:
 
 ####Before upgrade
-![Before SSD Upgrade]({{ site.url }}/images/ssd/old.png)
+![Before SSD Upgrade]({{ site.baseurl }}/images/ssd/old.png)
 ####After upgrade
-![After SSD Upgrade]({{ site.url }}/images/ssd/new.png)
+![After SSD Upgrade]({{ site.baseurl }}/images/ssd/new.png)

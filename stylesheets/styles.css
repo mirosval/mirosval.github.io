@@ -49,16 +49,33 @@ a small {
   float: none;
 }
 
+img {
+  border-radius: 5px;
+  overflow: hidden;
+}
+
 .pull-left {
   float: left;
+}
+
+.pull-right {
+  float: right;
 }
 
 img.pull-left {
   margin: 0px 20px 20px 0px;
 }
 
+img.pull-right {
+  margin: 0px 0px 20px 20px;
+}
+
 .half {
   width: 50%;
+}
+
+.third {
+  width: 33%;
 }
 
 .wrapper {

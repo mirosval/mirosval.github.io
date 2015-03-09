@@ -72,7 +72,7 @@ def play(tosses, account_balance):
 
 Ak z tohoto kódu vynecháme riadky 56 a 57, môžeme dostať nasledujúci graf
 
-![Crash]({{ site.url }}/images/roulette/crash-arrow.jpg)
+![Crash]({{ site.baseurl }}/images/roulette/crash-arrow.jpg)
 
 Tento graf ilustruje prečo je táto metóda problematická. Nestáva sa to vždy, ale občas sa stane, že nasleduje rovnaká farba veľa ťahov po sebe. V závislosti od počiatočného rozpočtu vždy existuje počet opakovaní ktorý je už likvidačný. Na úrovni 200&euro; je likvidačná 8x rovnaká farba zasebou.
 
@@ -91,7 +91,7 @@ Pravdepodobnosť, že sa to stane je (19/37)^8 = 0,004835206373, čiže asi pol 
 
 Aby sme videli ako sa to prejaví v simulácii, pozrime sa na nasledujúci graf
 
-![Cumulative]({{ site.url }}/images/roulette/cumulative.png)
+![Cumulative]({{ site.baseurl }}/images/roulette/cumulative.png)
 
 Tento graf ukazuje ako skončilo 1 000 hier, to sú cca 3 roky, 3 hodiny denne. Zelené krížiky sú hry ktoré skončili v pluse, červené, ktoré skončili v mínuse alebo na nule. Nula v tomto prípade znamená, že sme skončili s 200 eurami a za tie 3 hodiny sme nič nezarobili. Čiže oproti minimálnej mzde ste asi 9 eur v mínuse.
 

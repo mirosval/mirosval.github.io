@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Mirosval</title>
 
-    <link rel="stylesheet" href="{{ site.url }}/stylesheets/styles.css">
-    <link rel="stylesheet" href="{{ site.url }}/stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/stylesheets/styles.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/stylesheets/pygment_trac.css">
 
     <link href='//fonts.googleapis.com/css?family=Open+Sans:300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     
@@ -21,8 +21,8 @@
     <div class="wrapper">
       <header>
         
-        <a href="{{ site.url }}/" class="profile-picture-link">
-          <img src="{{ site.url }}/images/cuba.jpg" alt="Profile Picture Mirosval" class="profile-picture">
+        <a href="{{ site.baseurl }}/" class="profile-picture-link">
+          <img src="{{ site.baseurl }}/images/cuba.jpg" alt="Profile Picture Mirosval" class="profile-picture">
         </a>
 
         <p></p>
@@ -38,7 +38,7 @@
           <ul class="categories">
             {% for category in site.categories %}
               <li>
-                <a href="{{ site.url }}/categories/{{ category | first | slugize }}">
+                <a href="{{ site.baseurl }}/categories/{{ category | first | slugize }}">
                   {{ category | first | replace: "-", " " | capitalize }} ({{ category | last | size }})
                 </a>
               </li>
@@ -51,7 +51,7 @@
           <ul class="tags">
             {% for tag in site.tags %}
               <li style="font-size: {{ tag | last | size | times: 100 | divided_by: site.tags.size | plus: 60 }}%">
-                <a href="{{ site.url }}/tags/{{ tag | first | slugize }}">
+                <a href="{{ site.baseurl }}/tags/{{ tag | first | slugize }}">
                   {{ tag | first | replace: "-", " " | capitalize }} ({{ tag | last | size }})
                 </a>
               </li>

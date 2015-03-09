@@ -3,8 +3,85 @@
     <channel>
         <title>Mirosval</title>
         <description>Personal blog about programming and stuff</description>      
-        <link>http://mirosval.github.io</link>
-        <atom:link href="http://mirosval.github.io/feed.xml" rel="self" type="application/rss+xml" />
+        <link></link>
+        <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
+        
+            <item>
+                <title>Lamp Project&amp;#58; The Hardware Prototype</title>
+                <description>&lt;p&gt;The detailed description of the prototype hardware used for the lamp project.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a href=&quot;/lamp/english/2015/01/18/lamp-project.html&quot;&gt;Project Overview&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I have, obviously, started with an idea. I didn’t like any of the exisiting smart lamp solutions, mostly because they lacked customizability. So my thought process was to start with some minimal requirements. I have come up with the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;RGB LED Strip for the actual light&lt;/li&gt;
+  &lt;li&gt;Bluetooth for controls&lt;/li&gt;
+  &lt;li&gt;Some sort of Arduino to process it all&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/lamp-hw/finished-board.jpg&quot; alt=&quot;Finished prototype board&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;choosing-the-rgb-led-strip&quot;&gt;Choosing the RGB LED Strip&lt;/h2&gt;
+
+&lt;p&gt;There are lots of different options, there are single-color strips, RGB strips or &lt;a href=&quot;http://www.adafruit.com/products/1138&quot;&gt;programmable strips&lt;/a&gt;, where you can change the color of every single LED. I though I would be fine with just controlling the color of the entire strip so I went with something like &lt;a href=&quot;http://www.ebay.com/itm/5M-5050-RGB-SMD-LED-Waterproof-Flexible-Strip-300-LEDs-44-Key-IR-Remote-/180992529478&quot;&gt;this&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I don’t need the stupid IR controller, but I found that sometimes you can get the same thing &lt;em&gt;with&lt;/em&gt; the controller for less than without it. The key characteristics are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;SMD 5050 - this represents the size of a single LED&lt;/li&gt;
+  &lt;li&gt;60 LED/m - I want this to be bright&lt;/li&gt;
+  &lt;li&gt;12V DC - operating voltage&lt;/li&gt;
+  &lt;li&gt;1A/m - required current per 1 meter of the strip&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These things are really key, because everything else in the system is based on these values. If you change anything, be sure to adjust the rest of the system accordingly.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/lamp-hw/detail-led-strip.jpg&quot; alt=&quot;LED Stri Detail&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;next-arduino&quot;&gt;Next, Arduino&lt;/h2&gt;
+
+&lt;p&gt;I have come across &lt;a href=&quot;http://www.rfduino.com/product/rfd22102-rfduino-dip/index.html&quot;&gt;RFduino&lt;/a&gt;. I have bought some basic kit when they were on Kickstarter, but I have since bought 6 more units. The trouble with this board is a bit in its availability. &lt;a href=&quot;https://www.sparkfun.com/categories/274&quot;&gt;Sparkfun&lt;/a&gt; has it, but in the EU it is much more difficult to get your hands on it. I ended up buying from &lt;a href=&quot;http://cz.mouser.com/new/rfdigital/rf-digital-rfduino/&quot;&gt;Mouser&lt;/a&gt;, but they are primarily a wholesale operation, so it’s expensive to buy small quantities from them.&lt;/p&gt;
+
+&lt;p&gt;Having said that, I’m really happy with RFduino, it is programmable with the Arduino IDE, has nice sample code and iOS libraries, uses Bluetooth 4.0 Low Energy, which is super nice and, most importantly, I have found the connectivity &lt;em&gt;great&lt;/em&gt;, it just always works. It has also survived a couple of blunders on my part, such as connecting it to 5V power instead of the recommended 3.3V.&lt;/p&gt;
+
+&lt;h2 id=&quot;power-supply&quot;&gt;Power supply&lt;/h2&gt;
+
+&lt;p&gt;So my calculation went like this: I want a 1m long LED strip controlled by RFduino, that is 12V * 1A = 12W. So I need a 12W power supply. I ended up buying &lt;a href=&quot;http://www.gmelectronic.com/power-ac-adapter-12v-1500ma-connector-2-1mm-mw-p751-193&quot;&gt;this one&lt;/a&gt; because it has enough power, nice connector and is relatively cheap.&lt;/p&gt;
+
+&lt;h2 id=&quot;connecting-it-all-together&quot;&gt;Connecting it all together&lt;/h2&gt;
+
+&lt;p&gt;Now I have a LED strip and a power supply which both operate at 12V, but I have a RFduino which operates at 3.3V. So the problem is twofold:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Convert 12V to 3.3V to power the RFduino&lt;/li&gt;
+  &lt;li&gt;Drive the 12V LED with the signal from RFduino&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This in the end translates into 2 subsystems that need to be designed. A power regulator circuit to power RFduino from 12V and an amplifier or a relay that could drive the LEDs.&lt;/p&gt;
+
+&lt;h3 id=&quot;voltage-regulator-for-the-rfduino-12v-to-3v&quot;&gt;Voltage Regulator for the RFduino 12V to 3V&lt;/h3&gt;
+
+&lt;p&gt;This was the hardest part to figure out for me. I didn’t want anything overly complicated and in the end I’ve settled for the &lt;a href=&quot;http://www.ti.com/product/lp2950-33&quot;&gt;LP2950-33&lt;/a&gt; (&lt;a href=&quot;http://www.onsemi.com/pub_link/Collateral/LP2950-D.PDF&quot;&gt;Datasheet&lt;/a&gt;). It looks like a transistor, has 3 legs, one for input, one for output and one for ground. The usual usage example I found involved capacitors between output and ground and optionally between input and ground to further stabilize the voltage. LP2950 comes in different varietes, so I chose the one that had it’s output voltage closest to RFduino’s 3V.&lt;/p&gt;
+
+&lt;h3 id=&quot;darlington-array-to-drive-the-led-strip&quot;&gt;Darlington Array to drive the LED Strip&lt;/h3&gt;
+
+&lt;p&gt;The last thing to do was to bring the PWM pin output from RFduino into the strip. The way the strip is connected is that there is a +12V cable and three different grounds, one for each of the RGB channels. So basically what the darlington does, is connect each of the RGB channels to the ground such, that the amount of current flowing through them can be controlled by RFduino.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/lamp-hw/finished-wiring.jpg&quot; alt=&quot;Finished prototype board - wiring&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;the-prototype&quot;&gt;The Prototype&lt;/h2&gt;
+
+&lt;p&gt;I have built the prototype using an universal board with headers bought from &lt;a href=&quot;http://www.aliexpress.com/snapshot/6468939297.html?orderId=65605779553704&quot;&gt;Aliexpress&lt;/a&gt; so that I can plug the RFduino in and out as I please. This is what it looks like when I turn it on:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/lamp-hw/finished-on.jpg&quot; alt=&quot;Finished prototype turned on&quot; /&gt;&lt;/p&gt;
+</description>
+                <pubDate>Sat, 07 Mar 2015 00:00:00 +0100</pubDate>
+                <link>/lamp/english/2015/03/07/lamp-project-2.html</link>
+                <guid isPermaLink="true">/lamp/english/2015/03/07/lamp-project-2.html</guid>
+            </item>
         
             <item>
                 <title>Lamp Project</title>
@@ -29,7 +106,7 @@
 
 &lt;h2 id=&quot;the-current-state-of-things&quot;&gt;The current state of things&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://mirosval.github.io/images/lamp/lamp-1.jpg&quot; alt=&quot;Current state of the RGB LED Lamp&quot; class=&quot;pull-left half&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/lamp/lamp-1.jpg&quot; alt=&quot;Current state of the RGB LED Lamp&quot; class=&quot;pull-left half&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I’ve built a lamp using an Arduino and a Bluetooth chip that could be controlled by Bluetooth 2.0 back in 2012. This was good, but not good enough. The RGB strip worked well, but Bluetooth connection was unreliable and prone to problems (unable to find the device, unable to connect, etc.)&lt;/p&gt;
 
@@ -60,8 +137,8 @@
 
 </description>
                 <pubDate>Sun, 18 Jan 2015 00:00:00 +0100</pubDate>
-                <link>http://mirosval.github.io/lamp/english/2015/01/18/lamp-project.html</link>
-                <guid isPermaLink="true">http://mirosval.github.io/lamp/english/2015/01/18/lamp-project.html</guid>
+                <link>/lamp/english/2015/01/18/lamp-project.html</link>
+                <guid isPermaLink="true">/lamp/english/2015/01/18/lamp-project.html</guid>
             </item>
         
             <item>
@@ -97,8 +174,8 @@
 &lt;p&gt;Aby som to teda zhrnul. Nemám nič proti kasínam, to je každého osobná vec ako míňa svoje peniaze. Dokonca nemám ani nič proti autorovi tohoto článku, aj keď zneužíva to, že niektorí ľudia sú rozumovo slabší a neuvedomia si, o čo ide. Túto sériu článkov beriem s nadhľadom a ako cvičenie v štatistike a Pythone. Preto ak niekto nájde niekde nejakú chybu alebo nezrovnalosť, dajte mi vedieť.&lt;/p&gt;
 </description>
                 <pubDate>Thu, 10 Jul 2014 00:00:00 +0200</pubDate>
-                <link>http://mirosval.github.io/python/other/slovak/2014/07/10/roulette-III.html</link>
-                <guid isPermaLink="true">http://mirosval.github.io/python/other/slovak/2014/07/10/roulette-III.html</guid>
+                <link>/python/other/slovak/2014/07/10/roulette-III.html</link>
+                <guid isPermaLink="true">/python/other/slovak/2014/07/10/roulette-III.html</guid>
             </item>
         
             <item>
@@ -170,7 +247,7 @@
 
 &lt;p&gt;Ak z tohoto kódu vynecháme riadky 56 a 57, môžeme dostať nasledujúci graf&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://mirosval.github.io/images/roulette/crash-arrow.jpg&quot; alt=&quot;Crash&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/roulette/crash-arrow.jpg&quot; alt=&quot;Crash&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Tento graf ilustruje prečo je táto metóda problematická. Nestáva sa to vždy, ale občas sa stane, že nasleduje rovnaká farba veľa ťahov po sebe. V závislosti od počiatočného rozpočtu vždy existuje počet opakovaní ktorý je už likvidačný. Na úrovni 200€ je likvidačná 8x rovnaká farba zasebou.&lt;/p&gt;
 
@@ -239,7 +316,7 @@
 
 &lt;p&gt;Aby sme videli ako sa to prejaví v simulácii, pozrime sa na nasledujúci graf&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://mirosval.github.io/images/roulette/cumulative.png&quot; alt=&quot;Cumulative&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/roulette/cumulative.png&quot; alt=&quot;Cumulative&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Tento graf ukazuje ako skončilo 1 000 hier, to sú cca 3 roky, 3 hodiny denne. Zelené krížiky sú hry ktoré skončili v pluse, červené, ktoré skončili v mínuse alebo na nule. Nula v tomto prípade znamená, že sme skončili s 200 eurami a za tie 3 hodiny sme nič nezarobili. Čiže oproti minimálnej mzde ste asi 9 eur v mínuse.&lt;/p&gt;
 
@@ -250,8 +327,8 @@
 &lt;p&gt;Pokračujte &lt;a href=&quot;/python/other/slovak/2014/07/10/roulette-III.html&quot;&gt;O čo vlastne ide a závery&lt;/a&gt;&lt;/p&gt;
 </description>
                 <pubDate>Thu, 10 Jul 2014 00:00:00 +0200</pubDate>
-                <link>http://mirosval.github.io/python/other/slovak/2014/07/10/roulette-II.html</link>
-                <guid isPermaLink="true">http://mirosval.github.io/python/other/slovak/2014/07/10/roulette-II.html</guid>
+                <link>/python/other/slovak/2014/07/10/roulette-II.html</link>
+                <guid isPermaLink="true">/python/other/slovak/2014/07/10/roulette-II.html</guid>
             </item>
         
             <item>
@@ -340,8 +417,8 @@
 &lt;p&gt;Pokračujte &lt;a href=&quot;/python/other/slovak/2014/07/10/roulette-II.html&quot;&gt;Štatistická simulácia metódy a jej vyhodnotenie&lt;/a&gt;&lt;/p&gt;
 </description>
                 <pubDate>Thu, 10 Jul 2014 00:00:00 +0200</pubDate>
-                <link>http://mirosval.github.io/python/other/slovak/2014/07/10/roulette-I.html</link>
-                <guid isPermaLink="true">http://mirosval.github.io/python/other/slovak/2014/07/10/roulette-I.html</guid>
+                <link>/python/other/slovak/2014/07/10/roulette-I.html</link>
+                <guid isPermaLink="true">/python/other/slovak/2014/07/10/roulette-I.html</guid>
             </item>
         
             <item>
@@ -513,8 +590,8 @@ problem. To do that I’ve uninstalled all of the Flask and related packages usi
 re-installed them in the virtual environment instead.&lt;/p&gt;
 </description>
                 <pubDate>Fri, 21 Feb 2014 00:00:00 +0100</pubDate>
-                <link>http://mirosval.github.io/python/english/2014/02/21/pip-crashes.html</link>
-                <guid isPermaLink="true">http://mirosval.github.io/python/english/2014/02/21/pip-crashes.html</guid>
+                <link>/python/english/2014/02/21/pip-crashes.html</link>
+                <guid isPermaLink="true">/python/english/2014/02/21/pip-crashes.html</guid>
             </item>
         
             <item>
@@ -587,13 +664,13 @@ painless upgrade (apart from all the slow copying, ugh).&lt;/p&gt;
 &lt;p&gt;Here are the Speed Test Screen Shots:&lt;/p&gt;
 
 &lt;h4 id=&quot;before-upgrade&quot;&gt;Before upgrade&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;http://mirosval.github.io/images/ssd/old.png&quot; alt=&quot;Before SSD Upgrade&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/images/ssd/old.png&quot; alt=&quot;Before SSD Upgrade&quot; /&gt;
 ####After upgrade
-&lt;img src=&quot;http://mirosval.github.io/images/ssd/new.png&quot; alt=&quot;After SSD Upgrade&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/images/ssd/new.png&quot; alt=&quot;After SSD Upgrade&quot; /&gt;&lt;/p&gt;
 </description>
                 <pubDate>Thu, 20 Feb 2014 00:00:00 +0100</pubDate>
-                <link>http://mirosval.github.io/other/english/2014/02/20/ssd-upgrade.html</link>
-                <guid isPermaLink="true">http://mirosval.github.io/other/english/2014/02/20/ssd-upgrade.html</guid>
+                <link>/other/english/2014/02/20/ssd-upgrade.html</link>
+                <guid isPermaLink="true">/other/english/2014/02/20/ssd-upgrade.html</guid>
             </item>
         
             <item>
@@ -805,8 +882,8 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 slowest, maybe next time we’ll look at that.&lt;/p&gt;
 </description>
                 <pubDate>Tue, 11 Feb 2014 00:00:00 +0100</pubDate>
-                <link>http://mirosval.github.io/master-thesis/english/2014/02/11/unwrap-performance.html</link>
-                <guid isPermaLink="true">http://mirosval.github.io/master-thesis/english/2014/02/11/unwrap-performance.html</guid>
+                <link>/master-thesis/english/2014/02/11/unwrap-performance.html</link>
+                <guid isPermaLink="true">/master-thesis/english/2014/02/11/unwrap-performance.html</guid>
             </item>
         
             <item>
@@ -901,8 +978,8 @@ ncalls  tottime  percall  cumtime  percall filename:lineno(function)
 &lt;p&gt;So 1.022s to 0.004, 255× faster with just replacing a double &lt;code&gt;for&lt;/code&gt; loop with an OpenCV call.&lt;/p&gt;
 </description>
                 <pubDate>Mon, 10 Feb 2014 00:00:00 +0100</pubDate>
-                <link>http://mirosval.github.io/master-thesis/english/2014/02/10/orientation-performance.html</link>
-                <guid isPermaLink="true">http://mirosval.github.io/master-thesis/english/2014/02/10/orientation-performance.html</guid>
+                <link>/master-thesis/english/2014/02/10/orientation-performance.html</link>
+                <guid isPermaLink="true">/master-thesis/english/2014/02/10/orientation-performance.html</guid>
             </item>
         
             <item>
@@ -927,59 +1004,8 @@ welcome.&lt;/p&gt;
 when I get sufficiently annoyed again.&lt;/p&gt;
 </description>
                 <pubDate>Sat, 01 Feb 2014 00:00:00 +0100</pubDate>
-                <link>http://mirosval.github.io/other/english/2014/02/01/safari-units.html</link>
-                <guid isPermaLink="true">http://mirosval.github.io/other/english/2014/02/01/safari-units.html</guid>
-            </item>
-        
-            <item>
-                <title>Unwrapping the iris</title>
-                <description>&lt;p&gt;In the previous installments we’ve looked at &lt;a href=&quot;/master-thesis/english/2014/01/29/pupil-detection.html&quot;&gt;Pupil Detection&lt;/a&gt;
-and &lt;a href=&quot;/master-thesis/english/2014/01/30/iris-detection.html&quot;&gt;Iris Detection&lt;/a&gt;. Now we’ll look at unwrapping the image
-of the iris from a circular pattern to a rectangular one. We will use this later for some other 
-algorithms. &lt;/p&gt;
-
-&lt;p&gt;So by applying the above mentioned algorithms we got two bits of information: the center of the pupil and
-the estimated radius of the iris. We can see them on the image below.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://mirosval.github.io/images/003-unwrap/001-original.png&quot; alt=&quot;Pupil center and iris radius&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;In order to transform this circular iris into a rectangular image, we do the following:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;cv2&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;np&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;plt&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;003/eye.png&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;center&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;376&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;184&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iris_radius&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;115&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nsamples&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;360&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;samples&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;linspace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nsamples&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;polar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iris_radius&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nsamples&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iris_radius&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;samples&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;17&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;center&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;18&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;center&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;19&lt;/span&gt;         
-&lt;span class=&quot;lineno&quot;&gt;20&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;polar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nsamples&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;2.0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;21&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;22&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;figure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;figsize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;23&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;polar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cmap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;gray&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;We create an empty image with resolution &lt;code&gt;iris_radius * 360&lt;/code&gt; and then we iterate through this image
-and calculate the corresponding position in the circular image from the angle and the radius and copy
-this value to the new image.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://mirosval.github.io/images/003-unwrap/002-unwrapped.png&quot; alt=&quot;Pupil center and iris radius&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;This post is also available as an &lt;a href=&quot;http://nbviewer.ipython.org/gist/mirosval/8754366&quot;&gt;iPython Notebook&lt;/a&gt;&lt;/p&gt;
-</description>
-                <pubDate>Sat, 01 Feb 2014 00:00:00 +0100</pubDate>
-                <link>http://mirosval.github.io/master-thesis/english/2014/02/01/iris-unwrap.html</link>
-                <guid isPermaLink="true">http://mirosval.github.io/master-thesis/english/2014/02/01/iris-unwrap.html</guid>
+                <link>/other/english/2014/02/01/safari-units.html</link>
+                <guid isPermaLink="true">/other/english/2014/02/01/safari-units.html</guid>
             </item>
         
     </channel>

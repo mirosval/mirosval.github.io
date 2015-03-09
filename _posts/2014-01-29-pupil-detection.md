@@ -34,7 +34,7 @@ gray = cv2.cvtColor(image, cv2.cv.CV_BGR2GRAY)
 
 {% endhighlight %}
 
-![Eye image]({{ site.url }}/images/001-pupil/001.png)
+![Eye image]({{ site.baseurl }}/images/001-pupil/001.png)
 
 Now that that's out of the way, I'll threshold it. This will make a binary image out of a grayscale
 one. So everything darker than 30 goes to black, and everything else goes to white. And this is what
@@ -44,7 +44,7 @@ I get.
 retval, thresholded = cv2.threshold(gray, 30, 255, cv2.cv.CV_THRESH_BINARY)
 {% endhighlight %}
 
-![Threshold image]({{ site.url }}/images/001-pupil/002.png)
+![Threshold image]({{ site.baseurl }}/images/001-pupil/002.png)
 
 Now this next part (Line 1 and 2) does not have to be here for this particular image, but in general
 it should be there, becuase you want to get rid of small holes that might occur in the pupil from glints,
@@ -97,7 +97,7 @@ plt.figure(figsize=(10, 5))
 plt.imshow(drawing)
 {% endhighlight %}
 
-![Final image]({{ site.url }}/images/001-pupil/003.png)
+![Final image]({{ site.baseurl }}/images/001-pupil/003.png)
 
 So that is how we quickly detect the position of a pupil in an image. In the next installments
 we will look at how to detect the iris, which is a bit more complicated. We will also flatten 

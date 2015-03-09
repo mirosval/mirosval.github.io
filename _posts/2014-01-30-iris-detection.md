@@ -28,7 +28,7 @@ We begin with the location of the pupil as determined by the [Pupil Detection]({
 The iris detection technique presented here is relying on the corectness of the 
 pupil detection. It therefore very important for the pupil detection to be correct.
 
-![Pupil detection]({{ site.url }}/images/002-iris/001.png)
+![Pupil detection]({{ site.baseurl }}/images/002-iris/001.png)
 
 {% highlight python linenos %}
 def getOrientationAndMagnitude(image, show=False):
@@ -51,8 +51,8 @@ def getOrientationAndMagnitude(image, show=False):
     return orientation, magnitude
 {% endhighlight %}
 
-![Orientation]({{ site.url }}/images/002-iris/003-orientation.png)
-![Magnitude]({{ site.url }}/images/002-iris/002-magnitude.png)
+![Orientation]({{ site.baseurl }}/images/002-iris/003-orientation.png)
+![Magnitude]({{ site.baseurl }}/images/002-iris/002-magnitude.png)
 
 We know that the iris is going to be somewhere aroudn the pupil, so to get its radius,
 we are going to first get a couple of samples (lines that go from the center of the pupil)
@@ -125,95 +125,7 @@ line between the two points. We will evaluate the gradient along this line, and 
 need a list of positions where to look.
 
 {% highlight python linenos %}
-orientation, magnitude = getOrientationAndMagnitude(smooth, show=False)
-
-# average radius for pupil (since it is an ellipse)
-pupilRadius = pupil_width
-# max pupil radius will be at most 5 times pupil radius
-irisRadius = 5 * pupilRadius
-
-# 30 points laying between pupil and iris
-pupilSamples = getCircleSamples(center, min(irisRadius * 0.5, pupilRadius * 2))
-
-# 30 points laying on a circle that is bigger than iris
-irisSamples = getCircleSamples(center, irisRadius)
-
-# vote dict for different radii
-finalIrisRadiusVotes = dict()
-
-show = True
-
-# for each sample point in the concentric circle that lies between pupil and iris
-for sample in range(len(pupilSamples)):
-    # starting point for a line that goes from in between pupil and iris edge
-    pupilSample = (int(pupilSamples[sample][0]), int(pupilSamples[sample][1]))
-    # ending point for the line that ends at 5x pupil radius from the pupil center
-    irisSample = (int(irisSamples[sample][0]), int(irisSamples[sample][1]))
-
-    # line defined by pupilSample and irisSample points has the direction of
-    # the normal for the iris circle
-
-    # points in the image that lay on the line
-    lineCoordinates = getLineCoordinates(pupilSample, irisSample)
-
-    # normal vector for the pupil/iris circles
-    sampleVector = (pupilSample[0] - center[0], pupilSample[1] - center[1])
-
-    # length of the normal vector
-    dist = np.sqrt(sampleVector[0] ** 2 + sampleVector[1] ** 2)
-
-    # angle of the normal vector
-    angle = cv2.fastAtan2(sampleVector[1], sampleVector[0])
-
-    # loop over all the points on the line
-    for s in lineCoordinates:
-        # sometimes the line is outside the magnitude arrays, in that case just conitnue the loop
-        try:
-            mag = magnitude[s[1] - 1][s[0] - 1]
-        except:
-            continue
-
-        # only consider those points that have magnitude greater than 15 but lower than 30
-        # since the gradient is a slow one
-        if mag > 15 and mag < 30:
-            # orientation at the point in question
-            ori = orientation[s[1] - 1][s[0] - 1]
-
-            # cleanup the angle so that it is a comparable number to the angle of the line we've
-            # obtained earlier
-            an = angle + ori - 90.0
-            if an > 360.0: an -= 360.0
-
-            # angle difference should be +-3 degrees
-            if an < 3 or an > 357:
-                # we have a good sample point with the right magnitude and orientation
-                # calculate the radius of the iris this would correspond to
-                radius = np.sqrt((s[0] - center[0]) ** 2 + (s[1] - center[1]) ** 2)
-                # Round radius to tens
-                radius = round(radius / 10.0) * 10.0
-                radius = int(radius)
-
-                # draw the sample that we have used
-                if show:
-                    cv2.circle(image, (s[0], s[1]), 2, (255, 255, 0), 2)
-
-                # add the radius to the vote dict
-                if radius not in finalIrisRadiusVotes:
-                    finalIrisRadiusVotes[radius] = 0
-
-                finalIrisRadiusVotes[radius] += 1
-
-    # draw the line
-    if show:
-        cv2.line(image, pupilSample, irisSample, (0, 255, 0))
-
-# order the radius dict by votes and grab the winner
-import operator
-finalIrisRadius = max(finalIrisRadiusVotes.iteritems(), key=operator.itemgetter(1))[0]
-
-# draw the winning radius
-cv2.circle(image, center, finalIrisRadius, (255, 0, 255), 2)
-cv2.imshow("Test", image)
+The final algoeithm has been removed at the request of the ITU.
 {% endhighlight %}
 
 Now to put it all together, we start with orientation and magnitude maps. Then sample the
@@ -226,7 +138,7 @@ That is because it is probable that eyelids will cover top and bottom portion of
 therefore interfere with the algorithm, so we only consider the horizontal samples, as defined
 by `sin(x) < 0.7`.
 
-![Final image iris radius estimation]({{ site.url }}/images/002-iris/004-final.png)
+![Final image iris radius estimation]({{ site.baseurl }}/images/002-iris/004-final.png)
 
 This is it for the iris detection, next time we'll look at unwrapping the iris to form a rectangular
 image.
