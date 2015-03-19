@@ -48,7 +48,7 @@ After finishing the schematic, I proceeded with the board design. First I have t
 
 ##Manufacturing
 
-Somewhere on the internet I have found [OSH Park](https://oshpark.com/) a company from USA that will make PCBs from Eagle CAD files for $5 per square inch (imperial, really??) and ship it anywhere in the world for free. My board cost me under $20, I have ordered it on Feb 26, it got shipped on Mar 6 and arrived in Prague on Mar 18. This manufacturing delay makes mistakes super expensive, but luckily the board works as designed.
+Somewhere on the internet I have found [OSH Park](https://oshpark.com/) a company from USA that will make PCBs from Eagle CAD files: 3 copies of the board for $5 per square inch (imperial, really??) and ship it anywhere in the world for free. My board cost me under $20, I have ordered it on Feb 26, it got shipped on Mar 6 and arrived in Prague on Mar 18. This manufacturing delay makes mistakes super expensive, but luckily the board works as designed.
 
 ##Assembly
 
