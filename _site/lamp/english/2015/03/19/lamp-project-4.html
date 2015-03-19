@@ -151,9 +151,9 @@
       </header>
 
     <section class="content">
-        <h2>Lamp Project&#58; The Hardware Prototype</h2>
-        <span class="published">Published 7 March 2015</span>
-        <p>The detailed description of the prototype hardware used for the lamp project.</p>
+        <h2>Lamp Project&#58; Printed Circuit Boards</h2>
+        <span class="published">Published 19 March 2015</span>
+        <p>The journey of the PCB from start to finish. Designed using Eagle CAD, printed at OSH Park, delivered, assembled to build the final lamp.</p>
 
 <hr />
 
@@ -162,72 +162,69 @@
 <a href="/lamp/english/2015/03/12/lamp-project-3.html">Arduino Software</a>
 <a href="/lamp/english/2015/03/19/lamp-project-4.html">Printed Circuit Boards</a></p>
 
-<p>I have, obviously, started with an idea. I didn’t like any of the exisiting smart lamp solutions, mostly because they lacked customizability. So my thought process was to start with some minimal requirements. I have come up with the following:</p>
+<h2 id="design-tool">Design Tool</h2>
+
+<p>I haven’t really searched all that far to discover <a href="http://www.cadsoftusa.com/">Eagle CAD</a>, it seems to be probably the most widely used software for PCB design. I have watched two tutorial videos on YouTube by Jeremy Blum, <a href="https://www.youtube.com/watch?v=1AXwjZoyNno">Schematic Design</a> and <a href="https://www.youtube.com/watch?v=CCTs0mNXY24">Printed Circuit Board Layout</a>. That gave me a pretty good idea about how to use the software. I won’t pretend there weren’t any issues, but all were successfully resolved with a search on StackOverflow. Overall I think it is a very good tool. I’ve never used it before but I have been able to do all I wanted from it in maybe an hour.</p>
+
+<h2 id="schematic-design">Schematic Design</h2>
+
+<p>I started out with a schematic design. I already had a working prototype of the lamp, so it wasn’t so hard to use that to start things off. Overall the schematic is divided into three sub-circuits from the left:</p>
 
 <ul>
-  <li>RGB LED Strip for the actual light</li>
-  <li>Bluetooth for controls</li>
-  <li>Some sort of Arduino to process it all</li>
+  <li>Power, voltage dropdown for the RFduino</li>
+  <li>The RFduino</li>
+  <li>Darlington Array to increase the voltage back</li>
 </ul>
 
-<p><img src="/images/lamp-hw/finished-board.jpg" alt="Finished prototype board" /></p>
+<p><img src="/images/lamp-hw/schematic.png" alt="Board Schematic" /></p>
 
-<h2 id="choosing-the-rgb-led-strip">Choosing the RGB LED Strip</h2>
+<p>The most problematic part of the voltage regulator was to actually obtain the part I chose: <a href="http://www.ti.com/product/lp2950-33">LP2950-33</a>. Ideally you would choose a LP2950-30 here, as RFduino’s reference voltage is 3.0V, but it is rated to up to 3.6V, so 3.3V is fine. I have, by accident supplied it with more than that (think ~5V) and it has surprisingly survived.</p>
 
-<p>There are lots of different options, there are single-color strips, RGB strips or <a href="http://www.adafruit.com/products/1138">programmable strips</a>, where you can change the color of every single LED. I though I would be fine with just controlling the color of the entire strip so I went with something like <a href="http://www.ebay.com/itm/5M-5050-RGB-SMD-LED-Waterproof-Flexible-Strip-300-LEDs-44-Key-IR-Remote-/180992529478">this</a>.</p>
+<p>I have used two 10μF capacitors, one at input and one at output to further stabilize the voltage. </p>
 
-<p>I don’t need the stupid IR controller, but I found that sometimes you can get the same thing <em>with</em> the controller for less than without it. The key characteristics are:</p>
+<p>The RFduino is pretty self-explanatory, I have hooked the VCC and GND pins and I’ve connected the GPIO pins 2, 3 and 4 to the input of the darlington array.</p>
+
+<p><img src="/images/lamp-hw/darlington.png" alt="Darlington Array" class="pull-right third" /></p>
+
+<p>The last part was the <a href="https://www.sparkfun.com/datasheets/IC/ULN2003A.pdf">Darlington Array</a>. If you take a look at the schematic below, you’ll see how it’s wired inside. The LED strip has one positive wire and then three ground wires, each for one of the RGB colors. The positive end is connected directly to VCC, 1B-3B are connected to the output of the RFduino, 1C-3C are connected to the LED strip and the ground (not shown in the little schematic) is connected to the circuit ground.</p>
+
+<p>One of the biggest issues I had was to find the parts, Eagle has a large database of components, but still, things like RFduino are not there. Also I needed to make sure I can eventually buy the things somewhere.</p>
+
+<h2 id="board-design">Board Design</h2>
+
+<p>After finishing the schematic, I proceeded with the board design. First I have tried to automatically layout the components, but Eagle has made a complete mess of things, so in the end I had to lay out everyting myself anyway. The process can get a bit awkward with the bends of the wires, but if it does, you can just delete the wire and do it again. You can set the widths of the wires, so I’ve chosen slightly thicker wires for the 12V lines and slightly thinner for the rest. I’ve also managed to keep all the connections to the one side of the board, which just makes it look better in my opinion.</p>
+
+<p><img src="/images/lamp-hw/board.png" alt="Board Design" /></p>
+
+<h2 id="manufacturing">Manufacturing</h2>
+
+<p>Somewhere on the internet I have found <a href="https://oshpark.com/">OSH Park</a> a company from USA that will make PCBs from Eagle CAD files for $5 per square inch (imperial, really??) and ship it anywhere in the world for free. My board cost me under $20, I have ordered it on Feb 26, it got shipped on Mar 6 and arrived in Prague on Mar 18. This manufacturing delay makes mistakes super expensive, but luckily the board works as designed.</p>
+
+<h2 id="assembly">Assembly</h2>
+
+<p>I have assembled the components onto the board today, it took me about an hour and was a really pleasant experience. And the fact that it has worked on the first try was really satisfying. Here have a look at the finished product.</p>
+
+<p><img src="/images/lamp-hw/board-finished.jpg" alt="Board Finished" />
+<img src="/images/lamp-hw/finished.jpg" alt="Finished Lamp" /></p>
+
+<h2 id="final-notes">Final Notes</h2>
+
+<p>OSH Park has good <a href="https://oshpark.com/guidelines">guidelines</a> to follow (they also have a file that you can import to Eagle that will check your design). I suggest reading those before submitting anything.</p>
+
+<p>The boards that have arrived look stunning, but there are a couple of things I noticed that could be improved:</p>
 
 <ul>
-  <li>SMD 5050 - this represents the size of a single LED</li>
-  <li>60 LED/m - I want this to be bright</li>
-  <li>12V DC - operating voltage</li>
-  <li>1A/m - required current per 1 meter of the strip</li>
+  <li>Some joints don’t have the small metal area surrounding the hole, which makes them slightly more difficult to solder (see the holes for RFduino and the voltage regulator)</li>
+  <li>The other joints have the metal area around holes on both sides of the board, even though only one side has wires</li>
+  <li>The boards had some rough edges around the places where they were broken apart from the panel that had to be sanded, but this is just a minor issue</li>
 </ul>
 
-<p>These things are really key, because everything else in the system is based on these values. If you change anything, be sure to adjust the rest of the system accordingly.</p>
+<p>Most of these are my fault, I will try to fix them next time I have boards printed.</p>
 
-<p><img src="/images/lamp-hw/detail-led-strip.jpg" alt="LED Stri Detail" /></p>
+<p><img src="/images/lamp-hw/board-defects.jpg" alt="Board Defects" class="pull-left h45" />
+<img src="/images/lamp-hw/soldering-regulator.jpg" alt="Board Design" class="pull-right h45" /></p>
 
-<h2 id="next-arduino">Next, Arduino</h2>
 
-<p>I have come across <a href="http://www.rfduino.com/product/rfd22102-rfduino-dip/index.html">RFduino</a>. I have bought some basic kit when they were on Kickstarter, but I have since bought 6 more units. The trouble with this board is a bit in its availability. <a href="https://www.sparkfun.com/categories/274">Sparkfun</a> has it, but in the EU it is much more difficult to get your hands on it. I ended up buying from <a href="http://cz.mouser.com/new/rfdigital/rf-digital-rfduino/">Mouser</a>, but they are primarily a wholesale operation, so it’s expensive to buy small quantities from them.</p>
-
-<p>Having said that, I’m really happy with RFduino, it is programmable with the Arduino IDE, has nice sample code and iOS libraries, uses Bluetooth 4.0 Low Energy, which is super nice and, most importantly, I have found the connectivity <em>great</em>, it just always works. It has also survived a couple of blunders on my part, such as connecting it to 5V power instead of the recommended 3.3V.</p>
-
-<h2 id="power-supply">Power supply</h2>
-
-<p>So my calculation went like this: I want a 1m long LED strip controlled by RFduino, that is 12V * 1A = 12W. So I need a 12W power supply. I ended up buying <a href="http://www.gmelectronic.com/power-ac-adapter-12v-1500ma-connector-2-1mm-mw-p751-193">this one</a> because it has enough power, nice connector and is relatively cheap.</p>
-
-<h2 id="connecting-it-all-together">Connecting it all together</h2>
-
-<p>Now I have a LED strip and a power supply which both operate at 12V, but I have a RFduino which operates at 3.3V. So the problem is twofold:</p>
-
-<ol>
-  <li>Convert 12V to 3.3V to power the RFduino</li>
-  <li>Drive the 12V LED with the signal from RFduino</li>
-</ol>
-
-<p>This in the end translates into 2 subsystems that need to be designed. A power regulator circuit to power RFduino from 12V and an amplifier or a relay that could drive the LEDs.</p>
-
-<h3 id="voltage-regulator-for-the-rfduino-12v-to-3v">Voltage Regulator for the RFduino 12V to 3V</h3>
-
-<p>This was the hardest part to figure out for me. I didn’t want anything overly complicated and in the end I’ve settled for the <a href="http://www.ti.com/product/lp2950-33">LP2950-33</a> (<a href="http://www.onsemi.com/pub_link/Collateral/LP2950-D.PDF">Datasheet</a>). It looks like a transistor, has 3 legs, one for input, one for output and one for ground. The usual usage example I found involved capacitors between output and ground and optionally between input and ground to further stabilize the voltage. LP2950 comes in different varietes, so I chose the one that had it’s output voltage closest to RFduino’s 3V.</p>
-
-<h3 id="darlington-array-to-drive-the-led-strip">Darlington Array to drive the LED Strip</h3>
-
-<p>The last thing to do was to bring the PWM pin output from RFduino into the strip. The way the strip is connected is that there is a +12V cable and three different grounds, one for each of the RGB channels. So basically what the darlington does, is connect each of the RGB channels to the ground such, that the amount of current flowing through them can be controlled by RFduino.</p>
-
-<p><img src="/images/lamp-hw/finished-wiring.jpg" alt="Finished prototype board - wiring" /></p>
-
-<h2 id="the-prototype">The Prototype</h2>
-
-<p>I have built the prototype using an universal board with headers bought from <a href="http://www.aliexpress.com/snapshot/6468939297.html?orderId=65605779553704">Aliexpress</a> so that I can plug the RFduino in and out as I please. This is what it looks like when I turn it on:</p>
-
-<p><img src="/images/lamp-hw/finished-on.jpg" alt="Finished prototype turned on" /></p>
-
-        
-            
         
             
         

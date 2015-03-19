@@ -39,7 +39,7 @@
             
               <li>
                 <a href="/categories/english">
-                  English (11)
+                  English (13)
                 </a>
               </li>
             
@@ -69,7 +69,7 @@
             
               <li>
                 <a href="/categories/lamp">
-                  Lamp (2)
+                  Lamp (4)
                 </a>
               </li>
             
@@ -80,63 +80,69 @@
           <h3>Tags</h3>
           <ul class="tags">
             
-              <li style="font-size: 110%">
+              <li style="font-size: 1160/11%">
                 <a href="/tags/master-thesis">
                   Master thesis (5)
                 </a>
               </li>
             
-              <li style="font-size: 110%">
+              <li style="font-size: 1160/11%">
                 <a href="/tags/opencv">
                   Opencv (5)
                 </a>
               </li>
             
-              <li style="font-size: 150%">
+              <li style="font-size: 1560/11%">
                 <a href="/tags/python">
                   Python (9)
                 </a>
               </li>
             
-              <li style="font-size: 70%">
+              <li style="font-size: 760/11%">
                 <a href="/tags/pupil">
                   Pupil (1)
                 </a>
               </li>
             
-              <li style="font-size: 80%">
+              <li style="font-size: 860/11%">
                 <a href="/tags/iris">
                   Iris (2)
                 </a>
               </li>
             
-              <li style="font-size: 70%">
+              <li style="font-size: 760/11%">
                 <a href="/tags/safari-extension">
                   Safari extension (1)
                 </a>
               </li>
             
-              <li style="font-size: 80%">
+              <li style="font-size: 860/11%">
                 <a href="/tags/performance">
                   Performance (2)
                 </a>
               </li>
             
-              <li style="font-size: 90%">
+              <li style="font-size: 1060/11%">
                 <a href="/tags/hardware">
-                  Hardware (3)
+                  Hardware (4)
                 </a>
               </li>
             
-              <li style="font-size: 80%">
+              <li style="font-size: 960/11%">
                 <a href="/tags/arduino">
-                  Arduino (2)
+                  Arduino (3)
                 </a>
               </li>
             
-              <li style="font-size: 70%">
+              <li style="font-size: 760/11%">
                 <a href="/tags/ios">
                   Ios (1)
+                </a>
+              </li>
+            
+              <li style="font-size: 760/11%">
+                <a href="/tags/ble">
+                  Ble (1)
                 </a>
               </li>
             
@@ -147,17 +153,9 @@
     <section class="content">
         <h2>Basic Iris Detection</h2>
         <span class="published">Published 30 January 2014</span>
-        <p>Iris detection is significantly more difficult than pupil. Mostly because it is not
-so well defined, pupil is just a black disk essentially as far as a grayscale image
-is concerned, but the outer edge of the iris is not nearly as sharp as the outer edge
-of the pupil is. Also, there is a much higher probability of glints and reflections
-in the iris, since it is larger than the pupil and this can complicate the detection
-further. And on top of all that the upper and lower eyelids often cover up portions
-of the iris, which means that detecting the iris as a circle is going to be either
-difficult or impossible.</p>
+        <p>Iris detection is significantly more difficult than pupil. Mostly because it is not so well defined, pupil is just a black disk essentially as far as a grayscale image is concerned, but the outer edge of the iris is not nearly as sharp as the outer edge of the pupil is. Also, there is a much higher probability of glints and reflections in the iris, since it is larger than the pupil and this can complicate the detection further. And on top of all that the upper and lower eyelids often cover up portions of the iris, which means that detecting the iris as a circle is going to be either difficult or impossible.</p>
 
-<p>Despite all of these obstacles we have to do it somehow, so for this work, we are
-going to use the following:</p>
+<p>Despite all of these obstacles we have to do it somehow, so for this work, we are going to use the following:</p>
 
 <ul>
   <li>Start off with pupil location</li>
@@ -168,9 +166,7 @@ going to use the following:</p>
   <li>Draw the iris estimate</li>
 </ul>
 
-<p>We begin with the location of the pupil as determined by the <a href="/master-thesis/english/2014/01/29/pupil-detection.html">Pupil Detection</a>.
-The iris detection technique presented here is relying on the corectness of the 
-pupil detection. It therefore very important for the pupil detection to be correct.</p>
+<p>We begin with the location of the pupil as determined by the <a href="/master-thesis/english/2014/01/29/pupil-detection.html">Pupil Detection</a>. The iris detection technique presented here is relying on the corectness of the pupil detection. It therefore very important for the pupil detection to be correct.</p>
 
 <p><img src="/images/002-iris/001.png" alt="Pupil detection" /></p>
 
@@ -196,11 +192,7 @@ pupil detection. It therefore very important for the pupil detection to be corre
 <p><img src="/images/002-iris/003-orientation.png" alt="Orientation" />
 <img src="/images/002-iris/002-magnitude.png" alt="Magnitude" /></p>
 
-<p>We know that the iris is going to be somewhere aroudn the pupil, so to get its radius,
-we are going to first get a couple of samples (lines that go from the center of the pupil)
-and then we are going to find the place where the change in intensity is the right
-orientation and magnitude. To be able to do that, we first need to calculate the
-orientation and magnitude fields of the image. That is what you can see above.</p>
+<p>We know that the iris is going to be somewhere aroudn the pupil, so to get its radius, we are going to first get a couple of samples (lines that go from the center of the pupil) and then we are going to find the place where the change in intensity is the right orientation and magnitude. To be able to do that, we first need to calculate the orientation and magnitude fields of the image. That is what you can see above.</p>
 
 <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="lineno"> 1</span> <span class="k">def</span> <span class="nf">getCircleSamples</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nPoints</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
 <span class="lineno"> 2</span>     <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">nPoints</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -215,8 +207,7 @@ orientation and magnitude fields of the image. That is what you can see above.</
 <span class="lineno">11</span>             <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">s</span> <span class="p">]</span>
 <span class="lineno">12</span>     <span class="k">return</span> <span class="n">P</span></code></pre></div>
 
-<p>This function returns a list of tuples, each representing 2 points that delimit a line
-going from the center of the circle outwards in regular intervals.</p>
+<p>This function returns a list of tuples, each representing 2 points that delimit a line going from the center of the circle outwards in regular intervals.</p>
 
 <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="lineno"> 1</span> <span class="k">def</span> <span class="nf">getLineCoordinates</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
 <span class="lineno"> 2</span>     <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span> <span class="o">=</span> <span class="n">p1</span>
@@ -258,26 +249,15 @@ going from the center of the circle outwards in regular intervals.</p>
 <span class="lineno">38</span> 
 <span class="lineno">39</span>     <span class="k">return</span> <span class="n">retPoints</span></code></pre></div>
 
-<p>This function converts the coordinates of two points into a list of points that lay on the
-line between the two points. We will evaluate the gradient along this line, and for that we
-need a list of positions where to look.</p>
+<p>This function converts the coordinates of two points into a list of points that lay on the line between the two points. We will evaluate the gradient along this line, and for that we need a list of positions where to look.</p>
 
 <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="lineno">1</span> <span class="n">The</span> <span class="n">final</span> <span class="n">algoeithm</span> <span class="n">has</span> <span class="n">been</span> <span class="n">removed</span> <span class="n">at</span> <span class="n">the</span> <span class="n">request</span> <span class="n">of</span> <span class="n">the</span> <span class="n">ITU</span><span class="o">.</span></code></pre></div>
 
-<p>Now to put it all together, we start with orientation and magnitude maps. Then sample the
-original image to get lines from the pupil out. We loop through these samples and find places
-where the gradient magnitude and orientation is just right and then add a vote for the radius
-at that location. In the end we just grab the radius with the most votes and draw an ellipse
-around it. In the image below, the purple circle is the estimated iris radius, the aqua circles
-are votes and the green lines are samples. You can see that the lines don’t cover the whole circle.
-That is because it is probable that eyelids will cover top and bottom portion of the iris and
-therefore interfere with the algorithm, so we only consider the horizontal samples, as defined
-by <code>sin(x) &lt; 0.7</code>.</p>
+<p>Now to put it all together, we start with orientation and magnitude maps. Then sample the original image to get lines from the pupil out. We loop through these samples and find places where the gradient magnitude and orientation is just right and then add a vote for the radius at that location. In the end we just grab the radius with the most votes and draw an ellipse around it. In the image below, the purple circle is the estimated iris radius, the aqua circles are votes and the green lines are samples. You can see that the lines don’t cover the whole circle. That is because it is probable that eyelids will cover top and bottom portion of the iris and therefore interfere with the algorithm, so we only consider the horizontal samples, as defined by <code>sin(x) &lt; 0.7</code>.</p>
 
 <p><img src="/images/002-iris/004-final.png" alt="Final image iris radius estimation" /></p>
 
-<p>This is it for the iris detection, next time we’ll look at unwrapping the iris to form a rectangular
-image.</p>
+<p>This is it for the iris detection, next time we’ll look at unwrapping the iris to form a rectangular image.</p>
 
 <p>This post is also available as an <a href="http://nbviewer.ipython.org/gist/mirosval/8752437">iPython Notebook</a></p>
 

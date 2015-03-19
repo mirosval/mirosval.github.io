@@ -10,6 +10,9 @@ The detailed description of the prototype hardware used for the lamp project.
 ---
 
 [Project Overview]({% post_url 2015-01-18-lamp-project %})
+[Hardware]({% post_url 2015-03-07-lamp-project-2 %})
+[Arduino Software]({% post_url 2015-03-12-lamp-project-3%})
+[Printed Circuit Boards]({% post_url 2015-03-19-lamp-project-4%})
 
 I have, obviously, started with an idea. I didn't like any of the exisiting smart lamp solutions, mostly because they lacked customizability. So my thought process was to start with some minimal requirements. I have come up with the following:
 

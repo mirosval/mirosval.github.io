@@ -7,12 +7,187 @@
         <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
         
             <item>
+                <title>Lamp Project&amp;#58; Printed Circuit Boards</title>
+                <description>&lt;p&gt;The journey of the PCB from start to finish. Designed using Eagle CAD, printed at OSH Park, delivered, assembled to build the final lamp.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a href=&quot;/lamp/english/2015/01/18/lamp-project.html&quot;&gt;Project Overview&lt;/a&gt;
+&lt;a href=&quot;/lamp/english/2015/03/07/lamp-project-2.html&quot;&gt;Hardware&lt;/a&gt;
+&lt;a href=&quot;/lamp/english/2015/03/12/lamp-project-3.html&quot;&gt;Arduino Software&lt;/a&gt;
+&lt;a href=&quot;/lamp/english/2015/03/19/lamp-project-4.html&quot;&gt;Printed Circuit Boards&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;design-tool&quot;&gt;Design Tool&lt;/h2&gt;
+
+&lt;p&gt;I haven’t really searched all that far to discover &lt;a href=&quot;http://www.cadsoftusa.com/&quot;&gt;Eagle CAD&lt;/a&gt;, it seems to be probably the most widely used software for PCB design. I have watched two tutorial videos on YouTube by Jeremy Blum, &lt;a href=&quot;https://www.youtube.com/watch?v=1AXwjZoyNno&quot;&gt;Schematic Design&lt;/a&gt; and &lt;a href=&quot;https://www.youtube.com/watch?v=CCTs0mNXY24&quot;&gt;Printed Circuit Board Layout&lt;/a&gt;. That gave me a pretty good idea about how to use the software. I won’t pretend there weren’t any issues, but all were successfully resolved with a search on StackOverflow. Overall I think it is a very good tool. I’ve never used it before but I have been able to do all I wanted from it in maybe an hour.&lt;/p&gt;
+
+&lt;h2 id=&quot;schematic-design&quot;&gt;Schematic Design&lt;/h2&gt;
+
+&lt;p&gt;I started out with a schematic design. I already had a working prototype of the lamp, so it wasn’t so hard to use that to start things off. Overall the schematic is divided into three sub-circuits from the left:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Power, voltage dropdown for the RFduino&lt;/li&gt;
+  &lt;li&gt;The RFduino&lt;/li&gt;
+  &lt;li&gt;Darlington Array to increase the voltage back&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/lamp-hw/schematic.png&quot; alt=&quot;Board Schematic&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The most problematic part of the voltage regulator was to actually obtain the part I chose: &lt;a href=&quot;http://www.ti.com/product/lp2950-33&quot;&gt;LP2950-33&lt;/a&gt;. Ideally you would choose a LP2950-30 here, as RFduino’s reference voltage is 3.0V, but it is rated to up to 3.6V, so 3.3V is fine. I have, by accident supplied it with more than that (think ~5V) and it has surprisingly survived.&lt;/p&gt;
+
+&lt;p&gt;I have used two 10μF capacitors, one at input and one at output to further stabilize the voltage. &lt;/p&gt;
+
+&lt;p&gt;The RFduino is pretty self-explanatory, I have hooked the VCC and GND pins and I’ve connected the GPIO pins 2, 3 and 4 to the input of the darlington array.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/lamp-hw/darlington.png&quot; alt=&quot;Darlington Array&quot; class=&quot;pull-right third&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The last part was the &lt;a href=&quot;https://www.sparkfun.com/datasheets/IC/ULN2003A.pdf&quot;&gt;Darlington Array&lt;/a&gt;. If you take a look at the schematic below, you’ll see how it’s wired inside. The LED strip has one positive wire and then three ground wires, each for one of the RGB colors. The positive end is connected directly to VCC, 1B-3B are connected to the output of the RFduino, 1C-3C are connected to the LED strip and the ground (not shown in the little schematic) is connected to the circuit ground.&lt;/p&gt;
+
+&lt;p&gt;One of the biggest issues I had was to find the parts, Eagle has a large database of components, but still, things like RFduino are not there. Also I needed to make sure I can eventually buy the things somewhere.&lt;/p&gt;
+
+&lt;h2 id=&quot;board-design&quot;&gt;Board Design&lt;/h2&gt;
+
+&lt;p&gt;After finishing the schematic, I proceeded with the board design. First I have tried to automatically layout the components, but Eagle has made a complete mess of things, so in the end I had to lay out everyting myself anyway. The process can get a bit awkward with the bends of the wires, but if it does, you can just delete the wire and do it again. You can set the widths of the wires, so I’ve chosen slightly thicker wires for the 12V lines and slightly thinner for the rest. I’ve also managed to keep all the connections to the one side of the board, which just makes it look better in my opinion.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/lamp-hw/board.png&quot; alt=&quot;Board Design&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;manufacturing&quot;&gt;Manufacturing&lt;/h2&gt;
+
+&lt;p&gt;Somewhere on the internet I have found &lt;a href=&quot;https://oshpark.com/&quot;&gt;OSH Park&lt;/a&gt; a company from USA that will make PCBs from Eagle CAD files for $5 per square inch (imperial, really??) and ship it anywhere in the world for free. My board cost me under $20, I have ordered it on Feb 26, it got shipped on Mar 6 and arrived in Prague on Mar 18. This manufacturing delay makes mistakes super expensive, but luckily the board works as designed.&lt;/p&gt;
+
+&lt;h2 id=&quot;assembly&quot;&gt;Assembly&lt;/h2&gt;
+
+&lt;p&gt;I have assembled the components onto the board today, it took me about an hour and was a really pleasant experience. And the fact that it has worked on the first try was really satisfying. Here have a look at the finished product.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/lamp-hw/board-finished.jpg&quot; alt=&quot;Board Finished&quot; /&gt;
+&lt;img src=&quot;/images/lamp-hw/finished.jpg&quot; alt=&quot;Finished Lamp&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;final-notes&quot;&gt;Final Notes&lt;/h2&gt;
+
+&lt;p&gt;OSH Park has good &lt;a href=&quot;https://oshpark.com/guidelines&quot;&gt;guidelines&lt;/a&gt; to follow (they also have a file that you can import to Eagle that will check your design). I suggest reading those before submitting anything.&lt;/p&gt;
+
+&lt;p&gt;The boards that have arrived look stunning, but there are a couple of things I noticed that could be improved:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Some joints don’t have the small metal area surrounding the hole, which makes them slightly more difficult to solder (see the holes for RFduino and the voltage regulator)&lt;/li&gt;
+  &lt;li&gt;The other joints have the metal area around holes on both sides of the board, even though only one side has wires&lt;/li&gt;
+  &lt;li&gt;The boards had some rough edges around the places where they were broken apart from the panel that had to be sanded, but this is just a minor issue&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Most of these are my fault, I will try to fix them next time I have boards printed.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/lamp-hw/board-defects.jpg&quot; alt=&quot;Board Defects&quot; class=&quot;pull-left h45&quot; /&gt;
+&lt;img src=&quot;/images/lamp-hw/soldering-regulator.jpg&quot; alt=&quot;Board Design&quot; class=&quot;pull-right h45&quot; /&gt;&lt;/p&gt;
+
+</description>
+                <pubDate>Thu, 19 Mar 2015 00:00:00 +0100</pubDate>
+                <link>/lamp/english/2015/03/19/lamp-project-4.html</link>
+                <guid isPermaLink="true">/lamp/english/2015/03/19/lamp-project-4.html</guid>
+            </item>
+        
+            <item>
+                <title>Lamp Project&amp;#58; Arduino Software</title>
+                <description>&lt;p&gt;Bluetooth 4 Low Energy protocol implementation on the Lamp&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a href=&quot;/lamp/english/2015/01/18/lamp-project.html&quot;&gt;Project Overview&lt;/a&gt;
+&lt;a href=&quot;/lamp/english/2015/03/07/lamp-project-2.html&quot;&gt;Hardware&lt;/a&gt;
+&lt;a href=&quot;/lamp/english/2015/03/12/lamp-project-3.html&quot;&gt;Arduino Software&lt;/a&gt;
+&lt;a href=&quot;/lamp/english/2015/03/19/lamp-project-4.html&quot;&gt;Printed Circuit Boards&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Below you can find the whole source code for the Arduino sketch uploaded to RFduino. It’s pretty simple for now, it contains mappings to the pins that output &lt;a href=&quot;http://en.wikipedia.org/wiki/Pulse-width_modulation&quot;&gt;PWM&lt;/a&gt; for the LEDs. It also contains definitions of 2 modes that are supported: &lt;em&gt;MODE_RESET&lt;/em&gt; and &lt;em&gt;MODE_HOLD&lt;/em&gt;. The reset mode will turn of the light on disconnect, while the hold mode will keep the color even if the remote disconnects. It can then be changed if someone send it a new color.&lt;/p&gt;
+
+&lt;p&gt;The most interesting I guess is the onReceive function that is called by the RFduino stack when it has received new data. It receives a pointer to the data array and its length. This also defines the lamp protocol, so the data format is as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;One data packet is 4 bytes long&lt;/li&gt;
+  &lt;li&gt;Position 0 is the mode, currently only values 0 and 1 are supported, 0 will reset color after the client disconnects, 1 will keep the color until changed&lt;/li&gt;
+  &lt;li&gt;Position 1-3 are RGB values to be written to the output&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The mode is finally resolved in the RFduinoBLE_onDisconnect function.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#include &amp;lt;RFduinoBLE.h&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Lamp Modes&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MODE_RESET&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MODE_HOLD&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// pin 3 on the RGB shield is the red led&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// (can be turned on/off from the iPhone app)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;led_r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;led_g&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;led_b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// led turned on/off from the iPhone app&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;17&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;pinMode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OUTPUT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;18&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;pinMode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OUTPUT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;19&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;pinMode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OUTPUT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;20&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;21&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;RFduinoBLE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;advertisementData&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;mlamp&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;22&lt;/span&gt;   
+&lt;span class=&quot;lineno&quot;&gt;23&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// start the BLE stack&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;24&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;RFduinoBLE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;25&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;26&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;27&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;28&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;29&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;30&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;31&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;RFduinoBLE_onDisconnect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;32&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;33&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MODE_HOLD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;34&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Mode was set to MODE_HOLD, so will leave LEDs on&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;35&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;36&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// MODE_RESET&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;37&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Mode was set to MODE_RESET, so turning off LEDs&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;38&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// don&amp;#39;t leave the led on if they disconnect&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;39&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;analogWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;40&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;analogWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;41&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;analogWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;42&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;43&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;44&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;45&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;RFduinoBLE_onReceive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;46&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;47&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;len&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;48&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;49&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;50&lt;/span&gt;   
+&lt;span class=&quot;lineno&quot;&gt;51&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// 2nd byte is mode&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;52&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;53&lt;/span&gt;   
+&lt;span class=&quot;lineno&quot;&gt;54&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// 3rd, 4th, 5th are r,g,b&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;55&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;56&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;57&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;58&lt;/span&gt;   
+&lt;span class=&quot;lineno&quot;&gt;59&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// set the color&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;60&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;analogWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;61&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;analogWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;62&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;analogWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;63&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+</description>
+                <pubDate>Thu, 12 Mar 2015 00:00:00 +0100</pubDate>
+                <link>/lamp/english/2015/03/12/lamp-project-3.html</link>
+                <guid isPermaLink="true">/lamp/english/2015/03/12/lamp-project-3.html</guid>
+            </item>
+        
+            <item>
                 <title>Lamp Project&amp;#58; The Hardware Prototype</title>
                 <description>&lt;p&gt;The detailed description of the prototype hardware used for the lamp project.&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;a href=&quot;/lamp/english/2015/01/18/lamp-project.html&quot;&gt;Project Overview&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/lamp/english/2015/01/18/lamp-project.html&quot;&gt;Project Overview&lt;/a&gt;
+&lt;a href=&quot;/lamp/english/2015/03/07/lamp-project-2.html&quot;&gt;Hardware&lt;/a&gt;
+&lt;a href=&quot;/lamp/english/2015/03/12/lamp-project-3.html&quot;&gt;Arduino Software&lt;/a&gt;
+&lt;a href=&quot;/lamp/english/2015/03/19/lamp-project-4.html&quot;&gt;Printed Circuit Boards&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;I have, obviously, started with an idea. I didn’t like any of the exisiting smart lamp solutions, mostly because they lacked customizability. So my thought process was to start with some minimal requirements. I have come up with the following:&lt;/p&gt;
 
@@ -88,6 +263,11 @@
                 <description>&lt;p&gt;In this series I will share my experiences with building an Rfduino-based RGB LED lamp from start to finish, including iOS and other apps for remote control.&lt;/p&gt;
 
 &lt;hr /&gt;
+
+&lt;p&gt;&lt;a href=&quot;/lamp/english/2015/01/18/lamp-project.html&quot;&gt;Project Overview&lt;/a&gt;
+&lt;a href=&quot;/lamp/english/2015/03/07/lamp-project-2.html&quot;&gt;Hardware&lt;/a&gt;
+&lt;a href=&quot;/lamp/english/2015/03/12/lamp-project-3.html&quot;&gt;Arduino Software&lt;/a&gt;
+&lt;a href=&quot;/lamp/english/2015/03/19/lamp-project-4.html&quot;&gt;Printed Circuit Boards&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;I’ve had this idea for a project for quite some time now, but now I’ve actually come around to some real progress. The project specificaton is simple: I wanted to build an RGB LED lamp that could be controlled wirelessly. That idea in and of itself is not particularly new or unprecedented, however when I was looking at ready-made solutions online, I couldn’t find anything that would work for me. I really just wanted something that could be programmed or controlled remotely. &lt;/p&gt;
 
@@ -884,128 +1064,6 @@ slowest, maybe next time we’ll look at that.&lt;/p&gt;
                 <pubDate>Tue, 11 Feb 2014 00:00:00 +0100</pubDate>
                 <link>/master-thesis/english/2014/02/11/unwrap-performance.html</link>
                 <guid isPermaLink="true">/master-thesis/english/2014/02/11/unwrap-performance.html</guid>
-            </item>
-        
-            <item>
-                <title>Performance of the getOrientationAndMagnitude()</title>
-                <description>&lt;p&gt;I normally don’t do premature performance optimizations, and I was planning on optimizing the whole eye tracker
-later, when I felt I had all of the functionality I wanted, but from time to time, you still want to check your 
-code, particularly when it’s suspiciously slow. So I did examine the code I had written so far using 
-&lt;a href=&quot;http://packages.python.org/line_profiler/&quot;&gt;line_profiler&lt;/a&gt; (Abysmal documentation btw.) like so:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;kernprof.py -l test.py &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; python -m line_profiler test.py.lprof&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;I have found that the most time is being spent in one function, &lt;code&gt;getOrientationAndMagnitude&lt;/code&gt;, you’ll recall it
-looked like this:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getOrientationAndMagnitude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;sobelHorizontal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sobel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CV_32F&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;sobelVertical&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sobel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CV_32F&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sobelHorizontal&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sobelVertical&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;orientation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;empty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;magnitude&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;empty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;width&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt;         &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt;             &lt;span class=&quot;n&quot;&gt;orientation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fastAtan2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;magnitude&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;magnitude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;17&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;18&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;orientation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;magnitude&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;I wrote this code some time ago, when I was less familiar with OpenCV than I am now, and you can quickly see
-the hotspot. Yes, the line &lt;code&gt;14&lt;/code&gt;. I probably did it like this because I hadn’t noticed the 
-&lt;a href=&quot;http://docs.opencv.org/modules/core/doc/operations_on_arrays.html#phase&quot;&gt;&lt;code&gt;phase()&lt;/code&gt;&lt;/a&gt; function OpenCV has.&lt;/p&gt;
-
-&lt;p&gt;But this will serve the purpose of showing how such a small oversight can have a dramatic effect on performance.
-Armed with the &lt;a href=&quot;http://docs.opencv.org/modules/core/doc/operations_on_arrays.html#phase&quot;&gt;&lt;code&gt;phase()&lt;/code&gt;&lt;/a&gt; function,
-we can do the following:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getOrientationAndMagnitude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;h&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sobel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CV_32F&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sobel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CV_32F&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;orientation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;phase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;angleInDegrees&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;magnitude&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;magnitude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;7&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;8&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;orientation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;magnitude&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Now this much shorter and simpler function will also run much faster, thanks to OpenCV. And here’s how I tested
-it:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;cProfile&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;eye.png&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cvtColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CV_BGR2GRAY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cProfile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;runctx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;refGetOrientationAndMagnitude(image)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;globals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;globals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;locals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;locals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cProfile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;runctx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;newGetOrientationAndMagnitude(image)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;globals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;globals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;locals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;locals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Which yielded the following results:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;201309 function calls in 1.022 seconds
-
-Ordered by: standard name
-
-ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-     1    0.000    0.000    1.022    1.022 &amp;lt;string&amp;gt;:1(&amp;lt;module&amp;gt;)
-     1    0.823    0.823    1.022    1.022 test.py:7(refGetOrientationAndMagnitude)
-     2    0.004    0.002    0.004    0.002 {cv2.Sobel}
-201000    0.192    0.000    0.192    0.000 {cv2.fastAtan2}
-     1    0.001    0.001    0.001    0.001 {cv2.magnitude}
-     1    0.000    0.000    0.000    0.000 {method &amp;#39;disable&amp;#39; of &amp;#39;_lsprof.Profiler&amp;#39; objects}
-     2    0.000    0.000    0.000    0.000 {numpy.core.multiarray.empty}
-   301    0.002    0.000    0.002    0.000 {range}
-
-
-7 function calls in 0.004 seconds
-
-Ordered by: standard name
-
-ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-    1    0.000    0.000    0.004    0.004 &amp;lt;string&amp;gt;:1(&amp;lt;module&amp;gt;)
-    1    0.000    0.000    0.003    0.003 test.py:26(candidateGetOrientationAndMagnitude)
-    2    0.002    0.001    0.002    0.001 {cv2.Sobel}
-    1    0.000    0.000    0.000    0.000 {cv2.magnitude}
-    1    0.001    0.001    0.001    0.001 {cv2.phase}
-    1    0.000    0.000    0.000    0.000 {method &amp;#39;disable&amp;#39; of &amp;#39;_lsprof.Profiler&amp;#39; objects}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;So 1.022s to 0.004, 255× faster with just replacing a double &lt;code&gt;for&lt;/code&gt; loop with an OpenCV call.&lt;/p&gt;
-</description>
-                <pubDate>Mon, 10 Feb 2014 00:00:00 +0100</pubDate>
-                <link>/master-thesis/english/2014/02/10/orientation-performance.html</link>
-                <guid isPermaLink="true">/master-thesis/english/2014/02/10/orientation-performance.html</guid>
-            </item>
-        
-            <item>
-                <title>Units Safari Extension</title>
-                <description>&lt;p&gt;Did you know that there are still people in this world who use imperial units?
-For some reason they refuse to switch and continue using this stupid system.
-I requent Reddit and it’s quite common to find these people there, so instead
-of just bitching I decided to do something about it.&lt;/p&gt;
-
-&lt;p&gt;I have made this Safari Extension &lt;a href=&quot;https://github.com/mirosval/Units-Safari-Extension&quot;&gt;Units&lt;/a&gt;,
-&lt;a href=&quot;https://github.com/mirosval/Units-Safari-Extension/blob/master/units.safariextz?raw=true&quot;&gt;Download&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;It takes common expressions as &lt;code&gt;He is 5&#39;4&quot; tall&lt;/code&gt; and translates them to &lt;code&gt;He is 5&#39;4&quot; (162.56 cm) tall&lt;/code&gt;,
-so now you know that &lt;em&gt;he&lt;/em&gt; is quite short.&lt;/p&gt;
-
-&lt;p&gt;It can also convert some other units, such as miles to km, mpg to km/l and lbs to kg. Of course it
-does have limitations, for example if somebody writes &lt;code&gt;He is 6 feet tall&lt;/code&gt; or &lt;code&gt;He is 200&lt;/code&gt; it does not 
-get translated, maybe I’ll add it later, or if somebody wants to contribute, you’re more than
-welcome.&lt;/p&gt;
-
-&lt;p&gt;I’ve switched from Safari back to Chrome recently, so might be I port it there as well,
-when I get sufficiently annoyed again.&lt;/p&gt;
-</description>
-                <pubDate>Sat, 01 Feb 2014 00:00:00 +0100</pubDate>
-                <link>/other/english/2014/02/01/safari-units.html</link>
-                <guid isPermaLink="true">/other/english/2014/02/01/safari-units.html</guid>
             </item>
         
     </channel>

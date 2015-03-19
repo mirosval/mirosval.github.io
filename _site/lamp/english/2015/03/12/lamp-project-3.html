@@ -1,0 +1,283 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Mirosval</title>
+
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="/stylesheets/pygment_trac.css">
+
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    
+    <link rel="alternate" type="application/rss+xml" title="Mirosval" href="http://mirosval.github.io/feed.xml">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        
+        <a href="/" class="profile-picture-link">
+          <img src="/images/cuba.jpg" alt="Profile Picture Mirosval" class="profile-picture">
+        </a>
+
+        <p></p>
+        <h1>Mirosval</h1>
+
+        <p class="view">
+          <a href="https://github.com/mirosval">My GitHub</a>
+          <a href="https://twitter.com/mirosva1">My Twitter</a>
+        </p>
+
+        <div class="categories">
+          <h3>Categories</h3>
+          <ul class="categories">
+            
+              <li>
+                <a href="/categories/english">
+                  English (13)
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/master-thesis">
+                  Master thesis (5)
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/other">
+                  Other (5)
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/python">
+                  Python (4)
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/slovak">
+                  Slovak (3)
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/lamp">
+                  Lamp (4)
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+
+        <div class="tags">
+          <h3>Tags</h3>
+          <ul class="tags">
+            
+              <li style="font-size: 1160/11%">
+                <a href="/tags/master-thesis">
+                  Master thesis (5)
+                </a>
+              </li>
+            
+              <li style="font-size: 1160/11%">
+                <a href="/tags/opencv">
+                  Opencv (5)
+                </a>
+              </li>
+            
+              <li style="font-size: 1560/11%">
+                <a href="/tags/python">
+                  Python (9)
+                </a>
+              </li>
+            
+              <li style="font-size: 760/11%">
+                <a href="/tags/pupil">
+                  Pupil (1)
+                </a>
+              </li>
+            
+              <li style="font-size: 860/11%">
+                <a href="/tags/iris">
+                  Iris (2)
+                </a>
+              </li>
+            
+              <li style="font-size: 760/11%">
+                <a href="/tags/safari-extension">
+                  Safari extension (1)
+                </a>
+              </li>
+            
+              <li style="font-size: 860/11%">
+                <a href="/tags/performance">
+                  Performance (2)
+                </a>
+              </li>
+            
+              <li style="font-size: 1060/11%">
+                <a href="/tags/hardware">
+                  Hardware (4)
+                </a>
+              </li>
+            
+              <li style="font-size: 960/11%">
+                <a href="/tags/arduino">
+                  Arduino (3)
+                </a>
+              </li>
+            
+              <li style="font-size: 760/11%">
+                <a href="/tags/ios">
+                  Ios (1)
+                </a>
+              </li>
+            
+              <li style="font-size: 760/11%">
+                <a href="/tags/ble">
+                  Ble (1)
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </header>
+
+    <section class="content">
+        <h2>Lamp Project&#58; Arduino Software</h2>
+        <span class="published">Published 12 March 2015</span>
+        <p>Bluetooth 4 Low Energy protocol implementation on the Lamp</p>
+
+<hr />
+
+<p><a href="/lamp/english/2015/01/18/lamp-project.html">Project Overview</a>
+<a href="/lamp/english/2015/03/07/lamp-project-2.html">Hardware</a>
+<a href="/lamp/english/2015/03/12/lamp-project-3.html">Arduino Software</a>
+<a href="/lamp/english/2015/03/19/lamp-project-4.html">Printed Circuit Boards</a></p>
+
+<p>Below you can find the whole source code for the Arduino sketch uploaded to RFduino. It’s pretty simple for now, it contains mappings to the pins that output <a href="http://en.wikipedia.org/wiki/Pulse-width_modulation">PWM</a> for the LEDs. It also contains definitions of 2 modes that are supported: <em>MODE_RESET</em> and <em>MODE_HOLD</em>. The reset mode will turn of the light on disconnect, while the hold mode will keep the color even if the remote disconnects. It can then be changed if someone send it a new color.</p>
+
+<p>The most interesting I guess is the onReceive function that is called by the RFduino stack when it has received new data. It receives a pointer to the data array and its length. This also defines the lamp protocol, so the data format is as follows:</p>
+
+<ul>
+  <li>One data packet is 4 bytes long</li>
+  <li>Position 0 is the mode, currently only values 0 and 1 are supported, 0 will reset color after the client disconnects, 1 will keep the color until changed</li>
+  <li>Position 1-3 are RGB values to be written to the output</li>
+</ul>
+
+<p>The mode is finally resolved in the RFduinoBLE_onDisconnect function.</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cp">#include &lt;RFduinoBLE.h&gt;</span>
+<span class="lineno"> 2</span> 
+<span class="lineno"> 3</span> <span class="c1">// Lamp Modes</span>
+<span class="lineno"> 4</span> <span class="k">const</span> <span class="n">byte</span> <span class="n">MODE_RESET</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno"> 5</span> <span class="k">const</span> <span class="n">byte</span> <span class="n">MODE_HOLD</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span> <span class="c1">// pin 3 on the RGB shield is the red led</span>
+<span class="lineno"> 8</span> <span class="c1">// (can be turned on/off from the iPhone app)</span>
+<span class="lineno"> 9</span> <span class="kt">int</span> <span class="n">led_r</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="lineno">10</span> <span class="kt">int</span> <span class="n">led_g</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+<span class="lineno">11</span> <span class="kt">int</span> <span class="n">led_b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="lineno">12</span> 
+<span class="lineno">13</span> <span class="n">byte</span> <span class="n">mode</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">14</span> 
+<span class="lineno">15</span> <span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno">16</span>   <span class="c1">// led turned on/off from the iPhone app</span>
+<span class="lineno">17</span>   <span class="n">pinMode</span><span class="p">(</span><span class="n">led_r</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+<span class="lineno">18</span>   <span class="n">pinMode</span><span class="p">(</span><span class="n">led_g</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+<span class="lineno">19</span>   <span class="n">pinMode</span><span class="p">(</span><span class="n">led_b</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+<span class="lineno">20</span> 
+<span class="lineno">21</span>   <span class="n">RFduinoBLE</span><span class="p">.</span><span class="n">advertisementData</span> <span class="o">=</span> <span class="s">&quot;mlamp&quot;</span><span class="p">;</span>
+<span class="lineno">22</span>   
+<span class="lineno">23</span>   <span class="c1">// start the BLE stack</span>
+<span class="lineno">24</span>   <span class="n">RFduinoBLE</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+<span class="lineno">25</span> <span class="p">}</span>
+<span class="lineno">26</span> 
+<span class="lineno">27</span> <span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno">28</span> 
+<span class="lineno">29</span> <span class="p">}</span>
+<span class="lineno">30</span> 
+<span class="lineno">31</span> <span class="kt">void</span> <span class="nf">RFduinoBLE_onDisconnect</span><span class="p">()</span>
+<span class="lineno">32</span> <span class="p">{</span>
+<span class="lineno">33</span>   <span class="k">if</span><span class="p">(</span><span class="n">mode</span> <span class="o">&amp;</span> <span class="n">MODE_HOLD</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">34</span>     <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Mode was set to MODE_HOLD, so will leave LEDs on&quot;</span><span class="p">);</span>
+<span class="lineno">35</span>   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="lineno">36</span>     <span class="c1">// MODE_RESET</span>
+<span class="lineno">37</span>     <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Mode was set to MODE_RESET, so turning off LEDs&quot;</span><span class="p">);</span>
+<span class="lineno">38</span>     <span class="c1">// don&#39;t leave the led on if they disconnect</span>
+<span class="lineno">39</span>     <span class="n">analogWrite</span><span class="p">(</span><span class="n">led_r</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="lineno">40</span>     <span class="n">analogWrite</span><span class="p">(</span><span class="n">led_g</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="lineno">41</span>     <span class="n">analogWrite</span><span class="p">(</span><span class="n">led_b</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="lineno">42</span>   <span class="p">}</span>
+<span class="lineno">43</span> <span class="p">}</span>
+<span class="lineno">44</span> 
+<span class="lineno">45</span> <span class="kt">void</span> <span class="nf">RFduinoBLE_onReceive</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">)</span>
+<span class="lineno">46</span> <span class="p">{</span>
+<span class="lineno">47</span>   <span class="k">if</span><span class="p">(</span><span class="n">len</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">48</span>     <span class="k">return</span><span class="p">;</span>
+<span class="lineno">49</span>   <span class="p">}</span>
+<span class="lineno">50</span>   
+<span class="lineno">51</span>   <span class="c1">// 2nd byte is mode</span>
+<span class="lineno">52</span>   <span class="n">mode</span> <span class="o">=</span> <span class="p">(</span><span class="n">byte</span><span class="p">)</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="lineno">53</span>   
+<span class="lineno">54</span>   <span class="c1">// 3rd, 4th, 5th are r,g,b</span>
+<span class="lineno">55</span>   <span class="n">byte</span> <span class="n">r</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="lineno">56</span>   <span class="n">byte</span> <span class="n">g</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="lineno">57</span>   <span class="n">byte</span> <span class="n">b</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="lineno">58</span>   
+<span class="lineno">59</span>   <span class="c1">// set the color</span>
+<span class="lineno">60</span>   <span class="n">analogWrite</span><span class="p">(</span><span class="n">led_r</span><span class="p">,</span> <span class="n">r</span><span class="p">);</span>
+<span class="lineno">61</span>   <span class="n">analogWrite</span><span class="p">(</span><span class="n">led_g</span><span class="p">,</span> <span class="n">g</span><span class="p">);</span>
+<span class="lineno">62</span>   <span class="n">analogWrite</span><span class="p">(</span><span class="n">led_b</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+<span class="lineno">63</span> <span class="p">}</span></code></pre></div>
+
+
+        
+            
+        
+            
+        
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'mirosval'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+
+    </section>
+      <footer>
+        
+      </footer>
+    </div>
+    <script src="/javascripts/scale.fix.js"></script>
+    <script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+  try {
+    var pageTracker = _gat._getTracker("UA-44114682-1");
+  pageTracker._trackPageview();
+  } catch(err) {}
+</script>
+
+    <div class="clear"></div>
+  </body>
+</html>
+
