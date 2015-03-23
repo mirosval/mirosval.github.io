@@ -5,3 +5,5 @@ name: Mirosval
 description: Personal blog about programming and stuff
 url: http://mirosval.github.io
 markdown: kramdown
+gems:
+  - jekyll-sitemap
