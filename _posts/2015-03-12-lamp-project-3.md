@@ -9,10 +9,12 @@ Bluetooth 4 Low Energy protocol implementation on the Lamp
 
 ---
 
-[Project Overview]({% post_url 2015-01-18-lamp-project %})
-[Hardware]({% post_url 2015-03-07-lamp-project-2 %})
-[Arduino Software]({% post_url 2015-03-12-lamp-project-3%})
-[Printed Circuit Boards]({% post_url 2015-03-19-lamp-project-4%})
+1. [Project Overview]({% post_url 2015-01-18-lamp-project %})
+1. [Hardware]({% post_url 2015-03-07-lamp-project-2 %})
+1. [Arduino Software]({% post_url 2015-03-12-lamp-project-3%})
+1. [Printed Circuit Boards]({% post_url 2015-03-19-lamp-project-4%})
+1. [Assembly Timelapse]({% post_url 2015-04-01-lamp-project-5%})
+
 
 Below you can find the whole source code for the Arduino sketch uploaded to RFduino. It's pretty simple for now, it contains mappings to the pins that output [PWM](http://en.wikipedia.org/wiki/Pulse-width_modulation) for the LEDs. It also contains definitions of 2 modes that are supported: *MODE_RESET* and *MODE_HOLD*. The reset mode will turn of the light on disconnect, while the hold mode will keep the color even if the remote disconnects. It can then be changed if someone send it a new color.
 

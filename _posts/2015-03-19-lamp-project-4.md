@@ -9,10 +9,11 @@ The journey of the PCB from start to finish. Designed using Eagle CAD, printed a
 
 ---
 
-[Project Overview]({% post_url 2015-01-18-lamp-project %})
-[Hardware]({% post_url 2015-03-07-lamp-project-2 %})
-[Arduino Software]({% post_url 2015-03-12-lamp-project-3%})
-[Printed Circuit Boards]({% post_url 2015-03-19-lamp-project-4%})
+1. [Project Overview]({% post_url 2015-01-18-lamp-project %})
+1. [Hardware]({% post_url 2015-03-07-lamp-project-2 %})
+1. [Arduino Software]({% post_url 2015-03-12-lamp-project-3%})
+1. [Printed Circuit Boards]({% post_url 2015-03-19-lamp-project-4%})
+1. [Assembly Timelapse]({% post_url 2015-04-01-lamp-project-5%})
 
 ##Design Tool
 

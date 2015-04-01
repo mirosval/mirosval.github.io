@@ -9,10 +9,11 @@ In this series I will share my experiences with building an Rfduino-based RGB LE
 
 ---
 
-[Project Overview]({% post_url 2015-01-18-lamp-project %})
-[Hardware]({% post_url 2015-03-07-lamp-project-2 %})
-[Arduino Software]({% post_url 2015-03-12-lamp-project-3%})
-[Printed Circuit Boards]({% post_url 2015-03-19-lamp-project-4%})
+1. [Project Overview]({% post_url 2015-01-18-lamp-project %})
+1. [Hardware]({% post_url 2015-03-07-lamp-project-2 %})
+1. [Arduino Software]({% post_url 2015-03-12-lamp-project-3%})
+1. [Printed Circuit Boards]({% post_url 2015-03-19-lamp-project-4%})
+1. [Assembly Timelapse]({% post_url 2015-04-01-lamp-project-5%})
 
 I've had this idea for a project for quite some time now, but now I've actually come around to some real progress. The project specificaton is simple: I wanted to build an RGB LED lamp that could be controlled wirelessly. That idea in and of itself is not particularly new or unprecedented, however when I was looking at ready-made solutions online, I couldn't find anything that would work for me. I really just wanted something that could be programmed or controlled remotely. 
 
