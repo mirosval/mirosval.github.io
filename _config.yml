@@ -1,6 +1,6 @@
 safe: true
 lsi: false
-highlighter: pygments
+highlighter: rouge
 name: Mirosval
 description: Personal blog about programming and stuff
 url: http://blog.mirosval.sk

@@ -39,7 +39,7 @@
             
               <li>
                 <a href="/categories/english">
-                  English (14)
+                  English (15)
                 </a>
               </li>
             
@@ -50,8 +50,14 @@
               </li>
             
               <li>
+                <a href="/categories/Other">
+                  Other (1)
+                </a>
+              </li>
+            
+              <li>
                 <a href="/categories/other">
-                  Other (5)
+                  Other (4)
                 </a>
               </li>
             
@@ -69,7 +75,7 @@
             
               <li>
                 <a href="/categories/lamp">
-                  Lamp (5)
+                  Lamp (6)
                 </a>
               </li>
             
@@ -122,9 +128,9 @@
                 </a>
               </li>
             
-              <li style="font-size: 101%">
+              <li style="font-size: 110%">
                 <a href="/tags/hardware">
-                  Hardware (5)
+                  Hardware (6)
                 </a>
               </li>
             
@@ -146,9 +152,9 @@
                 </a>
               </li>
             
-              <li style="font-size: 68%">
+              <li style="font-size: 76%">
                 <a href="/tags/video">
-                  Video (1)
+                  Video (2)
                 </a>
               </li>
             
@@ -164,11 +170,11 @@ because the speed of this was still not satisfactory (I spent an hour processing
 
 <p>So I’ve whipped up line_profiler again:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">kernprof.py -l main.py <span class="o">&amp;&amp;</span> python -m line_profiler main.py.lprof</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">kernprof.py -l main.py <span class="o">&amp;&amp;</span> python -m line_profiler main.py.lprof</code></pre></figure>
 
 <p>This gave me the following trace:</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">File: main.py
+<figure class="highlight"><pre><code class="language-text" data-lang="text">File: main.py
 Function: main at line 10
 Total time: 23.1351 s
 
@@ -176,11 +182,11 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 ==============================================================
     10                                           @profile
     11                                           def main():
-    12         1       167798 167798.0      0.7      cv2.namedWindow(&quot;Eye&quot;)
-    13         1        28931  28931.0      0.1      cv2.namedWindow(&quot;Iris&quot;)
+    12         1       167798 167798.0      0.7      cv2.namedWindow("Eye")
+    13         1        28931  28931.0      0.1      cv2.namedWindow("Iris")
     14                                           
-    15         1        21107  21107.0      0.1      cv2.moveWindow(&quot;Eye&quot;, 0, 0)
-    16         1        27887  27887.0      0.1      cv2.moveWindow(&quot;Iris&quot;, 800, 0)
+    15         1        21107  21107.0      0.1      cv2.moveWindow("Eye", 0, 0)
+    16         1        27887  27887.0      0.1      cv2.moveWindow("Iris", 800, 0)
     17                                           
     18         1            6      6.0      0.0      i = 0
     19        12       247887  20657.2      1.1      for f in os.listdir(data_dir):
@@ -193,7 +199,7 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
     26        11       179806  16346.0      0.8          pupil = functions.findPupil(gray, show=True)
     27                                           
     28        11           51      4.6      0.0          if not pupil:
-    29                                                       print(&quot;No pupil found&quot;)
+    29                                                       print("No pupil found")
     30                                                       continue
     31                                           
     32        11           39      3.5      0.0          center, ellipse = pupil
@@ -204,40 +210,57 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
     37        11           77      7.0      0.0          if iris_radius &gt; 0:
     38        11     20144018 1831274.4     87.1              polar = functions.unwrapIris(gray, center, iris_radius, show=True)
     39                                           
-    40        11        51121   4647.4      0.2              cv2.imwrite(os.path.join(dest_dir, f.replace(&#39;.png&#39;, &#39;&#39;) + &quot;_polar.png&quot;), polar)
-    41        11          369     33.5      0.0              print(&quot;Written %s&quot; % f)
+    40        11        51121   4647.4      0.2              cv2.imwrite(os.path.join(dest_dir, f.replace('.png', '') + "_polar.png"), polar)
+    41        11          369     33.5      0.0              print("Written %s" % f)
     42                                           
-    43        11       237059  21550.8      1.0          if cv2.waitKey(1) == ord(&#39;q&#39;):
+    43        11       237059  21550.8      1.0          if cv2.waitKey(1) == ord('q'):
     44                                                       break
     45                                           
     46        11          108      9.8      0.0          if i == 10:
     47         1           61     61.0      0.0              break
     48                                           
-    49        10           37      3.7      0.0          i += 1</code></pre></div>
+    49        10           37      3.7      0.0          i += 1</code></pre></figure>
 
-<p>Hmmm, 87% of the time is spent in <code>unwrapIris()</code>. Lets take a look at what that looks like:</p>
+<p>Hmmm, 87% of the time is spent in <code class="highlighter-rouge">unwrapIris()</code>. Lets take a look at what that looks like:</p>
 
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="lineno"> 1</span> <span class="k">def</span> <span class="nf">unwrapIris</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">iris_center</span><span class="p">,</span> <span class="n">iris_radius</span><span class="p">,</span> <span class="n">nsamples</span><span class="o">=</span><span class="mi">360</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-<span class="lineno"> 2</span>     <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">nsamples</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="lineno"> 3</span>     <span class="n">polar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">iris_radius</span><span class="p">,</span> <span class="n">nsamples</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
-<span class="lineno"> 4</span> 
-<span class="lineno"> 5</span>     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iris_radius</span><span class="p">):</span>
-<span class="lineno"> 6</span>         <span class="k">for</span> <span class="n">theta</span> <span class="ow">in</span> <span class="n">samples</span><span class="p">:</span>
-<span class="lineno"> 7</span>             <span class="n">x</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">+</span> <span class="n">iris_center</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="lineno"> 8</span>             <span class="n">y</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">+</span> <span class="n">iris_center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="lineno"> 9</span>             <span class="k">try</span><span class="p">:</span>
-<span class="lineno">10</span>                 <span class="n">polar</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">theta</span> <span class="o">*</span> <span class="n">nsamples</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">]</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
-<span class="lineno">11</span>             <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
-<span class="lineno">12</span>                 <span class="n">polar</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">theta</span> <span class="o">*</span> <span class="n">nsamples</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="lineno">13</span> 
-<span class="lineno">14</span>     <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
-<span class="lineno">15</span>         <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s">&quot;Iris&quot;</span><span class="p">,</span> <span class="n">polar</span><span class="p">)</span>
-<span class="lineno">16</span> 
-<span class="lineno">17</span>     <span class="k">return</span> <span class="n">polar</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">unwrapIris</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">iris_center</span><span class="p">,</span> <span class="n">iris_radius</span><span class="p">,</span> <span class="n">nsamples</span><span class="o">=</span><span class="mi">360</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">nsamples</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">polar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">iris_radius</span><span class="p">,</span> <span class="n">nsamples</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iris_radius</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">theta</span> <span class="ow">in</span> <span class="n">samples</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">+</span> <span class="n">iris_center</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">+</span> <span class="n">iris_center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">polar</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">theta</span> <span class="o">*</span> <span class="n">nsamples</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">]</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
+            <span class="k">except</span> <span class="nb">IndexError</span><span class="p">:</span>
+                <span class="n">polar</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">theta</span> <span class="o">*</span> <span class="n">nsamples</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
+        <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s">"Iris"</span><span class="p">,</span> <span class="n">polar</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">polar</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>And its profile:</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">File: functions.py
+<figure class="highlight"><pre><code class="language-text" data-lang="text">File: functions.py
 Function: unwrapIris at line 145
 Total time: 34.5483 s
 
@@ -258,9 +281,9 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
    157                                                           polar[r][theta * nsamples / 2.0 / np.pi] = 0
    158                                           
    159        11           28      2.5      0.0      if show:
-   160        11        30015   2728.6      0.1          cv2.imshow(&quot;Iris&quot;, polar)
+   160        11        30015   2728.6      0.1          cv2.imshow("Iris", polar)
    161                                           
-   162        11           52      4.7      0.0      return polar</code></pre></div>
+   162        11           52      4.7      0.0      return polar</code></pre></figure>
 
 <p>So we can see that the load here is distributed between 3 lines, 2 trigonometric calculations
 and one array access and some arithmetic. But the main problem is that these 3 lines are run for
@@ -270,33 +293,43 @@ In this case we’ll look at how could this be moved over to either Numpy or Ope
 libraries are written in C or C++, they can perform the same loop much faster than plain Python.</p>
 
 <p>Thanks to Numpy’s operator overloading, it is possible to write code that looks really weird at the
-first glance, if you’re used to loops from other languages. Look at the lines 6 and 7. <code>magnitude</code>
-is an array, <code>angle</code> is an array and <code>iris_center</code> is an <code>int</code> as it is used here. Numpy can
+first glance, if you’re used to loops from other languages. Look at the lines 6 and 7. <code class="highlighter-rouge">magnitude</code>
+is an array, <code class="highlighter-rouge">angle</code> is an array and <code class="highlighter-rouge">iris_center</code> is an <code class="highlighter-rouge">int</code> as it is used here. Numpy can
 calculate this correctly and the loops are now in the library, yay!</p>
 
 <p>So what changed? Line 4 makes two arrays, one with angles and one with magnitudes, both of dimensions
-<code>iris_radius&amp;times;nsamples</code> which is about <code>359x130</code> for most of my images. The angle array is
+<code class="highlighter-rouge">iris_radius&amp;times;nsamples</code> which is about <code class="highlighter-rouge">359x130</code> for most of my images. The angle array is
 basically just a single row of radian values from 0 to 2pi repeated 130 times, and magnitude is
 a column from 0 to 129 repeated horizontally 359 times.</p>
 
 <p>The lines 6 and 7 convert these two arrays to X,Y coordinates in the image, from which we will be
-sampling later. <code>convertMaps()</code> converts the them further to improve performance of <code>cv2.remap()</code>.
-And finally <code>cv2.remap()</code> maps these coordinate maps from the original image into the polar image.</p>
+sampling later. <code class="highlighter-rouge">convertMaps()</code> converts the them further to improve performance of <code class="highlighter-rouge">cv2.remap()</code>.
+And finally <code class="highlighter-rouge">cv2.remap()</code> maps these coordinate maps from the original image into the polar image.</p>
 
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="lineno"> 1</span> <span class="k">def</span> <span class="nf">unwrapIris</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">iris_center</span><span class="p">,</span> <span class="n">iris_radius</span><span class="p">,</span> <span class="n">nsamples</span><span class="o">=</span><span class="mi">360</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-<span class="lineno"> 2</span>     <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">nsamples</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="lineno"> 3</span> 
-<span class="lineno"> 4</span>     <span class="n">angle</span><span class="p">,</span> <span class="n">magnitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">iris_radius</span><span class="p">))</span>
-<span class="lineno"> 5</span> 
-<span class="lineno"> 6</span>     <span class="n">x</span> <span class="o">=</span> <span class="n">magnitude</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">+</span> <span class="n">iris_center</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="lineno"> 7</span>     <span class="n">y</span> <span class="o">=</span> <span class="n">magnitude</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">+</span> <span class="n">iris_center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="lineno"> 8</span> 
-<span class="lineno"> 9</span>     <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">convertMaps</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">&#39;float32&#39;</span><span class="p">),</span> <span class="n">y</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">&#39;float32&#39;</span><span class="p">),</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CV_32FC1</span><span class="p">)</span>
-<span class="lineno">10</span>     <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">remap</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">INTER_LINEAR</span><span class="p">)</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">unwrapIris</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">iris_center</span><span class="p">,</span> <span class="n">iris_radius</span><span class="p">,</span> <span class="n">nsamples</span><span class="o">=</span><span class="mi">360</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">nsamples</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">angle</span><span class="p">,</span> <span class="n">magnitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">iris_radius</span><span class="p">))</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">magnitude</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">+</span> <span class="n">iris_center</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">magnitude</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">+</span> <span class="n">iris_center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">convertMaps</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">'float32'</span><span class="p">),</span> <span class="n">y</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">'float32'</span><span class="p">),</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CV_32FC1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">remap</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">INTER_LINEAR</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>And now lets take a look at what that did to the performance:</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">File: functions.py
+<figure class="highlight"><pre><code class="language-text" data-lang="text">File: functions.py
 Function: unwrapIris at line 145
 Total time: 0.090496 s
 
@@ -311,7 +344,7 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
    151        11        30335   2757.7     33.5      x = magnitude * np.cos(angle) + iris_center[0]
    152        11        29815   2710.5     32.9      y = magnitude * np.sin(angle) + iris_center[1]
    153                                           
-   154        11         5195    472.3      5.7      x, y = cv2.convertMaps(x.astype(&#39;float32&#39;), y.astype(&#39;float32&#39;), cv2.CV_32FC1)
+   154        11         5195    472.3      5.7      x, y = cv2.convertMaps(x.astype('float32'), y.astype('float32'), cv2.CV_32FC1)
    155        11        12046   1095.1     13.3      return cv2.remap(image, x, y, cv2.INTER_LINEAR)
 
 File: main.py
@@ -322,11 +355,11 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 ==============================================================
     10                                           @profile
     11                                           def main():
-    12         1       160876 160876.0      4.0      cv2.namedWindow(&quot;Eye&quot;)
-    13         1        11790  11790.0      0.3      cv2.namedWindow(&quot;Iris&quot;)
+    12         1       160876 160876.0      4.0      cv2.namedWindow("Eye")
+    13         1        11790  11790.0      0.3      cv2.namedWindow("Iris")
     14                                           
-    15         1        26153  26153.0      0.7      cv2.moveWindow(&quot;Eye&quot;, 0, 0)
-    16         1        25946  25946.0      0.6      cv2.moveWindow(&quot;Iris&quot;, 800, 0)
+    15         1        26153  26153.0      0.7      cv2.moveWindow("Eye", 0, 0)
+    16         1        25946  25946.0      0.6      cv2.moveWindow("Iris", 800, 0)
     17                                           
     18         1            9      9.0      0.0      i = 0
     19        12         3073    256.1      0.1      for f in os.listdir(data_dir):
@@ -339,7 +372,7 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
     26        11        38994   3544.9      1.0          pupil = functions.findPupil(gray, show=True)
     27                                           
     28        11          187     17.0      0.0          if not pupil:
-    29                                                       print(&quot;No pupil found&quot;)
+    29                                                       print("No pupil found")
     30                                                       continue
     31                                           
     32        11           68      6.2      0.0          center, ellipse = pupil
@@ -350,19 +383,19 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
     37        11          100      9.1      0.0          if iris_radius &gt; 0:
     38        11        91645   8331.4      2.3              polar = functions.unwrapIris(gray, center, iris_radius, show=True)
     39                                           
-    40        11        28406   2582.4      0.7              cv2.imwrite(os.path.join(dest_dir, f.replace(&#39;.png&#39;, &#39;&#39;) + &quot;_polar.png&quot;), polar)
-    41        11          563     51.2      0.0              print(&quot;Written %s&quot; % f)
+    40        11        28406   2582.4      0.7              cv2.imwrite(os.path.join(dest_dir, f.replace('.png', '') + "_polar.png"), polar)
+    41        11          563     51.2      0.0              print("Written %s" % f)
     42                                           
-    43        11       310859  28259.9      7.8          if cv2.waitKey(1) == ord(&#39;q&#39;):
+    43        11       310859  28259.9      7.8          if cv2.waitKey(1) == ord('q'):
     44                                                       break
     45                                           
     46        11          120     10.9      0.0          if i == 10:
     47         1           92     92.0      0.0              break
     48                                           
-    49        10           57      5.7      0.0          i += 1</code></pre></div>
+    49        10           57      5.7      0.0          i += 1</code></pre></figure>
 
-<p>Nice! Now <code>unwrapIris()</code> is taking just 2.3% of the total time! And we have reduced time needed to process
-10 images from ~34s to about 4s, that’s an order of magnitude improvement! Now the <code>findIris()</code> is the 
+<p>Nice! Now <code class="highlighter-rouge">unwrapIris()</code> is taking just 2.3% of the total time! And we have reduced time needed to process
+10 images from ~34s to about 4s, that’s an order of magnitude improvement! Now the <code class="highlighter-rouge">findIris()</code> is the 
 slowest, maybe next time we’ll look at that.</p>
 
         

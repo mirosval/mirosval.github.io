@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Mirosval - Macbook Pro SSD Upgrade</title>
+    <title>Mirosval - Better IDEA Keymap</title>
 
     <link rel="stylesheet" href="/stylesheets/styles.css">
     <link rel="stylesheet" href="/stylesheets/pygment_trac.css">
@@ -163,80 +163,137 @@
       </header>
 
     <section class="content">
-        <h2>Macbook Pro SSD Upgrade</h2>
-        <span class="published">Published 20 February 2014</span>
-        <p>I have a Macbook Pro from mid 2010. Its coming up on 4 years, so some would say that it’s quite old,
-but I’ve upgraded its RAM to 8GB and it has been working for me quite nicely until recently when I felt
-that it’s starting to get slow.</p>
+        <h2>Better IDEA Keymap</h2>
+        <span class="published">Published 30 July 2016</span>
+        <p>Completely overhauled keyboard shortcuts for Intellij IDEA on macOS.</p>
 
-<p>###Dust cleaning</p>
+<hr />
 
-<p>The first problem appeared in the summer, when I’ve installed Mavericks. At the time I’ve been using
-Google Chrome as my primary web browser and it has become unbearable. The machine would run hot and
-with fans at full speed with a lot of noise. So at the time I switched back to Safari which helped 
-tremendously, but Safari has many other shortcomings (Horrible PDF support, Reddit’s RES didn’t work, etc.)
-so I wanted to switch back to Chrome, and now after Christmas they seem to have released a new version
-(I’m using the Beta channel, so now it’s 33) which does not suffer from the performance issues of the
-old one, so I switched back and everything seemed fine, with just occasional fan rampage.</p>
+<h2 id="boring-ramblings-skip">Boring ramblings (skip)</h2>
 
-<p>But it still bothered me, it seemed that the fans would go crazy for no reason (low CPU and energy use,
-and still, fans were running at 6000rpm). So I’ve removed the back cover and cleaned all the dust from
-the fans, that has helped incredibly, now it runs much cooler (up to 10°C cooler) and much more
-quiet (most of the time just 2000rpm).</p>
+<p>First of all I really want to shout out to Intellij for building such awesome tools.
+I used Eclipse, Netbeans, Visual Studio but they all suck tremendously. OK, Eclipse
+and Netbeans are OSS, so you can live with that. But VS? Its almost cruel how shitty
+it is. It is so shitty that Intellij made a plugin to fix it. With the plugin its good.
+But costs &gt; $1000 for professional use. Its shameful, really.</p>
 
-<p>###New SSD
-I still wanted to improve the performance, and the SSD looked like a good option. After looking it
-up briefly I decided on Samsung 840 EVO 250GB SSD, it was faster than what my Macbook could handle
-(SATA III vs SATA II on my Macbook Pro), but not much more expensive than the lower options. At about
-150€ it wasn’t too expensive either. I got the Laptop Upgrade kit.</p>
+<p>IDEA is fantastic, it starts quickly, doesn’t freeze up, offers all these advanced
+features, code completions, rewrites and so on. I really recommend it to everyone.</p>
 
-<p>The kit comes with just a SATA to USB connector and some useless CD with software. It does not have
-any screw drivers, but I had that covered. You only need a Phillips screwdriver luckily.</p>
+<p>And it has a community version which is free and paid version is well worth its money.
+I pay monthly subscription for my PyCharm.</p>
 
-<p>The annoying part was that my HD was 500GB and I needed to reduce that to about 200GB if I wanted
-to fit into the SSD comfortably. I’ve moved all my photos to an external HDD, that took some good
-3-4 hours.</p>
+<p>So why would I ramble about it in the first place? IDEA has not one but 3 shortcut sets:</p>
 
-<p>I first formatted the SSD to <code class="highlighter-rouge">Mac OS Extended Journaled</code> and to move the filesystem to the SSD 
-I’ve used the <a href="http://www.bombich.com/">Carbon Copy Cloner</a>. It allows you to create the Mavericks
-recovery partition on the drive as well, so you could just use that to make a clean install. But
-I’ve copied my whole system over using the CCC, about 200GB took around 4 hours to complete.</p>
+<ul>
+  <li>Mac OS X 10.5+ (⌃R for Run) - Not very macOS-like</li>
+  <li>Mac OS X (F10 for Run) - WTF?</li>
+  <li>Eclipse (Mac OS X) (⌘⇧F11 for Run) - ?????</li>
+</ul>
 
-<p>I’ve encountered an issue with Time Machine local backups, they will use up the empty space on 
-the drive, so I’ve deleted almost 300GB of data and only had 70GB free on a 500GB drive. But it
-was sufficient to just run the Time Machine and it would remove these local backups during the
-Preparing Backup phase.</p>
+<p>These are just some examples, but generally the keymaps are this stupid overall.
+I genuinely wonder who came up with these. F keys on macOS have been traditionally
+used for media keys, screen dimming and such. I do not want to use Fn modifier for
+that, and I sure as hell will not type Fn⌘⇧F11 just to Run my code, which is probably
+the most common action I need a shortcut for. Stupid.</p>
 
-<p>The actual HW swap went well, the SSD is much lighter and a bit smaller than the original HDD.
-I’ve used the <a href="http://www.ifixit.com/Guide/MacBook+Pro+15-Inch+Unibody+Mid+2010+Hard+Drive+Replacement/3030">iFixit guide</a>,
-but I haven’t removed the battery and to unscrew the HDD screws on the side I’ve just used pliers
-to unscrew them carefully and then screw them back on the SSD. This is necessary to hold it in
-place, since it is slightly smaller than the original.</p>
+<h2 id="guiding-principles">Guiding Principles</h2>
 
-<p>After the replacement I’ve used <a href="http://www.cindori.org/software/trimenabler/">Trim Enabler</a> to
-enable TRIM support, because apparently Apple only enables TRIM on their own SSDs by default.</p>
+<p>I wanted my shortcuts to be as usable as possible, so I tried to keep to these rules:</p>
 
-<p>###Performance
-I have measured my disk performance before and after the upgrade using <a href="https://itunes.apple.com/us/app/blackmagic-disk-speed-test/id425264550?mt=12">Blackmagic Disk Speed Test</a>
-and this is what I got:</p>
+<ul>
+  <li>One handed shortcuts for the most common actions</li>
+  <li>Two handed only if it is inevitable</li>
+  <li>Ideally Left hand, since most people will use the mouse with the right</li>
+  <li>Do not interfere with existing macOS shortcuts</li>
+  <li>Try to use popular shortcuts from other editors (Atom, Sublime)</li>
+</ul>
 
-<figure class="highlight"><pre><code class="language-text" data-lang="text">Before:
-    Write:  42.5 MB/s   Read:   39.9 MB/s
-After:
-    Write: 202.0 MB/s   Read:  256.5 MB/s</code></pre></figure>
+<h2 id="disclaimers-and-limitations">Disclaimers and limitations</h2>
 
-<p>Subjectively it feels a lot faster, especially opening apps is almost instantaneous. The
-main bottleneck now is probably the 3Gb/s SATA II interface, because the SSD should give
-around 500MB/s on SATA III. Over all I think this was a good investment and a relatively
-painless upgrade (apart from all the slow copying, ugh).</p>
+<ul>
+  <li>I mainly work with Scala and Python, so the shortcuts are optimized for IDEA
+and PyCharm, but I’m sure they can be used in other Intellij products.</li>
+  <li>The multiple selection shortcut could annoy some people, because ⌘Click is
+mapped to documentation or something like that by default</li>
+</ul>
 
-<p>Here are the Speed Test Screen Shots:</p>
+<h2 id="show-me-the-shortcuts">Show me the shortcuts!</h2>
 
-<p>####Before upgrade
-<img src="/images/ssd/old.png" alt="Before SSD Upgrade" />
-####After upgrade
-<img src="/images/ssd/new.png" alt="After SSD Upgrade" /></p>
+<p>Multiple cursors:</p>
 
+<ul>
+  <li>⌘Click to place an additional cursor</li>
+  <li>⌘D to select the next occurrence of a selected word (same as in Atom/Sublime Text)</li>
+  <li>Esc to cancel selection</li>
+</ul>
+
+<p>Running tests:</p>
+
+<ul>
+  <li>Assuming you are using a testing framework like ScalaTest</li>
+  <li>Place cursor into the body of the test function/method/describe/it block</li>
+  <li>If this is the first time you’re running this test (or if you have run a different test previously) start with:
+    <ul>
+      <li>⌘⇧R to run the test</li>
+      <li>⌘⇧T to run the test with debugger</li>
+    </ul>
+  </li>
+  <li>If this is already the second time you’re running this same test/suite:
+    <ul>
+      <li>⌘R to run the test</li>
+      <li>⌘T to run the test with debugger</li>
+    </ul>
+  </li>
+  <li>⌘E while stopped in the debugger</li>
+  <li>⌘. to stop run/test/other running process</li>
+  <li>⌘[ to Step Over in the Debugger</li>
+  <li>⌘] to Step Into in the Debugger</li>
+  <li>⌘\ to Step Out in the Debugger</li>
+</ul>
+
+<p>Navigation Around IDE:</p>
+
+<ul>
+  <li>⌘P Search Symbols</li>
+  <li>⌘⇧P Search Classes</li>
+  <li>⌘B Jump to definition</li>
+</ul>
+
+<p>Navigation In the Editor:</p>
+
+<ul>
+  <li>⌥→ and ⌥← To move one word at a time</li>
+  <li>⌥⌃→ and ⌥⌃← To move one word at a time, respecting CamelHumps</li>
+  <li>⌥⇧→ and ⌥⇧← To select one word at a time</li>
+  <li>⌥⇧⌃→ and ⌥⇧⌃← To select one word at a time, respecting CamelHumps</li>
+  <li>⌥⌫ Delete Line</li>
+</ul>
+
+<p>Other shortcuts:</p>
+
+<ul>
+  <li>⌘5 to Make/Build project, this is useful if you need to see if your project compiles</li>
+  <li>⇧⇧ Search Everything</li>
+  <li>⌘⇧A Search in actions</li>
+  <li>⌘, Preferences</li>
+</ul>
+
+<h2 id="download">Download</h2>
+
+<ul>
+  <li><a href="/files/2016-07-30/settings.jar">My Entire IDEA Settings JAR</a></li>
+  <li><a href="/files/2016-07-30/keymaps-only.jar">Keymaps Only JAR</a></li>
+</ul>
+
+<h2 id="share">Share</h2>
+
+<p>Please take these shortcuts, use them, improve on them, share the changes. Maybe
+we can convince Intellij to adopt them for the next IDEA Release.</p>
+
+
+        
+            
         
             
         

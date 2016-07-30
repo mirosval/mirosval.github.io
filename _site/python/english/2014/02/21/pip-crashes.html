@@ -39,7 +39,7 @@
             
               <li>
                 <a href="/categories/english">
-                  English (14)
+                  English (15)
                 </a>
               </li>
             
@@ -50,8 +50,14 @@
               </li>
             
               <li>
+                <a href="/categories/Other">
+                  Other (1)
+                </a>
+              </li>
+            
+              <li>
                 <a href="/categories/other">
-                  Other (5)
+                  Other (4)
                 </a>
               </li>
             
@@ -69,7 +75,7 @@
             
               <li>
                 <a href="/categories/lamp">
-                  Lamp (5)
+                  Lamp (6)
                 </a>
               </li>
             
@@ -122,9 +128,9 @@
                 </a>
               </li>
             
-              <li style="font-size: 101%">
+              <li style="font-size: 110%">
                 <a href="/tags/hardware">
-                  Hardware (5)
+                  Hardware (6)
                 </a>
               </li>
             
@@ -146,9 +152,9 @@
                 </a>
               </li>
             
-              <li style="font-size: 68%">
+              <li style="font-size: 76%">
                 <a href="/tags/video">
-                  Video (1)
+                  Video (2)
                 </a>
               </li>
             
@@ -160,23 +166,23 @@
         <h2>Python Pip Crashes</h2>
         <span class="published">Published 21 February 2014</span>
         <p>I was upgrading my disk to SSD the other day, and to make sure all my data fit, I’ve done some
-cleaning up, among others I’ve run <code>brew cleanup</code> which deletes old formulae. But apparently
+cleaning up, among others I’ve run <code class="highlighter-rouge">brew cleanup</code> which deletes old formulae. But apparently
 somewhere along the way that has broken my Python install. Trying to run Flask server would produce
 a cryptic error:</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">ImportError: No module named itsdangerous</code></pre></div>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">ImportError: No module named itsdangerous</code></pre></figure>
 
 <p>Hmm okay, lets try to install it:</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">% pip3 install itsdangerous
+<figure class="highlight"><pre><code class="language-text" data-lang="text"> % pip3 install itsdangerous
     Downloading/unpacking itsdangerous
     Downloading itsdangerous-0.23.tar.gz (46kB): 46kB downloaded
-    [1]    48739 segmentation fault  pip3 install itsdangerous</code></pre></div>
+    [1]    48739 segmentation fault  pip3 install itsdangerous</code></pre></figure>
 
 <p>Mmmkaay, what? I’ve tried to reinstall python to no avail, the search did not show anything either…
 The segfault looked like this:</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">Process:         Python [61249]
+<figure class="highlight"><pre><code class="language-text" data-lang="text">Process:         Python [61249]
 Path:            /usr/local/Cellar/python3/3.3.4/Frameworks/Python.framework/Versions/3.3/Resources/Python.app/Contents/MacOS/Python
 Identifier:      Python
 Version:         3.3.4 (3.3.4)
@@ -270,12 +276,13 @@ Thread 0 crashed with X86 Thread State (64-bit):
   rdi: 0x00007fe6ca7bde20  rsi: 0x00007fe6ca60d490  rbp: 0x00007fff57726a90  rsp: 0x00007fff57726a70
    r8: 0x0000000000000006   r9: 0x00007fe6ca400000  r10: 0x0000000069793538  r11: 0xffffffffffe9b3a0
   r12: 0x00007fff7c009400  r13: 0x00000001092c0f38  r14: 0x00007fe6ca7bde20  r15: 0x0000000000000000
-  rip: 0x0000000108f6d1ac  rfl: 0x0000000000010202  cr2: 0x0000000000000011</code></pre></div>
+  rip: 0x0000000108f6d1ac  rfl: 0x0000000000010202  cr2: 0x0000000000000011
+ </code></pre></figure>
 
 <p>So libcrypto.dylib is at fault here… Lets see, Homebrew has an option to use Python
 with brewed OpenSSL instead:</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">% brew info python3
+<figure class="highlight"><pre><code class="language-text" data-lang="text">  % brew info python3
 
 python3: stable 3.3.4, HEAD
 http://www.python.org/
@@ -290,9 +297,9 @@ Recommended: readline ✔, sqlite ✔, gdbm ✔, xz ✔
 --universal
     Build a universal binary
 --with-brewed-openssl
-    Use Homebrew&#39;s openSSL instead of the one from OS X
+    Use Homebrew's openSSL instead of the one from OS X
 --with-brewed-tk
-    Use Homebrew&#39;s Tk (has optional Cocoa and threads support)
+    Use Homebrew's Tk (has optional Cocoa and threads support)
 --without-gdbm
     Build without gdbm support
 --without-readline
@@ -314,12 +321,12 @@ You can install Python packages with
 They will install into the site-package directory
   /usr/local/lib/python3.3/site-packages
 
-See: https://github.com/Homebrew/homebrew/wiki/Homebrew-and-Python</code></pre></div>
+See: https://github.com/Homebrew/homebrew/wiki/Homebrew-and-Python</code></pre></figure>
 
 <p>So I ran:</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">% brew uninstall python3
-  % brew install python3 --with-brewed-openssl</code></pre></div>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">  % brew uninstall python3
+  % brew install python3 --with-brewed-openssl</code></pre></figure>
 
 <p>And that seemed to do the trick for the pip segfaults, however it did not solve my original
 problem. To do that I’ve uninstalled all of the Flask and related packages using pip3 and then

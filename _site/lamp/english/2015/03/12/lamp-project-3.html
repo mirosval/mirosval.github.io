@@ -39,7 +39,7 @@
             
               <li>
                 <a href="/categories/english">
-                  English (14)
+                  English (15)
                 </a>
               </li>
             
@@ -50,8 +50,14 @@
               </li>
             
               <li>
+                <a href="/categories/Other">
+                  Other (1)
+                </a>
+              </li>
+            
+              <li>
                 <a href="/categories/other">
-                  Other (5)
+                  Other (4)
                 </a>
               </li>
             
@@ -69,7 +75,7 @@
             
               <li>
                 <a href="/categories/lamp">
-                  Lamp (5)
+                  Lamp (6)
                 </a>
               </li>
             
@@ -122,9 +128,9 @@
                 </a>
               </li>
             
-              <li style="font-size: 101%">
+              <li style="font-size: 110%">
                 <a href="/tags/hardware">
-                  Hardware (5)
+                  Hardware (6)
                 </a>
               </li>
             
@@ -146,9 +152,9 @@
                 </a>
               </li>
             
-              <li style="font-size: 68%">
+              <li style="font-size: 76%">
                 <a href="/tags/video">
-                  Video (1)
+                  Video (2)
                 </a>
               </li>
             
@@ -183,69 +189,132 @@
 
 <p>The mode is finally resolved in the RFduinoBLE_onDisconnect function.</p>
 
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="cp">#include &lt;RFduinoBLE.h&gt;</span>
-<span class="lineno"> 2</span> 
-<span class="lineno"> 3</span> <span class="c1">// Lamp Modes</span>
-<span class="lineno"> 4</span> <span class="k">const</span> <span class="n">byte</span> <span class="n">MODE_RESET</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">;</span>
-<span class="lineno"> 5</span> <span class="k">const</span> <span class="n">byte</span> <span class="n">MODE_HOLD</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">;</span>
-<span class="lineno"> 6</span> 
-<span class="lineno"> 7</span> <span class="c1">// pin 3 on the RGB shield is the red led</span>
-<span class="lineno"> 8</span> <span class="c1">// (can be turned on/off from the iPhone app)</span>
-<span class="lineno"> 9</span> <span class="kt">int</span> <span class="n">led_r</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
-<span class="lineno">10</span> <span class="kt">int</span> <span class="n">led_g</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
-<span class="lineno">11</span> <span class="kt">int</span> <span class="n">led_b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-<span class="lineno">12</span> 
-<span class="lineno">13</span> <span class="n">byte</span> <span class="n">mode</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="lineno">14</span> 
-<span class="lineno">15</span> <span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
-<span class="lineno">16</span>   <span class="c1">// led turned on/off from the iPhone app</span>
-<span class="lineno">17</span>   <span class="n">pinMode</span><span class="p">(</span><span class="n">led_r</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
-<span class="lineno">18</span>   <span class="n">pinMode</span><span class="p">(</span><span class="n">led_g</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
-<span class="lineno">19</span>   <span class="n">pinMode</span><span class="p">(</span><span class="n">led_b</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
-<span class="lineno">20</span> 
-<span class="lineno">21</span>   <span class="n">RFduinoBLE</span><span class="p">.</span><span class="n">advertisementData</span> <span class="o">=</span> <span class="s">&quot;mlamp&quot;</span><span class="p">;</span>
-<span class="lineno">22</span>   
-<span class="lineno">23</span>   <span class="c1">// start the BLE stack</span>
-<span class="lineno">24</span>   <span class="n">RFduinoBLE</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
-<span class="lineno">25</span> <span class="p">}</span>
-<span class="lineno">26</span> 
-<span class="lineno">27</span> <span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
-<span class="lineno">28</span> 
-<span class="lineno">29</span> <span class="p">}</span>
-<span class="lineno">30</span> 
-<span class="lineno">31</span> <span class="kt">void</span> <span class="nf">RFduinoBLE_onDisconnect</span><span class="p">()</span>
-<span class="lineno">32</span> <span class="p">{</span>
-<span class="lineno">33</span>   <span class="k">if</span><span class="p">(</span><span class="n">mode</span> <span class="o">&amp;</span> <span class="n">MODE_HOLD</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">34</span>     <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Mode was set to MODE_HOLD, so will leave LEDs on&quot;</span><span class="p">);</span>
-<span class="lineno">35</span>   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-<span class="lineno">36</span>     <span class="c1">// MODE_RESET</span>
-<span class="lineno">37</span>     <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Mode was set to MODE_RESET, so turning off LEDs&quot;</span><span class="p">);</span>
-<span class="lineno">38</span>     <span class="c1">// don&#39;t leave the led on if they disconnect</span>
-<span class="lineno">39</span>     <span class="n">analogWrite</span><span class="p">(</span><span class="n">led_r</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-<span class="lineno">40</span>     <span class="n">analogWrite</span><span class="p">(</span><span class="n">led_g</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-<span class="lineno">41</span>     <span class="n">analogWrite</span><span class="p">(</span><span class="n">led_b</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-<span class="lineno">42</span>   <span class="p">}</span>
-<span class="lineno">43</span> <span class="p">}</span>
-<span class="lineno">44</span> 
-<span class="lineno">45</span> <span class="kt">void</span> <span class="nf">RFduinoBLE_onReceive</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">)</span>
-<span class="lineno">46</span> <span class="p">{</span>
-<span class="lineno">47</span>   <span class="k">if</span><span class="p">(</span><span class="n">len</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">48</span>     <span class="k">return</span><span class="p">;</span>
-<span class="lineno">49</span>   <span class="p">}</span>
-<span class="lineno">50</span>   
-<span class="lineno">51</span>   <span class="c1">// 2nd byte is mode</span>
-<span class="lineno">52</span>   <span class="n">mode</span> <span class="o">=</span> <span class="p">(</span><span class="n">byte</span><span class="p">)</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-<span class="lineno">53</span>   
-<span class="lineno">54</span>   <span class="c1">// 3rd, 4th, 5th are r,g,b</span>
-<span class="lineno">55</span>   <span class="n">byte</span> <span class="n">r</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
-<span class="lineno">56</span>   <span class="n">byte</span> <span class="n">g</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
-<span class="lineno">57</span>   <span class="n">byte</span> <span class="n">b</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
-<span class="lineno">58</span>   
-<span class="lineno">59</span>   <span class="c1">// set the color</span>
-<span class="lineno">60</span>   <span class="n">analogWrite</span><span class="p">(</span><span class="n">led_r</span><span class="p">,</span> <span class="n">r</span><span class="p">);</span>
-<span class="lineno">61</span>   <span class="n">analogWrite</span><span class="p">(</span><span class="n">led_g</span><span class="p">,</span> <span class="n">g</span><span class="p">);</span>
-<span class="lineno">62</span>   <span class="n">analogWrite</span><span class="p">(</span><span class="n">led_b</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
-<span class="lineno">63</span> <span class="p">}</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</pre></td><td class="code"><pre><span class="cp">#include &lt;RFduinoBLE.h&gt;
+</span>
+<span class="c1">// Lamp Modes
+</span><span class="k">const</span> <span class="n">byte</span> <span class="n">MODE_RESET</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">const</span> <span class="n">byte</span> <span class="n">MODE_HOLD</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="c1">// pin 3 on the RGB shield is the red led
+// (can be turned on/off from the iPhone app)
+</span><span class="kt">int</span> <span class="n">led_r</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">led_g</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">led_b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+<span class="n">byte</span> <span class="n">mode</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// led turned on/off from the iPhone app
+</span>  <span class="n">pinMode</span><span class="p">(</span><span class="n">led_r</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">led_g</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">led_b</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+
+  <span class="n">RFduinoBLE</span><span class="p">.</span><span class="n">advertisementData</span> <span class="o">=</span> <span class="s">"mlamp"</span><span class="p">;</span>
+  
+  <span class="c1">// start the BLE stack
+</span>  <span class="n">RFduinoBLE</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">RFduinoBLE_onDisconnect</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">mode</span> <span class="o">&amp;</span> <span class="n">MODE_HOLD</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Mode was set to MODE_HOLD, so will leave LEDs on"</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// MODE_RESET
+</span>    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Mode was set to MODE_RESET, so turning off LEDs"</span><span class="p">);</span>
+    <span class="c1">// don't leave the led on if they disconnect
+</span>    <span class="n">analogWrite</span><span class="p">(</span><span class="n">led_r</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">analogWrite</span><span class="p">(</span><span class="n">led_g</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">analogWrite</span><span class="p">(</span><span class="n">led_b</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">RFduinoBLE_onReceive</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">len</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="c1">// 2nd byte is mode
+</span>  <span class="n">mode</span> <span class="o">=</span> <span class="p">(</span><span class="n">byte</span><span class="p">)</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  
+  <span class="c1">// 3rd, 4th, 5th are r,g,b
+</span>  <span class="n">byte</span> <span class="n">r</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="n">byte</span> <span class="n">g</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+  <span class="n">byte</span> <span class="n">b</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+  
+  <span class="c1">// set the color
+</span>  <span class="n">analogWrite</span><span class="p">(</span><span class="n">led_r</span><span class="p">,</span> <span class="n">r</span><span class="p">);</span>
+  <span class="n">analogWrite</span><span class="p">(</span><span class="n">led_g</span><span class="p">,</span> <span class="n">g</span><span class="p">);</span>
+  <span class="n">analogWrite</span><span class="p">(</span><span class="n">led_b</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 
         

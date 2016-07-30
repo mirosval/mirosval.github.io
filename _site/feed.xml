@@ -7,6 +7,140 @@
         <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
         
             <item>
+                <title>Better IDEA Keymap</title>
+                <description>&lt;p&gt;Completely overhauled keyboard shortcuts for Intellij IDEA on macOS.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;boring-ramblings-skip&quot;&gt;Boring ramblings (skip)&lt;/h2&gt;
+
+&lt;p&gt;First of all I really want to shout out to Intellij for building such awesome tools.
+I used Eclipse, Netbeans, Visual Studio but they all suck tremendously. OK, Eclipse
+and Netbeans are OSS, so you can live with that. But VS? Its almost cruel how shitty
+it is. It is so shitty that Intellij made a plugin to fix it. With the plugin its good.
+But costs &amp;gt; $1000 for professional use. Its shameful, really.&lt;/p&gt;
+
+&lt;p&gt;IDEA is fantastic, it starts quickly, doesn’t freeze up, offers all these advanced
+features, code completions, rewrites and so on. I really recommend it to everyone.&lt;/p&gt;
+
+&lt;p&gt;And it has a community version which is free and paid version is well worth its money.
+I pay monthly subscription for my PyCharm.&lt;/p&gt;
+
+&lt;p&gt;So why would I ramble about it in the first place? IDEA has not one but 3 shortcut sets:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Mac OS X 10.5+ (⌃R for Run) - Not very macOS-like&lt;/li&gt;
+  &lt;li&gt;Mac OS X (F10 for Run) - WTF?&lt;/li&gt;
+  &lt;li&gt;Eclipse (Mac OS X) (⌘⇧F11 for Run) - ?????&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These are just some examples, but generally the keymaps are this stupid overall.
+I genuinely wonder who came up with these. F keys on macOS have been traditionally
+used for media keys, screen dimming and such. I do not want to use Fn modifier for
+that, and I sure as hell will not type Fn⌘⇧F11 just to Run my code, which is probably
+the most common action I need a shortcut for. Stupid.&lt;/p&gt;
+
+&lt;h2 id=&quot;guiding-principles&quot;&gt;Guiding Principles&lt;/h2&gt;
+
+&lt;p&gt;I wanted my shortcuts to be as usable as possible, so I tried to keep to these rules:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;One handed shortcuts for the most common actions&lt;/li&gt;
+  &lt;li&gt;Two handed only if it is inevitable&lt;/li&gt;
+  &lt;li&gt;Ideally Left hand, since most people will use the mouse with the right&lt;/li&gt;
+  &lt;li&gt;Do not interfere with existing macOS shortcuts&lt;/li&gt;
+  &lt;li&gt;Try to use popular shortcuts from other editors (Atom, Sublime)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;disclaimers-and-limitations&quot;&gt;Disclaimers and limitations&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;I mainly work with Scala and Python, so the shortcuts are optimized for IDEA
+and PyCharm, but I’m sure they can be used in other Intellij products.&lt;/li&gt;
+  &lt;li&gt;The multiple selection shortcut could annoy some people, because ⌘Click is
+mapped to documentation or something like that by default&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;show-me-the-shortcuts&quot;&gt;Show me the shortcuts!&lt;/h2&gt;
+
+&lt;p&gt;Multiple cursors:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;⌘Click to place an additional cursor&lt;/li&gt;
+  &lt;li&gt;⌘D to select the next occurrence of a selected word (same as in Atom/Sublime Text)&lt;/li&gt;
+  &lt;li&gt;Esc to cancel selection&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Running tests:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Assuming you are using a testing framework like ScalaTest&lt;/li&gt;
+  &lt;li&gt;Place cursor into the body of the test function/method/describe/it block&lt;/li&gt;
+  &lt;li&gt;If this is the first time you’re running this test (or if you have run a different test previously) start with:
+    &lt;ul&gt;
+      &lt;li&gt;⌘⇧R to run the test&lt;/li&gt;
+      &lt;li&gt;⌘⇧T to run the test with debugger&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;If this is already the second time you’re running this same test/suite:
+    &lt;ul&gt;
+      &lt;li&gt;⌘R to run the test&lt;/li&gt;
+      &lt;li&gt;⌘T to run the test with debugger&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;⌘E while stopped in the debugger&lt;/li&gt;
+  &lt;li&gt;⌘. to stop run/test/other running process&lt;/li&gt;
+  &lt;li&gt;⌘[ to Step Over in the Debugger&lt;/li&gt;
+  &lt;li&gt;⌘] to Step Into in the Debugger&lt;/li&gt;
+  &lt;li&gt;⌘\ to Step Out in the Debugger&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Navigation Around IDE:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;⌘P Search Symbols&lt;/li&gt;
+  &lt;li&gt;⌘⇧P Search Classes&lt;/li&gt;
+  &lt;li&gt;⌘B Jump to definition&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Navigation In the Editor:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;⌥→ and ⌥← To move one word at a time&lt;/li&gt;
+  &lt;li&gt;⌥⌃→ and ⌥⌃← To move one word at a time, respecting CamelHumps&lt;/li&gt;
+  &lt;li&gt;⌥⇧→ and ⌥⇧← To select one word at a time&lt;/li&gt;
+  &lt;li&gt;⌥⇧⌃→ and ⌥⇧⌃← To select one word at a time, respecting CamelHumps&lt;/li&gt;
+  &lt;li&gt;⌥⌫ Delete Line&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Other shortcuts:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;⌘5 to Make/Build project, this is useful if you need to see if your project compiles&lt;/li&gt;
+  &lt;li&gt;⇧⇧ Search Everything&lt;/li&gt;
+  &lt;li&gt;⌘⇧A Search in actions&lt;/li&gt;
+  &lt;li&gt;⌘, Preferences&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;download&quot;&gt;Download&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/files/2016-07-30/settings.jar&quot;&gt;My Entire IDEA Settings JAR&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/files/2016-07-30/keymaps-only.jar&quot;&gt;Keymaps Only JAR&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;share&quot;&gt;Share&lt;/h2&gt;
+
+&lt;p&gt;Please take these shortcuts, use them, improve on them, share the changes. Maybe
+we can convince Intellij to adopt them for the next IDEA Release.&lt;/p&gt;
+
+</description>
+                <pubDate>Sat, 30 Jul 2016 00:00:00 +0200</pubDate>
+                <link>/lamp/english/2016/07/30/idea-settings.html</link>
+                <guid isPermaLink="true">/lamp/english/2016/07/30/idea-settings.html</guid>
+            </item>
+        
+            <item>
                 <title>Lamp Project&amp;#58; Assembly Timelapse</title>
                 <description>&lt;p&gt;I have recorded a couple of timelapse videos during project assembly, including sanding the PCB, inserting components and soldering them. I trust some of you might find it interesting, it’s about one minute long.&lt;/p&gt;
 
@@ -41,11 +175,11 @@
   &lt;li&gt;&lt;a href=&quot;/lamp/english/2015/04/01/lamp-project-5.html&quot;&gt;Assembly Timelapse&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&quot;design-tool&quot;&gt;Design Tool&lt;/h2&gt;
+&lt;p&gt;##Design Tool&lt;/p&gt;
 
 &lt;p&gt;I haven’t really searched all that far to discover &lt;a href=&quot;http://www.cadsoftusa.com/&quot;&gt;Eagle CAD&lt;/a&gt;, it seems to be probably the most widely used software for PCB design. I have watched two tutorial videos on YouTube by Jeremy Blum, &lt;a href=&quot;https://www.youtube.com/watch?v=1AXwjZoyNno&quot;&gt;Schematic Design&lt;/a&gt; and &lt;a href=&quot;https://www.youtube.com/watch?v=CCTs0mNXY24&quot;&gt;Printed Circuit Board Layout&lt;/a&gt;. That gave me a pretty good idea about how to use the software. I won’t pretend there weren’t any issues, but all were successfully resolved with a search on StackOverflow. Overall I think it is a very good tool. I’ve never used it before but I have been able to do all I wanted from it in maybe an hour.&lt;/p&gt;
 
-&lt;h2 id=&quot;schematic-design&quot;&gt;Schematic Design&lt;/h2&gt;
+&lt;p&gt;##Schematic Design&lt;/p&gt;
 
 &lt;p&gt;I started out with a schematic design. I already had a working prototype of the lamp, so it wasn’t so hard to use that to start things off. Overall the schematic is divided into three sub-circuits from the left:&lt;/p&gt;
 
@@ -59,7 +193,7 @@
 
 &lt;p&gt;The most problematic part of the voltage regulator was to actually obtain the part I chose: &lt;a href=&quot;http://www.ti.com/product/lp2950-33&quot;&gt;LP2950-33&lt;/a&gt;. Ideally you would choose a LP2950-30 here, as RFduino’s reference voltage is 3.0V, but it is rated to up to 3.6V, so 3.3V is fine. I have, by accident supplied it with more than that (think ~5V) and it has surprisingly survived.&lt;/p&gt;
 
-&lt;p&gt;I have used two 10μF capacitors, one at input and one at output to further stabilize the voltage. &lt;/p&gt;
+&lt;p&gt;I have used two 10μF capacitors, one at input and one at output to further stabilize the voltage.&lt;/p&gt;
 
 &lt;p&gt;The RFduino is pretty self-explanatory, I have hooked the VCC and GND pins and I’ve connected the GPIO pins 2, 3 and 4 to the input of the darlington array.&lt;/p&gt;
 
@@ -69,24 +203,24 @@
 
 &lt;p&gt;One of the biggest issues I had was to find the parts, Eagle has a large database of components, but still, things like RFduino are not there. Also I needed to make sure I can eventually buy the things somewhere.&lt;/p&gt;
 
-&lt;h2 id=&quot;board-design&quot;&gt;Board Design&lt;/h2&gt;
+&lt;p&gt;##Board Design&lt;/p&gt;
 
 &lt;p&gt;After finishing the schematic, I proceeded with the board design. First I have tried to automatically layout the components, but Eagle has made a complete mess of things, so in the end I had to lay out everyting myself anyway. The process can get a bit awkward with the bends of the wires, but if it does, you can just delete the wire and do it again. You can set the widths of the wires, so I’ve chosen slightly thicker wires for the 12V lines and slightly thinner for the rest. I’ve also managed to keep all the connections to the one side of the board, which just makes it look better in my opinion.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/lamp-hw/board.png&quot; alt=&quot;Board Design&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;manufacturing&quot;&gt;Manufacturing&lt;/h2&gt;
+&lt;p&gt;##Manufacturing&lt;/p&gt;
 
 &lt;p&gt;Somewhere on the internet I have found &lt;a href=&quot;https://oshpark.com/&quot;&gt;OSH Park&lt;/a&gt; a company from USA that will make PCBs from Eagle CAD files: 3 copies of the board for $5 per square inch (imperial, really??) and ship it anywhere in the world for free. My board cost me under $20, I have ordered it on Feb 26, it got shipped on Mar 6 and arrived in Prague on Mar 18. This manufacturing delay makes mistakes super expensive, but luckily the board works as designed.&lt;/p&gt;
 
-&lt;h2 id=&quot;assembly&quot;&gt;Assembly&lt;/h2&gt;
+&lt;p&gt;##Assembly&lt;/p&gt;
 
 &lt;p&gt;I have assembled the components onto the board today, it took me about an hour and was a really pleasant experience. And the fact that it has worked on the first try was really satisfying. Here have a look at the finished product.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/lamp-hw/board-finished.jpg&quot; alt=&quot;Board Finished&quot; /&gt;
 &lt;img src=&quot;/images/lamp-hw/finished.jpg&quot; alt=&quot;Finished Lamp&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;final-notes&quot;&gt;Final Notes&lt;/h2&gt;
+&lt;p&gt;##Final Notes&lt;/p&gt;
 
 &lt;p&gt;OSH Park has good &lt;a href=&quot;https://oshpark.com/guidelines&quot;&gt;guidelines&lt;/a&gt; to follow (they also have a file that you can import to Eagle that will check your design). I suggest reading those before submitting anything.&lt;/p&gt;
 
@@ -135,69 +269,132 @@
 
 &lt;p&gt;The mode is finally resolved in the RFduinoBLE_onDisconnect function.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#include &amp;lt;RFduinoBLE.h&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Lamp Modes&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MODE_RESET&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MODE_HOLD&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// pin 3 on the RGB shield is the red led&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// (can be turned on/off from the iPhone app)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;led_r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;led_g&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;led_b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// led turned on/off from the iPhone app&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;17&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;pinMode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OUTPUT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;18&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;pinMode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OUTPUT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;19&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;pinMode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OUTPUT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;20&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;21&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;RFduinoBLE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;advertisementData&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;mlamp&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;22&lt;/span&gt;   
-&lt;span class=&quot;lineno&quot;&gt;23&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// start the BLE stack&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;24&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;RFduinoBLE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;25&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;26&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;27&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;28&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;29&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;30&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;31&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;RFduinoBLE_onDisconnect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;32&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;33&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MODE_HOLD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;34&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Mode was set to MODE_HOLD, so will leave LEDs on&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;35&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;36&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// MODE_RESET&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;37&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Mode was set to MODE_RESET, so turning off LEDs&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;38&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// don&amp;#39;t leave the led on if they disconnect&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;39&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;analogWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;40&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;analogWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;41&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;analogWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;42&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;43&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;44&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;45&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;RFduinoBLE_onReceive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;46&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;47&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;len&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;48&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;49&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;50&lt;/span&gt;   
-&lt;span class=&quot;lineno&quot;&gt;51&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// 2nd byte is mode&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;52&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;53&lt;/span&gt;   
-&lt;span class=&quot;lineno&quot;&gt;54&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// 3rd, 4th, 5th are r,g,b&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;55&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;56&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;57&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;58&lt;/span&gt;   
-&lt;span class=&quot;lineno&quot;&gt;59&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// set the color&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;60&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;analogWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;61&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;analogWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;62&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;analogWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;63&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;RFduinoBLE.h&amp;gt;
+&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// Lamp Modes
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MODE_RESET&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MODE_HOLD&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// pin 3 on the RGB shield is the red led
+// (can be turned on/off from the iPhone app)
+&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;led_r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;led_g&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;led_b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// led turned on/off from the iPhone app
+&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;pinMode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OUTPUT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;pinMode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OUTPUT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;pinMode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OUTPUT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;RFduinoBLE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;advertisementData&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;mlamp&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  
+  &lt;span class=&quot;c1&quot;&gt;// start the BLE stack
+&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;RFduinoBLE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;RFduinoBLE_onDisconnect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MODE_HOLD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Mode was set to MODE_HOLD, so will leave LEDs on&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// MODE_RESET
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Mode was set to MODE_RESET, so turning off LEDs&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// don't leave the led on if they disconnect
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;analogWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;analogWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;analogWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;RFduinoBLE_onReceive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;len&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  
+  &lt;span class=&quot;c1&quot;&gt;// 2nd byte is mode
+&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  
+  &lt;span class=&quot;c1&quot;&gt;// 3rd, 4th, 5th are r,g,b
+&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  
+  &lt;span class=&quot;c1&quot;&gt;// set the color
+&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;analogWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;analogWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;analogWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;led_b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 </description>
                 <pubDate>Thu, 12 Mar 2015 00:00:00 +0100</pubDate>
@@ -229,7 +426,7 @@
 
 &lt;p&gt;&lt;img src=&quot;/images/lamp-hw/finished-board.jpg&quot; alt=&quot;Finished prototype board&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;choosing-the-rgb-led-strip&quot;&gt;Choosing the RGB LED Strip&lt;/h2&gt;
+&lt;p&gt;##Choosing the RGB LED Strip&lt;/p&gt;
 
 &lt;p&gt;There are lots of different options, there are single-color strips, RGB strips or &lt;a href=&quot;http://www.adafruit.com/products/1138&quot;&gt;programmable strips&lt;/a&gt;, where you can change the color of every single LED. I though I would be fine with just controlling the color of the entire strip so I went with something like &lt;a href=&quot;http://www.ebay.com/itm/5M-5050-RGB-SMD-LED-Waterproof-Flexible-Strip-300-LEDs-44-Key-IR-Remote-/180992529478&quot;&gt;this&lt;/a&gt;.&lt;/p&gt;
 
@@ -246,17 +443,17 @@
 
 &lt;p&gt;&lt;img src=&quot;/images/lamp-hw/detail-led-strip.jpg&quot; alt=&quot;LED Stri Detail&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;next-arduino&quot;&gt;Next, Arduino&lt;/h2&gt;
+&lt;p&gt;##Next, Arduino&lt;/p&gt;
 
 &lt;p&gt;I have come across &lt;a href=&quot;http://www.rfduino.com/product/rfd22102-rfduino-dip/index.html&quot;&gt;RFduino&lt;/a&gt;. I have bought some basic kit when they were on Kickstarter, but I have since bought 6 more units. The trouble with this board is a bit in its availability. &lt;a href=&quot;https://www.sparkfun.com/categories/274&quot;&gt;Sparkfun&lt;/a&gt; has it, but in the EU it is much more difficult to get your hands on it. I ended up buying from &lt;a href=&quot;http://cz.mouser.com/new/rfdigital/rf-digital-rfduino/&quot;&gt;Mouser&lt;/a&gt;, but they are primarily a wholesale operation, so it’s expensive to buy small quantities from them.&lt;/p&gt;
 
 &lt;p&gt;Having said that, I’m really happy with RFduino, it is programmable with the Arduino IDE, has nice sample code and iOS libraries, uses Bluetooth 4.0 Low Energy, which is super nice and, most importantly, I have found the connectivity &lt;em&gt;great&lt;/em&gt;, it just always works. It has also survived a couple of blunders on my part, such as connecting it to 5V power instead of the recommended 3.3V.&lt;/p&gt;
 
-&lt;h2 id=&quot;power-supply&quot;&gt;Power supply&lt;/h2&gt;
+&lt;p&gt;##Power supply&lt;/p&gt;
 
 &lt;p&gt;So my calculation went like this: I want a 1m long LED strip controlled by RFduino, that is 12V * 1A = 12W. So I need a 12W power supply. I ended up buying &lt;a href=&quot;http://www.gmelectronic.com/power-ac-adapter-12v-1500ma-connector-2-1mm-mw-p751-193&quot;&gt;this one&lt;/a&gt; because it has enough power, nice connector and is relatively cheap.&lt;/p&gt;
 
-&lt;h2 id=&quot;connecting-it-all-together&quot;&gt;Connecting it all together&lt;/h2&gt;
+&lt;p&gt;##Connecting it all together&lt;/p&gt;
 
 &lt;p&gt;Now I have a LED strip and a power supply which both operate at 12V, but I have a RFduino which operates at 3.3V. So the problem is twofold:&lt;/p&gt;
 
@@ -267,17 +464,17 @@
 
 &lt;p&gt;This in the end translates into 2 subsystems that need to be designed. A power regulator circuit to power RFduino from 12V and an amplifier or a relay that could drive the LEDs.&lt;/p&gt;
 
-&lt;h3 id=&quot;voltage-regulator-for-the-rfduino-12v-to-3v&quot;&gt;Voltage Regulator for the RFduino 12V to 3V&lt;/h3&gt;
+&lt;p&gt;###Voltage Regulator for the RFduino 12V to 3V&lt;/p&gt;
 
 &lt;p&gt;This was the hardest part to figure out for me. I didn’t want anything overly complicated and in the end I’ve settled for the &lt;a href=&quot;http://www.ti.com/product/lp2950-33&quot;&gt;LP2950-33&lt;/a&gt; (&lt;a href=&quot;http://www.onsemi.com/pub_link/Collateral/LP2950-D.PDF&quot;&gt;Datasheet&lt;/a&gt;). It looks like a transistor, has 3 legs, one for input, one for output and one for ground. The usual usage example I found involved capacitors between output and ground and optionally between input and ground to further stabilize the voltage. LP2950 comes in different varietes, so I chose the one that had it’s output voltage closest to RFduino’s 3V.&lt;/p&gt;
 
-&lt;h3 id=&quot;darlington-array-to-drive-the-led-strip&quot;&gt;Darlington Array to drive the LED Strip&lt;/h3&gt;
+&lt;p&gt;###Darlington Array to drive the LED Strip&lt;/p&gt;
 
 &lt;p&gt;The last thing to do was to bring the PWM pin output from RFduino into the strip. The way the strip is connected is that there is a +12V cable and three different grounds, one for each of the RGB channels. So basically what the darlington does, is connect each of the RGB channels to the ground such, that the amount of current flowing through them can be controlled by RFduino.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/lamp-hw/finished-wiring.jpg&quot; alt=&quot;Finished prototype board - wiring&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;the-prototype&quot;&gt;The Prototype&lt;/h2&gt;
+&lt;p&gt;##The Prototype&lt;/p&gt;
 
 &lt;p&gt;I have built the prototype using an universal board with headers bought from &lt;a href=&quot;http://www.aliexpress.com/snapshot/6468939297.html?orderId=65605779553704&quot;&gt;Aliexpress&lt;/a&gt; so that I can plug the RFduino in and out as I please. This is what it looks like when I turn it on:&lt;/p&gt;
 
@@ -302,9 +499,9 @@
   &lt;li&gt;&lt;a href=&quot;/lamp/english/2015/04/01/lamp-project-5.html&quot;&gt;Assembly Timelapse&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;I’ve had this idea for a project for quite some time now, but now I’ve actually come around to some real progress. The project specificaton is simple: I wanted to build an RGB LED lamp that could be controlled wirelessly. That idea in and of itself is not particularly new or unprecedented, however when I was looking at ready-made solutions online, I couldn’t find anything that would work for me. I really just wanted something that could be programmed or controlled remotely. &lt;/p&gt;
+&lt;p&gt;I’ve had this idea for a project for quite some time now, but now I’ve actually come around to some real progress. The project specificaton is simple: I wanted to build an RGB LED lamp that could be controlled wirelessly. That idea in and of itself is not particularly new or unprecedented, however when I was looking at ready-made solutions online, I couldn’t find anything that would work for me. I really just wanted something that could be programmed or controlled remotely.&lt;/p&gt;
 
-&lt;h2 id=&quot;the-vision&quot;&gt;The Vision&lt;/h2&gt;
+&lt;p&gt;##The Vision&lt;/p&gt;
 
 &lt;p&gt;I really just want a smart lamp, that would be able to do things like change color and intensity of light according to various outside stimuli, such as direct control via a mobile phone, automatic lighting up and dimming according to my sleep cycle, audio input, temperature and so on. I would like to be able to control multiple lamps from one place and optionally have “groups” of lamps that could be controlled separately. I could not find anything that would be both inexpensive and flexible enough for my programming needs (most of these cheap RGB LED strips come with an IR remote control, but that is a joke). I thought I could build something that would work for me from the following components:&lt;/p&gt;
 
@@ -317,7 +514,7 @@
   &lt;li&gt;Raspberry PI&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;the-current-state-of-things&quot;&gt;The current state of things&lt;/h2&gt;
+&lt;p&gt;##The current state of things&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/lamp/lamp-1.jpg&quot; alt=&quot;Current state of the RGB LED Lamp&quot; class=&quot;pull-left half&quot; /&gt;&lt;/p&gt;
 
@@ -327,19 +524,19 @@
 
 &lt;p&gt;I currently have 1 Rfduino-based lamp with a 1m RGB LED strip attached to it. The LED strip I’m currently using is something like &lt;a href=&quot;http://www.amazon.co.uk/Waterproof-300LEDs-Flexible-Lighting-Decoration/dp/B009ZOLW04/ref=sr_1_46?s=lighting&amp;amp;ie=UTF8&amp;amp;qid=1421617842&amp;amp;sr=1-46&amp;amp;keywords=5050+rgb+led+strip&quot;&gt;this&lt;/a&gt;. The key parameters are 12V, ~1A/m, 5050 LEDs 60 pieces per meter. The cool part is that the strip can be cut every 5cm (every 3 LEDs). So I have bought a 5m roll and I’m going to cut it into 5 1m long strips for use in 5 lamps.&lt;/p&gt;
 
-&lt;p&gt;The 1m LED strip I have draws 1.2A at 12V, which means it has a wattage of 14.4W. This determines all of the other components that are needed. For power supply I have used something like &lt;a href=&quot;http://uk.farnell.com/powerpax/sw3526/ac-dc-power-supply-12v-1-25a-euro/dp/1971795&quot;&gt;this&lt;/a&gt;. At 15W it supplies enough power for the LED strip,  Rfduino and the remaining circuitry. &lt;/p&gt;
+&lt;p&gt;The 1m LED strip I have draws 1.2A at 12V, which means it has a wattage of 14.4W. This determines all of the other components that are needed. For power supply I have used something like &lt;a href=&quot;http://uk.farnell.com/powerpax/sw3526/ac-dc-power-supply-12v-1-25a-euro/dp/1971795&quot;&gt;this&lt;/a&gt;. At 15W it supplies enough power for the LED strip,  Rfduino and the remaining circuitry.&lt;/p&gt;
 
-&lt;p&gt;I have designed a simple protocol that is able to send the RGB color to the lamp and is able to address up to 255 lamps. iOS is limited to 10 simmultaneous BT connections, so 255 is more than could be realistically adressed anyways. &lt;/p&gt;
+&lt;p&gt;I have designed a simple protocol that is able to send the RGB color to the lamp and is able to address up to 255 lamps. iOS is limited to 10 simmultaneous BT connections, so 255 is more than could be realistically adressed anyways.&lt;/p&gt;
 
 &lt;p&gt;And lastly I have built an iOS app that is able to set a solid color on a lamp, or alternatively can use the microphone to set the intensity of the light, while the user can pick the hue. I will discuss all these points in depth in future posts.&lt;/p&gt;
 
-&lt;h2 id=&quot;immediate-future-of-the-project&quot;&gt;Immediate future of the project&lt;/h2&gt;
+&lt;p&gt;##Immediate future of the project&lt;/p&gt;
 
 &lt;p&gt;Currently I have 1 lamp that works with the iOS app. I’ve recently received a shipment of 7 new Rfduinos and I’ve ordered more parts online which should arrive shortly. In the next weeks I’m going to build another prototype and test how the iOS app and the protocol cope with 2 or 3 lamps. I would also like to employ my Raspberry pi in the project, so that it could control the lamps without the need to use an iOS device. This would be perfect for things like morning alarm light, afternoon automatic lights and so on.&lt;/p&gt;
 
 &lt;p&gt;Another little subproject I have researched and would like to do is having PCBs printed. I have started designing the board using &lt;a href=&quot;http://www.cadsoftusa.com/&quot;&gt;Eagle&lt;/a&gt;, but I have to wait until I can finalize the component list. I found an interesting place that could print my PCBs, &lt;a href=&quot;https://oshpark.com/&quot;&gt;OSHPark&lt;/a&gt; and I would like to see how it works.&lt;/p&gt;
 
-&lt;h2 id=&quot;long-term-ideas&quot;&gt;Long term ideas&lt;/h2&gt;
+&lt;p&gt;##Long term ideas&lt;/p&gt;
 
 &lt;p&gt;There are a couple of things that I can see as a long term / low priority goals for the project:&lt;/p&gt;
 
@@ -378,7 +575,7 @@
   &lt;li&gt;Pán autor nezarába na hraní v kasíne, ale na tom blogu. Ako? Referrals.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Keď sa na ten blog bližšie pozrieme, vidíme, že je to vlastne len “blog” s &lt;a href=&quot;http://braniblog.info/&quot;&gt;1 stránkou&lt;/a&gt; a doménu &lt;a href=&quot;http://whois.domaintools.com/braniblog.info&quot;&gt;vlastní niekto z Kyjeva&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;Keď sa na ten blog bližšie pozrieme, vidíme, že je to vlastne len “blog” s &lt;a href=&quot;http://braniblog.info/&quot;&gt;1 stránkou&lt;/a&gt; a doménu &lt;a href=&quot;http://whois.domaintools.com/braniblog.info&quot;&gt;vlastní niekto z Kyjeva&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Všetky linky na stránke vedú na &lt;a href=&quot;http://braniblog.info/2/eu.php&quot;&gt;http://braniblog.info/2/eu.php&lt;/a&gt;, ktorá nás presmeruje cez &lt;a href=&quot;http://site.gotoeucasino.com/index.cgi?aname=mitkobombata1&amp;amp;zone_id=brask2&quot;&gt;http://site.gotoeucasino.com/index.cgi?aname=mitkobombata1&amp;amp;zone_id=brask2&lt;/a&gt; na &lt;a href=&quot;http://slovakian.eucasino.com/&quot;&gt;http://slovakian.eucasino.com/&lt;/a&gt;, zaregistrované na Cypre, len tak mimochodom. Takže, keď sa cez tento link dostanete na kasíno, autor článku dostane nejaké percentá z vášho prvého vkladu, koľko presne to je alebo ako to funguje sa mi nepodarilo vypátrať.&lt;/p&gt;
 
@@ -411,52 +608,98 @@
 
 &lt;p&gt;Nasledujúca časť je však to podstatné. Implementácia logiky uvedenj metódy.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;play&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tosses&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;account_balance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;     &lt;span class=&quot;c&quot;&gt;# account_history podrzi vsetky hodnoty uctu pocas celej hry&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;account_history&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;account_balance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;     &lt;span class=&quot;c&quot;&gt;# pociatocna uroven stavky je 1 euro&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;bet&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;     &lt;span class=&quot;c&quot;&gt;# stavkujeme na cervenu alebo na ciernu, zaciname na ciernej&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;betting_on_red&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;     &lt;span class=&quot;c&quot;&gt;# vyhrali sme toto kolo?&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;won&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;     
-&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt;     &lt;span class=&quot;c&quot;&gt;# iterujeme cez vsetky nahodne hody&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tosses&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;    
-&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt;         &lt;span class=&quot;c&quot;&gt;# ak prave stavkujeme na cervenu a padla cervena, vyhravame&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt;         &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;betting_on_red&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;red&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt;             &lt;span class=&quot;n&quot;&gt;won&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt;         &lt;span class=&quot;c&quot;&gt;# ak stavkujeme na ciernu a padla cierna, tiez vyhravame&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;17&lt;/span&gt;         &lt;span class=&quot;k&quot;&gt;elif&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;betting_on_red&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;black&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;18&lt;/span&gt;             &lt;span class=&quot;n&quot;&gt;won&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;19&lt;/span&gt;         &lt;span class=&quot;c&quot;&gt;# inak sme prehrali&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;20&lt;/span&gt;         &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;21&lt;/span&gt;             &lt;span class=&quot;n&quot;&gt;won&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;22&lt;/span&gt;         
-&lt;span class=&quot;lineno&quot;&gt;23&lt;/span&gt;         &lt;span class=&quot;c&quot;&gt;# ak sme toto kolo vyhrali&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;24&lt;/span&gt;         &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;won&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;25&lt;/span&gt;             &lt;span class=&quot;c&quot;&gt;# pripiseme si vyhru&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;26&lt;/span&gt;             &lt;span class=&quot;n&quot;&gt;account_balance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bet&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;27&lt;/span&gt;             &lt;span class=&quot;c&quot;&gt;# zmenime farbu&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;28&lt;/span&gt;             &lt;span class=&quot;n&quot;&gt;betting_on_red&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;betting_on_red&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;29&lt;/span&gt;             &lt;span class=&quot;c&quot;&gt;# resetujeme stavku na 1 euro&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;30&lt;/span&gt;             &lt;span class=&quot;n&quot;&gt;bet&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;31&lt;/span&gt;         &lt;span class=&quot;c&quot;&gt;# ak sme prehrali&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;32&lt;/span&gt;         &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;33&lt;/span&gt;             &lt;span class=&quot;c&quot;&gt;# odpocitame si prehru&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;34&lt;/span&gt;             &lt;span class=&quot;n&quot;&gt;account_balance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bet&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;35&lt;/span&gt;             &lt;span class=&quot;c&quot;&gt;# zvysime stavku na dvojnasobok&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;36&lt;/span&gt;             &lt;span class=&quot;n&quot;&gt;bet&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;37&lt;/span&gt;         
-&lt;span class=&quot;lineno&quot;&gt;38&lt;/span&gt;         &lt;span class=&quot;c&quot;&gt;# zapiseme si vysledok do historie&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;39&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;account_history&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;account_balance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;40&lt;/span&gt;         
-&lt;span class=&quot;lineno&quot;&gt;41&lt;/span&gt;         &lt;span class=&quot;c&quot;&gt;# ak sme klesli s uctom na alebo pod nulu, koncime&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;42&lt;/span&gt;         &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;account_balance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;43&lt;/span&gt;             &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;account_balance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;account_history&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;44&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;45&lt;/span&gt;     &lt;span class=&quot;c&quot;&gt;# vratime vysledky&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;46&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;account_balance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;account_history&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;play&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tosses&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;account_balance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# account_history podrzi vsetky hodnoty uctu pocas celej hry&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;account_history&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;account_balance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# pociatocna uroven stavky je 1 euro&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;bet&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# stavkujeme na cervenu alebo na ciernu, zaciname na ciernej&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;betting_on_red&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# vyhrali sme toto kolo?&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;won&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
+    
+    &lt;span class=&quot;c&quot;&gt;# iterujeme cez vsetky nahodne hody&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tosses&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;    
+        &lt;span class=&quot;c&quot;&gt;# ak prave stavkujeme na cervenu a padla cervena, vyhravame&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;betting_on_red&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;red&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;won&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;# ak stavkujeme na ciernu a padla cierna, tiez vyhravame&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;elif&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;betting_on_red&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;black&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;won&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;# inak sme prehrali&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;won&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
+        
+        &lt;span class=&quot;c&quot;&gt;# ak sme toto kolo vyhrali&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;won&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;c&quot;&gt;# pripiseme si vyhru&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;account_balance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bet&lt;/span&gt;
+            &lt;span class=&quot;c&quot;&gt;# zmenime farbu&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;betting_on_red&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;betting_on_red&lt;/span&gt;
+            &lt;span class=&quot;c&quot;&gt;# resetujeme stavku na 1 euro&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;bet&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;# ak sme prehrali&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;c&quot;&gt;# odpocitame si prehru&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;account_balance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bet&lt;/span&gt;
+            &lt;span class=&quot;c&quot;&gt;# zvysime stavku na dvojnasobok&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;bet&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+        
+        &lt;span class=&quot;c&quot;&gt;# zapiseme si vysledok do historie&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;account_history&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;account_balance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        
+        &lt;span class=&quot;c&quot;&gt;# ak sme klesli s uctom na alebo pod nulu, koncime&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;account_balance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;account_balance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;account_history&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;# vratime vysledky&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;account_balance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;account_history&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Ak z tohoto kódu vynecháme riadky 56 a 57, môžeme dostať nasledujúci graf&lt;/p&gt;
 
@@ -586,8 +829,8 @@
   &lt;p&gt;Hlavný princíp tejto metódy je založený na opakovanom stávkovaní malých súm na základe prvej stávky. Používanie takejto schémy je 100 % legálne. Túto techniku som použil pri hraní rulety on-line a už v priebehu 5 mesiacov sa mi podarilo získať dosť peňazí na kúpu vysnívaného auta.&lt;/p&gt;
 
   &lt;ol&gt;
-    &lt;li&gt;Každú novú hru začínam stávkou 1 € na čierne číslo. &lt;/li&gt;
-    &lt;li&gt;Ak prehrám (guľôčka padne na červené číslo), zdvojnásobím stávku na tú istú farbu (čiernu). &lt;/li&gt;
+    &lt;li&gt;Každú novú hru začínam stávkou 1 € na čierne číslo.&lt;/li&gt;
+    &lt;li&gt;Ak prehrám (guľôčka padne na červené číslo), zdvojnásobím stávku na tú istú farbu (čiernu).&lt;/li&gt;
     &lt;li&gt;Ak vyhrám, začnem novú hru so stávkou 1 € na opačnú farbu.&lt;/li&gt;
   &lt;/ol&gt;
 &lt;/blockquote&gt;
@@ -595,7 +838,7 @@
 &lt;p&gt;Keď som si toto prečítal, začal som byť ešte podozrievavejší, pretože:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;“opakovanom stávkovaní malých súm na základe prvej stávky” - toto je tzv. &lt;a href=&quot;http://en.wikipedia.org/wiki/Gambler&#39;s_fallacy&quot;&gt;Gamblers Fallacy&lt;/a&gt;, pomýlená predstava, že pravdepodobnosť ďalšieho výsledku závisí od predchádzajúceho výsledku. To jednoducho nie je pravda, to vie každý kto mal štatistiku. Jednotlívé ťahy sú na sebe nezávislé.&lt;/li&gt;
+  &lt;li&gt;“opakovanom stávkovaní malých súm na základe prvej stávky” - toto je tzv. &lt;a href=&quot;http://en.wikipedia.org/wiki/Gambler's_fallacy&quot;&gt;Gamblers Fallacy&lt;/a&gt;, pomýlená predstava, že pravdepodobnosť ďalšieho výsledku závisí od predchádzajúceho výsledku. To jednoducho nie je pravda, to vie každý kto mal štatistiku. Jednotlívé ťahy sú na sebe nezávislé.&lt;/li&gt;
   &lt;li&gt;Kroky 2 a 3 menia farby. To je znova Gambler’s fallacy, pretože, čierna a červená sú štatisticky ekvivalentné.&lt;/li&gt;
   &lt;li&gt;Hlavný princíp je stávkovanie malých súm, ale v kroku 2 zdvojnásobujeme stávku. To je exponenciálny rast. Aký to má dopad si ukážeme ďalej.&lt;/li&gt;
 &lt;/ul&gt;
@@ -620,7 +863,7 @@
 
 &lt;ol&gt;
   &lt;li&gt;Nielen ostatní hráči, &lt;em&gt;každý&lt;/em&gt; má 50% šancu na výhru.&lt;/li&gt;
-  &lt;li&gt;Nie je to 50%, ale 48,65% pretože v rulete je červená (18), čierna (18) a zelená (1) a teda červená a čierna majú šancu 18/37, ak sa bavíme o Francúszkej verzii. V Americkej je to ešte horšie, lebo tam sú 2 zelené polia. &lt;/li&gt;
+  &lt;li&gt;Nie je to 50%, ale 48,65% pretože v rulete je červená (18), čierna (18) a zelená (1) a teda červená a čierna majú šancu 18/37, ak sa bavíme o Francúszkej verzii. V Americkej je to ešte horšie, lebo tam sú 2 zelené polia.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;Graf, ktorý tam k tomu je je síce pekný, ale je to totálny nezmysel.&lt;/p&gt;
@@ -637,23 +880,23 @@
             <item>
                 <title>Python Pip Crashes</title>
                 <description>&lt;p&gt;I was upgrading my disk to SSD the other day, and to make sure all my data fit, I’ve done some
-cleaning up, among others I’ve run &lt;code&gt;brew cleanup&lt;/code&gt; which deletes old formulae. But apparently
+cleaning up, among others I’ve run &lt;code class=&quot;highlighter-rouge&quot;&gt;brew cleanup&lt;/code&gt; which deletes old formulae. But apparently
 somewhere along the way that has broken my Python install. Trying to run Flask server would produce
 a cryptic error:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;ImportError: No module named itsdangerous&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;ImportError: No module named itsdangerous&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Hmm okay, lets try to install it:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;% pip3 install itsdangerous
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt; % pip3 install itsdangerous
     Downloading/unpacking itsdangerous
     Downloading itsdangerous-0.23.tar.gz (46kB): 46kB downloaded
-    [1]    48739 segmentation fault  pip3 install itsdangerous&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    [1]    48739 segmentation fault  pip3 install itsdangerous&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Mmmkaay, what? I’ve tried to reinstall python to no avail, the search did not show anything either…
 The segfault looked like this:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;Process:         Python [61249]
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;Process:         Python [61249]
 Path:            /usr/local/Cellar/python3/3.3.4/Frameworks/Python.framework/Versions/3.3/Resources/Python.app/Contents/MacOS/Python
 Identifier:      Python
 Version:         3.3.4 (3.3.4)
@@ -747,12 +990,13 @@ Thread 0 crashed with X86 Thread State (64-bit):
   rdi: 0x00007fe6ca7bde20  rsi: 0x00007fe6ca60d490  rbp: 0x00007fff57726a90  rsp: 0x00007fff57726a70
    r8: 0x0000000000000006   r9: 0x00007fe6ca400000  r10: 0x0000000069793538  r11: 0xffffffffffe9b3a0
   r12: 0x00007fff7c009400  r13: 0x00000001092c0f38  r14: 0x00007fe6ca7bde20  r15: 0x0000000000000000
-  rip: 0x0000000108f6d1ac  rfl: 0x0000000000010202  cr2: 0x0000000000000011&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  rip: 0x0000000108f6d1ac  rfl: 0x0000000000010202  cr2: 0x0000000000000011
+ &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;So libcrypto.dylib is at fault here… Lets see, Homebrew has an option to use Python
 with brewed OpenSSL instead:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;% brew info python3
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;  % brew info python3
 
 python3: stable 3.3.4, HEAD
 http://www.python.org/
@@ -767,9 +1011,9 @@ Recommended: readline ✔, sqlite ✔, gdbm ✔, xz ✔
 --universal
     Build a universal binary
 --with-brewed-openssl
-    Use Homebrew&amp;#39;s openSSL instead of the one from OS X
+    Use Homebrew's openSSL instead of the one from OS X
 --with-brewed-tk
-    Use Homebrew&amp;#39;s Tk (has optional Cocoa and threads support)
+    Use Homebrew's Tk (has optional Cocoa and threads support)
 --without-gdbm
     Build without gdbm support
 --without-readline
@@ -791,12 +1035,12 @@ You can install Python packages with
 They will install into the site-package directory
   /usr/local/lib/python3.3/site-packages
 
-See: https://github.com/Homebrew/homebrew/wiki/Homebrew-and-Python&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+See: https://github.com/Homebrew/homebrew/wiki/Homebrew-and-Python&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;So I ran:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;% brew uninstall python3
-  % brew install python3 --with-brewed-openssl&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;  % brew uninstall python3
+  % brew install python3 --with-brewed-openssl&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;And that seemed to do the trick for the pip segfaults, however it did not solve my original
 problem. To do that I’ve uninstalled all of the Flask and related packages using pip3 and then
@@ -805,85 +1049,6 @@ re-installed them in the virtual environment instead.&lt;/p&gt;
                 <pubDate>Fri, 21 Feb 2014 00:00:00 +0100</pubDate>
                 <link>/python/english/2014/02/21/pip-crashes.html</link>
                 <guid isPermaLink="true">/python/english/2014/02/21/pip-crashes.html</guid>
-            </item>
-        
-            <item>
-                <title>Macbook Pro SSD Upgrade</title>
-                <description>&lt;p&gt;I have a Macbook Pro from mid 2010. Its coming up on 4 years, so some would say that it’s quite old,
-but I’ve upgraded its RAM to 8GB and it has been working for me quite nicely until recently when I felt
-that it’s starting to get slow.&lt;/p&gt;
-
-&lt;h3 id=&quot;dust-cleaning&quot;&gt;Dust cleaning&lt;/h3&gt;
-
-&lt;p&gt;The first problem appeared in the summer, when I’ve installed Mavericks. At the time I’ve been using
-Google Chrome as my primary web browser and it has become unbearable. The machine would run hot and
-with fans at full speed with a lot of noise. So at the time I switched back to Safari which helped 
-tremendously, but Safari has many other shortcomings (Horrible PDF support, Reddit’s RES didn’t work, etc.)
-so I wanted to switch back to Chrome, and now after Christmas they seem to have released a new version
-(I’m using the Beta channel, so now it’s 33) which does not suffer from the performance issues of the
-old one, so I switched back and everything seemed fine, with just occasional fan rampage.&lt;/p&gt;
-
-&lt;p&gt;But it still bothered me, it seemed that the fans would go crazy for no reason (low CPU and energy use,
-and still, fans were running at 6000rpm). So I’ve removed the back cover and cleaned all the dust from
-the fans, that has helped incredibly, now it runs much cooler (up to 10°C cooler) and much more
-quiet (most of the time just 2000rpm).&lt;/p&gt;
-
-&lt;h3 id=&quot;new-ssd&quot;&gt;New SSD&lt;/h3&gt;
-&lt;p&gt;I still wanted to improve the performance, and the SSD looked like a good option. After looking it
-up briefly I decided on Samsung 840 EVO 250GB SSD, it was faster than what my Macbook could handle
-(SATA III vs SATA II on my Macbook Pro), but not much more expensive than the lower options. At about
-150€ it wasn’t too expensive either. I got the Laptop Upgrade kit.&lt;/p&gt;
-
-&lt;p&gt;The kit comes with just a SATA to USB connector and some useless CD with software. It does not have
-any screw drivers, but I had that covered. You only need a Phillips screwdriver luckily.&lt;/p&gt;
-
-&lt;p&gt;The annoying part was that my HD was 500GB and I needed to reduce that to about 200GB if I wanted
-to fit into the SSD comfortably. I’ve moved all my photos to an external HDD, that took some good
-3-4 hours.&lt;/p&gt;
-
-&lt;p&gt;I first formatted the SSD to &lt;code&gt;Mac OS Extended Journaled&lt;/code&gt; and to move the filesystem to the SSD 
-I’ve used the &lt;a href=&quot;http://www.bombich.com/&quot;&gt;Carbon Copy Cloner&lt;/a&gt;. It allows you to create the Mavericks
-recovery partition on the drive as well, so you could just use that to make a clean install. But
-I’ve copied my whole system over using the CCC, about 200GB took around 4 hours to complete.&lt;/p&gt;
-
-&lt;p&gt;I’ve encountered an issue with Time Machine local backups, they will use up the empty space on 
-the drive, so I’ve deleted almost 300GB of data and only had 70GB free on a 500GB drive. But it
-was sufficient to just run the Time Machine and it would remove these local backups during the
-Preparing Backup phase.&lt;/p&gt;
-
-&lt;p&gt;The actual HW swap went well, the SSD is much lighter and a bit smaller than the original HDD.
-I’ve used the &lt;a href=&quot;http://www.ifixit.com/Guide/MacBook+Pro+15-Inch+Unibody+Mid+2010+Hard+Drive+Replacement/3030&quot;&gt;iFixit guide&lt;/a&gt;,
-but I haven’t removed the battery and to unscrew the HDD screws on the side I’ve just used pliers
-to unscrew them carefully and then screw them back on the SSD. This is necessary to hold it in
-place, since it is slightly smaller than the original.&lt;/p&gt;
-
-&lt;p&gt;After the replacement I’ve used &lt;a href=&quot;http://www.cindori.org/software/trimenabler/&quot;&gt;Trim Enabler&lt;/a&gt; to
-enable TRIM support, because apparently Apple only enables TRIM on their own SSDs by default.&lt;/p&gt;
-
-&lt;h3 id=&quot;performance&quot;&gt;Performance&lt;/h3&gt;
-&lt;p&gt;I have measured my disk performance before and after the upgrade using &lt;a href=&quot;https://itunes.apple.com/us/app/blackmagic-disk-speed-test/id425264550?mt=12&quot;&gt;Blackmagic Disk Speed Test&lt;/a&gt;
-and this is what I got:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;Before:
-    Write:  42.5 MB/s   Read:   39.9 MB/s
-After:
-    Write: 202.0 MB/s   Read:  256.5 MB/s&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Subjectively it feels a lot faster, especially opening apps is almost instantaneous. The
-main bottleneck now is probably the 3Gb/s SATA II interface, because the SSD should give
-around 500MB/s on SATA III. Over all I think this was a good investment and a relatively
-painless upgrade (apart from all the slow copying, ugh).&lt;/p&gt;
-
-&lt;p&gt;Here are the Speed Test Screen Shots:&lt;/p&gt;
-
-&lt;h4 id=&quot;before-upgrade&quot;&gt;Before upgrade&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;/images/ssd/old.png&quot; alt=&quot;Before SSD Upgrade&quot; /&gt;
-####After upgrade
-&lt;img src=&quot;/images/ssd/new.png&quot; alt=&quot;After SSD Upgrade&quot; /&gt;&lt;/p&gt;
-</description>
-                <pubDate>Thu, 20 Feb 2014 00:00:00 +0100</pubDate>
-                <link>/other/english/2014/02/20/ssd-upgrade.html</link>
-                <guid isPermaLink="true">/other/english/2014/02/20/ssd-upgrade.html</guid>
             </item>
         
     </channel>

@@ -39,7 +39,7 @@
             
               <li>
                 <a href="/categories/english">
-                  English (14)
+                  English (15)
                 </a>
               </li>
             
@@ -50,8 +50,14 @@
               </li>
             
               <li>
+                <a href="/categories/Other">
+                  Other (1)
+                </a>
+              </li>
+            
+              <li>
                 <a href="/categories/other">
-                  Other (5)
+                  Other (4)
                 </a>
               </li>
             
@@ -69,7 +75,7 @@
             
               <li>
                 <a href="/categories/lamp">
-                  Lamp (5)
+                  Lamp (6)
                 </a>
               </li>
             
@@ -122,9 +128,9 @@
                 </a>
               </li>
             
-              <li style="font-size: 101%">
+              <li style="font-size: 110%">
                 <a href="/tags/hardware">
-                  Hardware (5)
+                  Hardware (6)
                 </a>
               </li>
             
@@ -146,9 +152,9 @@
                 </a>
               </li>
             
-              <li style="font-size: 68%">
+              <li style="font-size: 76%">
                 <a href="/tags/video">
-                  Video (1)
+                  Video (2)
                 </a>
               </li>
             
@@ -177,52 +183,98 @@
 
 <p>Nasledujúca časť je však to podstatné. Implementácia logiky uvedenj metódy.</p>
 
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="lineno"> 1</span> <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="n">tosses</span><span class="p">,</span> <span class="n">account_balance</span><span class="p">):</span>
-<span class="lineno"> 2</span>     <span class="c"># account_history podrzi vsetky hodnoty uctu pocas celej hry</span>
-<span class="lineno"> 3</span>     <span class="n">account_history</span> <span class="o">=</span> <span class="p">[</span><span class="n">account_balance</span><span class="p">]</span>
-<span class="lineno"> 4</span>     <span class="c"># pociatocna uroven stavky je 1 euro</span>
-<span class="lineno"> 5</span>     <span class="n">bet</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="lineno"> 6</span>     <span class="c"># stavkujeme na cervenu alebo na ciernu, zaciname na ciernej</span>
-<span class="lineno"> 7</span>     <span class="n">betting_on_red</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="lineno"> 8</span>     <span class="c"># vyhrali sme toto kolo?</span>
-<span class="lineno"> 9</span>     <span class="n">won</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="lineno">10</span>     
-<span class="lineno">11</span>     <span class="c"># iterujeme cez vsetky nahodne hody</span>
-<span class="lineno">12</span>     <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">tosses</span><span class="p">:</span>    
-<span class="lineno">13</span>         <span class="c"># ak prave stavkujeme na cervenu a padla cervena, vyhravame</span>
-<span class="lineno">14</span>         <span class="k">if</span> <span class="n">betting_on_red</span> <span class="ow">and</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">red</span><span class="p">:</span>
-<span class="lineno">15</span>             <span class="n">won</span> <span class="o">=</span> <span class="bp">True</span>
-<span class="lineno">16</span>         <span class="c"># ak stavkujeme na ciernu a padla cierna, tiez vyhravame</span>
-<span class="lineno">17</span>         <span class="k">elif</span> <span class="ow">not</span> <span class="n">betting_on_red</span> <span class="ow">and</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">black</span><span class="p">:</span>
-<span class="lineno">18</span>             <span class="n">won</span> <span class="o">=</span> <span class="bp">True</span>
-<span class="lineno">19</span>         <span class="c"># inak sme prehrali</span>
-<span class="lineno">20</span>         <span class="k">else</span><span class="p">:</span>
-<span class="lineno">21</span>             <span class="n">won</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="lineno">22</span>         
-<span class="lineno">23</span>         <span class="c"># ak sme toto kolo vyhrali</span>
-<span class="lineno">24</span>         <span class="k">if</span> <span class="n">won</span><span class="p">:</span>
-<span class="lineno">25</span>             <span class="c"># pripiseme si vyhru</span>
-<span class="lineno">26</span>             <span class="n">account_balance</span> <span class="o">+=</span> <span class="n">bet</span>
-<span class="lineno">27</span>             <span class="c"># zmenime farbu</span>
-<span class="lineno">28</span>             <span class="n">betting_on_red</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">betting_on_red</span>
-<span class="lineno">29</span>             <span class="c"># resetujeme stavku na 1 euro</span>
-<span class="lineno">30</span>             <span class="n">bet</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="lineno">31</span>         <span class="c"># ak sme prehrali</span>
-<span class="lineno">32</span>         <span class="k">else</span><span class="p">:</span>
-<span class="lineno">33</span>             <span class="c"># odpocitame si prehru</span>
-<span class="lineno">34</span>             <span class="n">account_balance</span> <span class="o">-=</span> <span class="n">bet</span>
-<span class="lineno">35</span>             <span class="c"># zvysime stavku na dvojnasobok</span>
-<span class="lineno">36</span>             <span class="n">bet</span> <span class="o">*=</span> <span class="mi">2</span>
-<span class="lineno">37</span>         
-<span class="lineno">38</span>         <span class="c"># zapiseme si vysledok do historie</span>
-<span class="lineno">39</span>         <span class="n">account_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">account_balance</span><span class="p">)</span>
-<span class="lineno">40</span>         
-<span class="lineno">41</span>         <span class="c"># ak sme klesli s uctom na alebo pod nulu, koncime</span>
-<span class="lineno">42</span>         <span class="k">if</span> <span class="n">account_balance</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-<span class="lineno">43</span>             <span class="k">return</span> <span class="n">account_balance</span><span class="p">,</span> <span class="n">account_history</span>
-<span class="lineno">44</span> 
-<span class="lineno">45</span>     <span class="c"># vratime vysledky</span>
-<span class="lineno">46</span>     <span class="k">return</span> <span class="n">account_balance</span><span class="p">,</span> <span class="n">account_history</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="n">tosses</span><span class="p">,</span> <span class="n">account_balance</span><span class="p">):</span>
+    <span class="c"># account_history podrzi vsetky hodnoty uctu pocas celej hry</span>
+    <span class="n">account_history</span> <span class="o">=</span> <span class="p">[</span><span class="n">account_balance</span><span class="p">]</span>
+    <span class="c"># pociatocna uroven stavky je 1 euro</span>
+    <span class="n">bet</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="c"># stavkujeme na cervenu alebo na ciernu, zaciname na ciernej</span>
+    <span class="n">betting_on_red</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="c"># vyhrali sme toto kolo?</span>
+    <span class="n">won</span> <span class="o">=</span> <span class="bp">False</span>
+    
+    <span class="c"># iterujeme cez vsetky nahodne hody</span>
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">tosses</span><span class="p">:</span>    
+        <span class="c"># ak prave stavkujeme na cervenu a padla cervena, vyhravame</span>
+        <span class="k">if</span> <span class="n">betting_on_red</span> <span class="ow">and</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">red</span><span class="p">:</span>
+            <span class="n">won</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="c"># ak stavkujeme na ciernu a padla cierna, tiez vyhravame</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">betting_on_red</span> <span class="ow">and</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">black</span><span class="p">:</span>
+            <span class="n">won</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="c"># inak sme prehrali</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">won</span> <span class="o">=</span> <span class="bp">False</span>
+        
+        <span class="c"># ak sme toto kolo vyhrali</span>
+        <span class="k">if</span> <span class="n">won</span><span class="p">:</span>
+            <span class="c"># pripiseme si vyhru</span>
+            <span class="n">account_balance</span> <span class="o">+=</span> <span class="n">bet</span>
+            <span class="c"># zmenime farbu</span>
+            <span class="n">betting_on_red</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">betting_on_red</span>
+            <span class="c"># resetujeme stavku na 1 euro</span>
+            <span class="n">bet</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="c"># ak sme prehrali</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># odpocitame si prehru</span>
+            <span class="n">account_balance</span> <span class="o">-=</span> <span class="n">bet</span>
+            <span class="c"># zvysime stavku na dvojnasobok</span>
+            <span class="n">bet</span> <span class="o">*=</span> <span class="mi">2</span>
+        
+        <span class="c"># zapiseme si vysledok do historie</span>
+        <span class="n">account_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">account_balance</span><span class="p">)</span>
+        
+        <span class="c"># ak sme klesli s uctom na alebo pod nulu, koncime</span>
+        <span class="k">if</span> <span class="n">account_balance</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">account_balance</span><span class="p">,</span> <span class="n">account_history</span>
+
+    <span class="c"># vratime vysledky</span>
+    <span class="k">return</span> <span class="n">account_balance</span><span class="p">,</span> <span class="n">account_history</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Ak z tohoto kódu vynecháme riadky 56 a 57, môžeme dostať nasledujúci graf</p>
 

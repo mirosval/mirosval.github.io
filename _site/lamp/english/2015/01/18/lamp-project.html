@@ -39,7 +39,7 @@
             
               <li>
                 <a href="/categories/english">
-                  English (14)
+                  English (15)
                 </a>
               </li>
             
@@ -50,8 +50,14 @@
               </li>
             
               <li>
+                <a href="/categories/Other">
+                  Other (1)
+                </a>
+              </li>
+            
+              <li>
                 <a href="/categories/other">
-                  Other (5)
+                  Other (4)
                 </a>
               </li>
             
@@ -69,7 +75,7 @@
             
               <li>
                 <a href="/categories/lamp">
-                  Lamp (5)
+                  Lamp (6)
                 </a>
               </li>
             
@@ -122,9 +128,9 @@
                 </a>
               </li>
             
-              <li style="font-size: 101%">
+              <li style="font-size: 110%">
                 <a href="/tags/hardware">
-                  Hardware (5)
+                  Hardware (6)
                 </a>
               </li>
             
@@ -146,9 +152,9 @@
                 </a>
               </li>
             
-              <li style="font-size: 68%">
+              <li style="font-size: 76%">
                 <a href="/tags/video">
-                  Video (1)
+                  Video (2)
                 </a>
               </li>
             
@@ -171,9 +177,9 @@
   <li><a href="/lamp/english/2015/04/01/lamp-project-5.html">Assembly Timelapse</a></li>
 </ol>
 
-<p>I’ve had this idea for a project for quite some time now, but now I’ve actually come around to some real progress. The project specificaton is simple: I wanted to build an RGB LED lamp that could be controlled wirelessly. That idea in and of itself is not particularly new or unprecedented, however when I was looking at ready-made solutions online, I couldn’t find anything that would work for me. I really just wanted something that could be programmed or controlled remotely. </p>
+<p>I’ve had this idea for a project for quite some time now, but now I’ve actually come around to some real progress. The project specificaton is simple: I wanted to build an RGB LED lamp that could be controlled wirelessly. That idea in and of itself is not particularly new or unprecedented, however when I was looking at ready-made solutions online, I couldn’t find anything that would work for me. I really just wanted something that could be programmed or controlled remotely.</p>
 
-<h2 id="the-vision">The Vision</h2>
+<p>##The Vision</p>
 
 <p>I really just want a smart lamp, that would be able to do things like change color and intensity of light according to various outside stimuli, such as direct control via a mobile phone, automatic lighting up and dimming according to my sleep cycle, audio input, temperature and so on. I would like to be able to control multiple lamps from one place and optionally have “groups” of lamps that could be controlled separately. I could not find anything that would be both inexpensive and flexible enough for my programming needs (most of these cheap RGB LED strips come with an IR remote control, but that is a joke). I thought I could build something that would work for me from the following components:</p>
 
@@ -186,7 +192,7 @@
   <li>Raspberry PI</li>
 </ul>
 
-<h2 id="the-current-state-of-things">The current state of things</h2>
+<p>##The current state of things</p>
 
 <p><img src="/images/lamp/lamp-1.jpg" alt="Current state of the RGB LED Lamp" class="pull-left half" /></p>
 
@@ -196,19 +202,19 @@
 
 <p>I currently have 1 Rfduino-based lamp with a 1m RGB LED strip attached to it. The LED strip I’m currently using is something like <a href="http://www.amazon.co.uk/Waterproof-300LEDs-Flexible-Lighting-Decoration/dp/B009ZOLW04/ref=sr_1_46?s=lighting&amp;ie=UTF8&amp;qid=1421617842&amp;sr=1-46&amp;keywords=5050+rgb+led+strip">this</a>. The key parameters are 12V, ~1A/m, 5050 LEDs 60 pieces per meter. The cool part is that the strip can be cut every 5cm (every 3 LEDs). So I have bought a 5m roll and I’m going to cut it into 5 1m long strips for use in 5 lamps.</p>
 
-<p>The 1m LED strip I have draws 1.2A at 12V, which means it has a wattage of 14.4W. This determines all of the other components that are needed. For power supply I have used something like <a href="http://uk.farnell.com/powerpax/sw3526/ac-dc-power-supply-12v-1-25a-euro/dp/1971795">this</a>. At 15W it supplies enough power for the LED strip,  Rfduino and the remaining circuitry. </p>
+<p>The 1m LED strip I have draws 1.2A at 12V, which means it has a wattage of 14.4W. This determines all of the other components that are needed. For power supply I have used something like <a href="http://uk.farnell.com/powerpax/sw3526/ac-dc-power-supply-12v-1-25a-euro/dp/1971795">this</a>. At 15W it supplies enough power for the LED strip,  Rfduino and the remaining circuitry.</p>
 
-<p>I have designed a simple protocol that is able to send the RGB color to the lamp and is able to address up to 255 lamps. iOS is limited to 10 simmultaneous BT connections, so 255 is more than could be realistically adressed anyways. </p>
+<p>I have designed a simple protocol that is able to send the RGB color to the lamp and is able to address up to 255 lamps. iOS is limited to 10 simmultaneous BT connections, so 255 is more than could be realistically adressed anyways.</p>
 
 <p>And lastly I have built an iOS app that is able to set a solid color on a lamp, or alternatively can use the microphone to set the intensity of the light, while the user can pick the hue. I will discuss all these points in depth in future posts.</p>
 
-<h2 id="immediate-future-of-the-project">Immediate future of the project</h2>
+<p>##Immediate future of the project</p>
 
 <p>Currently I have 1 lamp that works with the iOS app. I’ve recently received a shipment of 7 new Rfduinos and I’ve ordered more parts online which should arrive shortly. In the next weeks I’m going to build another prototype and test how the iOS app and the protocol cope with 2 or 3 lamps. I would also like to employ my Raspberry pi in the project, so that it could control the lamps without the need to use an iOS device. This would be perfect for things like morning alarm light, afternoon automatic lights and so on.</p>
 
 <p>Another little subproject I have researched and would like to do is having PCBs printed. I have started designing the board using <a href="http://www.cadsoftusa.com/">Eagle</a>, but I have to wait until I can finalize the component list. I found an interesting place that could print my PCBs, <a href="https://oshpark.com/">OSHPark</a> and I would like to see how it works.</p>
 
-<h2 id="long-term-ideas">Long term ideas</h2>
+<p>##Long term ideas</p>
 
 <p>There are a couple of things that I can see as a long term / low priority goals for the project:</p>
 

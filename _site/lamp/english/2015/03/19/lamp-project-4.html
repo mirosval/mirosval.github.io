@@ -39,7 +39,7 @@
             
               <li>
                 <a href="/categories/english">
-                  English (14)
+                  English (15)
                 </a>
               </li>
             
@@ -50,8 +50,14 @@
               </li>
             
               <li>
+                <a href="/categories/Other">
+                  Other (1)
+                </a>
+              </li>
+            
+              <li>
                 <a href="/categories/other">
-                  Other (5)
+                  Other (4)
                 </a>
               </li>
             
@@ -69,7 +75,7 @@
             
               <li>
                 <a href="/categories/lamp">
-                  Lamp (5)
+                  Lamp (6)
                 </a>
               </li>
             
@@ -122,9 +128,9 @@
                 </a>
               </li>
             
-              <li style="font-size: 101%">
+              <li style="font-size: 110%">
                 <a href="/tags/hardware">
-                  Hardware (5)
+                  Hardware (6)
                 </a>
               </li>
             
@@ -146,9 +152,9 @@
                 </a>
               </li>
             
-              <li style="font-size: 68%">
+              <li style="font-size: 76%">
                 <a href="/tags/video">
-                  Video (1)
+                  Video (2)
                 </a>
               </li>
             
@@ -171,11 +177,11 @@
   <li><a href="/lamp/english/2015/04/01/lamp-project-5.html">Assembly Timelapse</a></li>
 </ol>
 
-<h2 id="design-tool">Design Tool</h2>
+<p>##Design Tool</p>
 
 <p>I haven’t really searched all that far to discover <a href="http://www.cadsoftusa.com/">Eagle CAD</a>, it seems to be probably the most widely used software for PCB design. I have watched two tutorial videos on YouTube by Jeremy Blum, <a href="https://www.youtube.com/watch?v=1AXwjZoyNno">Schematic Design</a> and <a href="https://www.youtube.com/watch?v=CCTs0mNXY24">Printed Circuit Board Layout</a>. That gave me a pretty good idea about how to use the software. I won’t pretend there weren’t any issues, but all were successfully resolved with a search on StackOverflow. Overall I think it is a very good tool. I’ve never used it before but I have been able to do all I wanted from it in maybe an hour.</p>
 
-<h2 id="schematic-design">Schematic Design</h2>
+<p>##Schematic Design</p>
 
 <p>I started out with a schematic design. I already had a working prototype of the lamp, so it wasn’t so hard to use that to start things off. Overall the schematic is divided into three sub-circuits from the left:</p>
 
@@ -189,7 +195,7 @@
 
 <p>The most problematic part of the voltage regulator was to actually obtain the part I chose: <a href="http://www.ti.com/product/lp2950-33">LP2950-33</a>. Ideally you would choose a LP2950-30 here, as RFduino’s reference voltage is 3.0V, but it is rated to up to 3.6V, so 3.3V is fine. I have, by accident supplied it with more than that (think ~5V) and it has surprisingly survived.</p>
 
-<p>I have used two 10μF capacitors, one at input and one at output to further stabilize the voltage. </p>
+<p>I have used two 10μF capacitors, one at input and one at output to further stabilize the voltage.</p>
 
 <p>The RFduino is pretty self-explanatory, I have hooked the VCC and GND pins and I’ve connected the GPIO pins 2, 3 and 4 to the input of the darlington array.</p>
 
@@ -199,24 +205,24 @@
 
 <p>One of the biggest issues I had was to find the parts, Eagle has a large database of components, but still, things like RFduino are not there. Also I needed to make sure I can eventually buy the things somewhere.</p>
 
-<h2 id="board-design">Board Design</h2>
+<p>##Board Design</p>
 
 <p>After finishing the schematic, I proceeded with the board design. First I have tried to automatically layout the components, but Eagle has made a complete mess of things, so in the end I had to lay out everyting myself anyway. The process can get a bit awkward with the bends of the wires, but if it does, you can just delete the wire and do it again. You can set the widths of the wires, so I’ve chosen slightly thicker wires for the 12V lines and slightly thinner for the rest. I’ve also managed to keep all the connections to the one side of the board, which just makes it look better in my opinion.</p>
 
 <p><img src="/images/lamp-hw/board.png" alt="Board Design" /></p>
 
-<h2 id="manufacturing">Manufacturing</h2>
+<p>##Manufacturing</p>
 
 <p>Somewhere on the internet I have found <a href="https://oshpark.com/">OSH Park</a> a company from USA that will make PCBs from Eagle CAD files: 3 copies of the board for $5 per square inch (imperial, really??) and ship it anywhere in the world for free. My board cost me under $20, I have ordered it on Feb 26, it got shipped on Mar 6 and arrived in Prague on Mar 18. This manufacturing delay makes mistakes super expensive, but luckily the board works as designed.</p>
 
-<h2 id="assembly">Assembly</h2>
+<p>##Assembly</p>
 
 <p>I have assembled the components onto the board today, it took me about an hour and was a really pleasant experience. And the fact that it has worked on the first try was really satisfying. Here have a look at the finished product.</p>
 
 <p><img src="/images/lamp-hw/board-finished.jpg" alt="Board Finished" />
 <img src="/images/lamp-hw/finished.jpg" alt="Finished Lamp" /></p>
 
-<h2 id="final-notes">Final Notes</h2>
+<p>##Final Notes</p>
 
 <p>OSH Park has good <a href="https://oshpark.com/guidelines">guidelines</a> to follow (they also have a file that you can import to Eagle that will check your design). I suggest reading those before submitting anything.</p>
 
