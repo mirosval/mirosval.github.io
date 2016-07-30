@@ -99,8 +99,8 @@ Other shortcuts:
 
 ## Download
 
-* [My Entire IDEA Settings JAR]({{ site.baseurl }}/files/2016-07-30/settings.jar)
-* [Keymaps Only JAR]({{ site.baseurl }}/files/2016-07-30/keymaps-only.jar)
+* [My Entire IDEA Settings JAR]({{ site.baseurl }}/files/2016-07-30-idea/settings.jar)
+* [Keymaps Only JAR]({{ site.baseurl }}/files/2016-07-30-idea/keymaps-only.jar)
 
 ## Share
 
